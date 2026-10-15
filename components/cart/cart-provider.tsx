@@ -41,6 +41,7 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 const STORAGE_UNAVAILABLE = "__KROVINOX_STORAGE_UNAVAILABLE__";
+const SERVER_SNAPSHOT = "__KROVINOX_SERVER_SNAPSHOT__";
 const subscribers = new Map<string, Set<() => void>>();
 const cachedSnapshots = new Map<string, string>();
 
@@ -65,8 +66,8 @@ function getSnapshot(mode: CartMode): string {
   }
 }
 
-function getServerSnapshot(): null {
-  return null;
+function getServerSnapshot(): string {
+  return SERVER_SNAPSHOT;
 }
 
 function subscribe(mode: CartMode, listener: () => void): () => void {
@@ -129,9 +130,9 @@ export function CartProvider({
     () => getSnapshot(mode),
     getServerSnapshot,
   );
-  const ready = snapshot !== null;
+  const ready = snapshot !== SERVER_SNAPSHOT;
   const lines = useMemo(() => {
-    if (snapshot === null || snapshot === STORAGE_UNAVAILABLE || snapshot === "") return [];
+    if (snapshot === SERVER_SNAPSHOT || snapshot === STORAGE_UNAVAILABLE || snapshot === "") return [];
     try {
       return normalizeCart(JSON.parse(snapshot), mode, products);
     } catch {
