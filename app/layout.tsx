@@ -18,8 +18,11 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KROVINOX — Foundation Preview",
-  description: "Internal design-system preview. This is not a live shop.",
+  title: {
+    default: "KROVINOX — Design Preview",
+    template: "%s | KROVINOX",
+  },
+  description: "A private design preview of the KROVINOX clothing project. Concept fixtures only; no products are for sale.",
   robots: {
     index: false,
     follow: false,
@@ -39,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-IN">
-      <body className={`${manrope.variable} ${plexMono.variable}`}>
+      <body className={manrope.variable + " " + plexMono.variable}>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />
         {children}

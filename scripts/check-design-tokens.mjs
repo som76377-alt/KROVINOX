@@ -6,22 +6,19 @@ const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "ut
 const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
 const header = await readFile(new URL("../components/site-header.tsx", import.meta.url), "utf8");
 const footer = await readFile(new URL("../components/site-footer.tsx", import.meta.url), "utf8");
+const catalogue = await readFile(new URL("../lib/products/catalogue.ts", import.meta.url), "utf8");
 const pkg = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
 
-function escapeRegex(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
 function declaration(property) {
-  const match = css.match(new RegExp(`(^|\\s)${escapeRegex(property)}\\s*:\\s*([^;]+);`));
-  assert.ok(match, `Missing CSS token declaration: ${property}`);
+  const match = css.match(new RegExp("(^|\\s)" + property + "\\s*:\\s*([^;]+);"));
+  assert.ok(match, "Missing CSS token declaration: " + property);
   return match[2].trim();
 }
 
 function contrastRatio(a, b) {
   const luminance = (hex) => {
     const parts = hex.match(/[0-9a-f]{2}/gi);
-    assert.equal(parts?.length, 3, `Expected hex color, received ${hex}`);
+    assert.equal(parts?.length, 3, "Expected hex color, received " + hex);
     const channels = parts.map((part) => parseInt(part, 16) / 255).map((channel) =>
       channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4
     );
@@ -44,13 +41,9 @@ const expected = {
 };
 
 for (const [property, value] of Object.entries(expected)) {
-  assert.equal(declaration(property), value, `${property} drifted from the approved token value`);
-}
-
-for (const [property, value] of Object.entries(expected)) {
-  const declarationPattern = new RegExp(`${escapeRegex(property)}\\s*:\\s*[^;]+;`, "g");
-  const count = [...css.matchAll(declarationPattern)].length;
-  assert.equal(count, 1, `${property} should have one canonical declaration, found ${count}`);
+  assert.equal(declaration(property), value, property + " drifted from the approved token value");
+  const count = [...css.matchAll(new RegExp(property + "\\s*:\\s*[^;]+;", "g"))].length;
+  assert.equal(count, 1, property + " should have one canonical declaration, found " + count);
 }
 
 assert.ok(contrastRatio("#0C0D0C", "#F4F2ED") >= 7, "Primary text/background should meet WCAG AAA contrast.");
@@ -63,16 +56,21 @@ assert.match(css, /--font-size-hero:\s*clamp\(2\.5rem,\s*5vw,\s*5rem\);/, "Hero 
 assert.match(layout, /index:\s*false/);
 assert.match(layout, /follow:\s*false/);
 assert.match(header, /DESIGN PREVIEW · NOT FOR SALE/);
-assert.match(footer, /no products for sale · no checkout/i);
-assert.match(layout, /<SiteHeader \/>/);
-assert.match(layout, /<SiteFooter \/>/);
+assert.match(header, /href: "\/shop"/);
+assert.match(header, /href: "\/about"/);
+assert.match(header, /aria-current/);
+assert.match(footer, /No products for sale/i);
+assert.match(footer, /No orders or payment accepted/i);
 assert.match(layout, /className="skip-link"/);
-assert.match(page, /readOnly/);
-assert.match(page, /disabled/);
+assert.match(page, /<ProductGrid/);
+assert.match(page, /getCatalogueProducts/);
+assert.match(catalogue, /assertProductionSafe/);
+assert.match(catalogue, /resolveCatalogueMode/);
 assert.equal(pkg.scripts["check:tokens"], "node scripts/check-design-tokens.mjs");
+assert.equal(pkg.scripts.prebuild, "npm run check:catalogue");
 
 for (let i = 1; i <= 12; i += 1) {
-  assert.ok(css.includes(`--spacing-kx-${i}:`), `Missing spacing scale step kx-${i}`);
+  assert.ok(css.includes("--spacing-kx-" + i + ":"), "Missing spacing scale step kx-" + i);
 }
 
-console.log("Design token checks passed: palette, contrast, spacing scale, type, focus, reduced motion, and preview isolation.");
+console.log("Design token checks passed: palette, contrast, spacing, type, ratio, focus, reduced motion, preview status and catalogue guard.");

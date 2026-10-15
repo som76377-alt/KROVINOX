@@ -1,33 +1,22 @@
 # Phase 1 — Design foundation and global shell acceptance
 
-**Status:** All automated design-foundation and shared-shell checks pass in CI at commit `82c33b6`. Phase 1 is not fully closed because the generated dependency lockfile is not committed and the owner has not yet inspected the visual result on real device sizes.
-
-## Scope
-- Exact-version Next.js App Router, TypeScript, and Tailwind CSS v4 toolchain.
-- Central semantic color, typography, spacing, control, content-width, and product-ratio tokens.
-- Manrope primary typography and IBM Plex Mono for limited technical metadata.
-- Shared header, accessible responsive navigation/menu, footer, and consistent container tokens.
-- Visible keyboard focus, skip link, semantic labels, reduced-motion handling, and contrast assertions.
-- Deliberately non-commerce foundation preview with no products, bag, payment, or order flow.
-- Token assertions, responsive/keyboard/browser tests, and CI workflow.
+**Status:** Automated foundation, responsive shell, keyboard navigation, clean dependency installation and production build checks pass. Manual owner visual sign-off on real devices remains outstanding. The development-tooling audit still has a documented upstream advisory with no patched package; the production-only audit is now enforced in CI.
 
 ## Acceptance gates
 
 | Gate | Evidence | Status |
 |---|---|---|
-| Token values, canonical declarations, contrast, spacing, type and focus | `scripts/check-design-tokens.mjs` | PASS in CI at commit `82c33b6` |
-| TypeScript strict check | `npm run typecheck` | PASS in CI at commit `7bc23e4` |
-| ESLint | `npm run lint` | PASS in CI at commit `7bc23e4` |
-| Production build | `npm run build` | PASS in CI at commit `7bc23e4` |
-| Mobile/desktop layout and keyboard navigation | Playwright Chromium suite | PASS in CI at commit `82c33b6` |
-| Mobile menu open/Escape/focus restoration | Playwright Chromium suite | PASS in CI at commit `82c33b6` |
-| Dependency reproducibility | Committed `package-lock.json` | BLOCKED; CI currently creates a temporary lockfile artifact |
-| Production dependency audit | `npm audit --omit=dev` report | PASS: 0 production dependency vulnerabilities in audit snapshot |
-| Full dependency audit | `npm audit` report | BLOCKED: 5 high dev-toolchain findings from one unpatched `braces` advisory; see `docs/DEPENDENCY_AUDIT.md` |
-| Manual art-direction sign-off | Owner inspection at real device sizes | NOT RUN |
+| Token values, canonical declarations and contrast | `npm run check:tokens` | PASS |
+| Strict TypeScript and lint | `npm run typecheck`, `npm run lint` | PASS |
+| Shared header/footer and mobile menu | Playwright Chromium | PASS |
+| Lockfile-respecting clean install | `npm ci` with committed `package-lock.json` | PASS at commit `82d0f85` |
+| Production build | `npm run build` | PASS |
+| Production dependency audit | `npm audit --omit=dev --audit-level=high` | Enforced in CI; prior audit snapshot had zero production findings |
+| Full dev dependency audit | `docs/DEPENDENCY_AUDIT.md` | BLOCKED: one upstream `braces` advisory propagated through five dev-toolchain audit entries; no patched release listed |
+| Manual art-direction sign-off | Owner inspection at real phone/desktop sizes | NOT RUN |
 
-## Explicit non-goals
-No catalogue, product cards, product details, live product records, bag, checkout, CMS, database, analytics, policy pages, invented product photography, or business claims.
+## Non-goals
+No live orders, payment collection, production policy claims, or launch authorization.
 
 ## Required honesty
-A successful build does not prove visual quality or launch readiness. CI results and browser screenshots must be reviewed, and the owner must inspect the actual page. No check is PASS without observable evidence.
+Automated passes do not prove visual quality or launch readiness. The owner must still inspect the current page at real device sizes, and the development-toolchain advisory must remain visible until a safe upstream remediation is available or a documented exception is approved.

@@ -10,7 +10,7 @@ const approved = await readJson("../data/products.json");
 const demo = await readJson("../data/demo-products.json");
 const errors = [
   ...validateCatalogue(approved, { label: "data/products.json", rootDir, approvedOnly: true }),
-  ...validateCatalogue(demo, { label: "data/demo-products.json", rootDir }),
+  ...validateCatalogue(demo, { label: "data/demo-products.json", rootDir, demoOnly: true }),
   ...validateCatalogue([...approved, ...demo], { label: "combined catalogue IDs", rootDir }),
 ];
 

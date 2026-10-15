@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: foundation-${{ github.ref }}
@@ -18,9 +18,9 @@ concurrency:
 
 jobs:
   verify:
-    name: Lint, types, tokens, build and browser checks
+    name: Lint, types, catalogue, build and browser checks
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: Check out source
         uses: actions/checkout@v6
@@ -32,28 +32,16 @@ jobs:
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
 
-      - name: Record lockfile bootstrap state
-        id: lockfile_state
-        run: |
-          if [ -f package-lock.json ]; then
-            echo "bootstrap=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "bootstrap=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Install dependencies and create a temporary lockfile if absent
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install --package-lock-only --ignore-scripts
-            npm ci
-          fi
+      - name: Install pinned dependencies
+        run: npm ci
 
       - name: Capture dependency audit reports
         run: |
           npm audit --json > npm-audit-all.json || true
           npm audit --omit=dev --json > npm-audit-production.json || true
+
+      - name: Enforce production dependency audit
+        run: npm audit --omit=dev --audit-level=high
 
       - name: Lint
         run: npm run lint
@@ -67,7 +55,7 @@ jobs:
       - name: Validate product catalogue and demo isolation
         run: npm run check:catalogue
 
-      - name: Unit tests for catalogue validation
+      - name: Unit tests for catalogue and presentation rules
         run: npm run test:unit
 
       - name: Production build
@@ -76,21 +64,8 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: End-to-end foundation checks
+      - name: End-to-end browser checks
         run: npm run test:e2e
-
-      - name: Commit generated lockfile after all checks pass
-        if: github.event_name == 'push' && github.ref == 'refs/heads/rebuild/krovinox-clean-start' && steps.lockfile_state.outputs.bootstrap == 'true'
-        run: |
-          git add package-lock.json
-          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "chore: commit reproducible npm lockfile"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
-
-      - name: Verify committed lockfile from a clean install
-        if: steps.lockfile_state.outputs.bootstrap == 'true'
-        run: |
-          npm ci
-          npm run check
 
       - name: Upload dependency audit reports
         if: always()
@@ -101,20 +76,11 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Upload generated dependency lockfile for review
-        if: always() && hashFiles('package-lock.json') != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: phase-1-package-lock
-          path: package-lock.json
-          if-no-files-found: error
-          retention-days: 7
-
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: phase-1-test-reports
+          name: phase-3-test-reports
           path: |
             playwright-report/
             test-results/

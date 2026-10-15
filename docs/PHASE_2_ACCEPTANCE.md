@@ -1,30 +1,22 @@
 # Catalogue contract and demo isolation — acceptance
 
-**Status:** Catalogue contract, asset-register cross-checks, unit tests, production build, and browser checks all pass in CI at commit `82c33b6`. The approved catalogue remains empty, and demo fixtures are not rendered in the UI.
-
-## Scope
-- Typed product, variant, image, lifecycle, and availability contracts.
-- Separate approved catalogue (data/products.json) and isolated demo fixtures (data/demo-products.json).
-- Neutral original SVG layout fixtures, each marked concept-only and not for sale.
-- Asset register entries for every placeholder asset.
-- Runtime validation for IDs/slugs, currency and integer minor-unit prices, variants, availability, alt text, image dimensions, asset existence, lifecycle rules, and approved-product facts.
-- A production guard that rejects demo/draft/archived/placeholder records in the approved catalogue.
-- Automated valid/invalid fixture tests wired into the project check and CI.
+**Status:** Schema, catalogue and asset-register validation pass. The approved catalogue is empty. Concept fixtures are displayed only when catalogue mode is explicitly preview or the runtime is development; production defaults to live mode and refuses non-approved saleable records.
 
 ## Acceptance gates
 
 | Gate | Evidence | Status |
 |---|---|---|
-| Type contract aligns with the PRD | lib/products/types.ts | PASS in CI at commit `82c33b6` |
-| Approved and demo records remain separate | data/products.json, data/demo-products.json | PASS in CI at commit `82c33b6` |
-| Referenced placeholder assets exist and are registered | public/placeholders/*, docs/ASSET_REGISTER_TEMPLATE.csv | PASS in CI at commit `82c33b6` |
-| Duplicate IDs/slugs, missing alt/assets, saleable demo state fail | tests/unit/catalogue-validation.test.mjs | PASS in CI at commit `82c33b6` |
-| Production guard rejects non-approved records | assertProductionSafe unit tests and CLI check | PASS in CI at commit `82c33b6` |
-| Build remains safe with no approved products | Production build and catalogue CLI | PASS in CI at commit `82c33b6` |
-| Demo fixtures are not rendered as saleable products | No product UI exists in this phase; approved catalogue remains empty | Verified by source separation; recheck when UI is added |
+| Product/variant/image types | `lib/products/types.ts` | PASS |
+| Approved and demo source separation | `data/products.json`, `data/demo-products.json` | PASS |
+| Image source, alt text, dimensions and asset register | `public/placeholders/*`, `docs/ASSET_REGISTER_TEMPLATE.csv` | PASS |
+| Unique IDs/slugs and product lifecycle validation | `npm run check:catalogue` | PASS |
+| Demo availability, asset approval and zero-price safeguards | Catalogue unit tests | PASS |
+| Runtime catalogue mode and release guard | `lib/products/catalogue-mode.mjs` and unit tests | PASS |
+| Production build cannot treat demo fixtures as live records | Live mode defaults to approved-only catalogue; prebuild validates data and assets | PASS |
+| Demo fixture presentation is unmistakably non-saleable | Preview labels and end-to-end tests | PASS |
 
 ## Non-goals
-No product cards, homepage catalogue, product details, price display, checkout, inventory claims, live product records, or real garment assets.
+No live inventory, checkout, price display for demo fixtures, customer orders, or physical garment representation.
 
 ## Deferred
-Actual garment designs, pricing, measurements, material/fit/care claims, production method, supplier, inventory, shipping/returns, and approval records remain unresolved. Do not invent these to fill the schema.
+Final garment designs, product pricing, sizes, measurements, material/fit/care claims, production method, supplier, stock, shipping/returns and approval records remain unresolved.

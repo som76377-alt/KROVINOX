@@ -10,7 +10,7 @@ An experimental, design-led clothing storefront. This repository is being rebuil
 
 ## Status
 
-**Automated checks pass on the rebuild branch through commit `82c33b6`.** The shared preview shell and isolated catalogue contract are implemented, but the root page is still an internal design-foundation preview, not a storefront. Dependency reproducibility and owner visual sign-off remain open.
+**Verified foundation and catalogue isolation are complete; homepage implementation is in progress.** The rebuild branch has a committed package lockfile and CI passed a clean install, all configured checks, production build and Playwright tests on the prior commit. This branch is still a design preview, not a live shop.
 
 ## Planned technical direction
 

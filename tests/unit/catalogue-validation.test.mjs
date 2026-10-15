@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { assertProductionSafe, validateCatalogue } from "../../lib/products/catalogue-validation.mjs";
+import { resolveCatalogueMode } from "../../lib/products/catalogue-mode.mjs";
+import { formatPricePaise } from "../../lib/products/format-price.mjs";
 
 const rootDir = process.cwd();
 const approved = JSON.parse(readFileSync("data/products.json", "utf8"));
@@ -9,8 +11,16 @@ const demo = JSON.parse(readFileSync("data/demo-products.json", "utf8"));
 
 test("approved and demo source files satisfy the product contract", () => {
   assert.deepEqual(validateCatalogue(approved, { rootDir, approvedOnly: true }), []);
-  assert.deepEqual(validateCatalogue(demo, { rootDir }), []);
+  assert.deepEqual(validateCatalogue(demo, { rootDir, demoOnly: true }), []);
   assert.deepEqual(validateCatalogue([...approved, ...demo], { rootDir }), []);
+});
+
+test("approved products cannot be inserted into the demo fixture file", () => {
+  const records = structuredClone(demo);
+  records[0].lifecycle = "approved";
+  records[0].isPlaceholder = false;
+  const errors = validateCatalogue(records, { rootDir, demoOnly: true });
+  assert.ok(errors.some((message) => message.includes('only lifecycle "demo" is allowed')));
 });
 
 test("duplicate product IDs and slugs fail with actionable errors", () => {
@@ -45,7 +55,7 @@ test("demo fixtures cannot claim sale availability", () => {
   assert.ok(errors.some((message) => message.includes("demo variants cannot be marked available for sale")));
 });
 
-test("production guard rejects demo, draft and archived records", () => {
+test("production guard rejects demo and draft records", () => {
   assert.throws(() => assertProductionSafe([demo[0]], { mode: "production" }), /Production catalogue contains non-approved or placeholder product/);
   assert.throws(() => assertProductionSafe([{ id: "draft-1", lifecycle: "draft" }], { mode: "production" }), /Production catalogue contains non-approved or placeholder product/);
 });
@@ -63,4 +73,27 @@ test("approved zero-price records fail without explicit approval", () => {
   const errors = validateCatalogue(records, { rootDir, approvedOnly: true });
   assert.ok(errors.some((message) => message.includes("approved saleable products cannot have a zero price")));
   assert.ok(errors.some((message) => message.includes("approved variants cannot have a zero price")));
+});
+
+test("catalogue mode defaults to preview in development and live in production", () => {
+  assert.equal(resolveCatalogueMode(undefined, "development"), "preview");
+  assert.equal(resolveCatalogueMode(undefined, "production"), "live");
+});
+
+test("release mode refuses an explicitly configured preview catalogue", () => {
+  assert.throws(() => resolveCatalogueMode("preview", "production", true), /release build cannot use preview catalogue mode/);
+  assert.equal(resolveCatalogueMode("live", "production", true), "live");
+  assert.throws(() => resolveCatalogueMode("unexpected", "production"), /must be "preview" or "live"/);
+});
+
+test("price formatting is centralised and rejects malformed minor-unit amounts", () => {
+  assert.match(formatPricePaise(199900), /1,999/);
+  assert.throws(() => formatPricePaise(-1), /non-negative integer number of paise/);
+  assert.throws(() => formatPricePaise(2.5), /non-negative integer number of paise/);
+});
+
+test("demo product cards do not get a zero currency price", () => {
+  const raw = readFileSync("components/product-card.tsx", "utf8");
+  assert.match(raw, /product\.lifecycle === "demo"/);
+  assert.match(raw, /Illustrative fixture · Not for sale/);
 });

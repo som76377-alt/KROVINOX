@@ -1,18 +1,18 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useRef } from "react";
 
-const previewLinks = [
-  { href: "#main-content", label: "Preview overview" },
-  { href: "#colors-heading", label: "Color system" },
-  { href: "#type-heading", label: "Typography" },
-  { href: "#spacing-heading", label: "Spacing scale" },
-  { href: "#controls-heading", label: "Controls and focus" },
+const navigation = [
+  { href: "/shop", label: "Shop" },
+  { href: "/about", label: "About" },
 ];
 
 export default function SiteHeader() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
 
   function openMenu() {
     dialogRef.current?.showModal();
@@ -24,14 +24,24 @@ export default function SiteHeader() {
 
   return (
     <header className="site-header">
-      <div className="site-container site-header-inner">
-        <a className="site-wordmark" href="#main-content" aria-label="KROVINOX preview home">
-          KROVINOX
-        </a>
+      <div className="site-announcement" role="note">
+        <span>Design preview</span>
+        <span>Not for sale · Concept fixtures only</span>
+      </div>
 
-        <nav className="site-desktop-nav" aria-label="Preview sections">
-          {previewLinks.map((link) => (
-            <a href={link.href} key={link.href}>{link.label}</a>
+      <div className="site-container site-header-inner">
+        <Link className="site-wordmark" href="/" aria-label="KROVINOX home">KROVINOX</Link>
+
+        <nav className="site-desktop-nav" aria-label="Main navigation">
+          {navigation.map((item) => (
+            <Link
+              className={pathname === item.href ? "site-nav-link is-active" : "site-nav-link"}
+              href={item.href}
+              key={item.href}
+              aria-current={pathname === item.href ? "page" : undefined}
+            >
+              {item.label}
+            </Link>
           ))}
         </nav>
 
@@ -56,14 +66,20 @@ export default function SiteHeader() {
           onClose={() => triggerRef.current?.focus()}
         >
           <div className="site-mobile-menu-header">
-            <span id="site-mobile-menu-title">Preview navigation</span>
-            <button className="site-menu-close" type="button" onClick={closeMenu}>
-              Close
-            </button>
+            <span id="site-mobile-menu-title">Navigation</span>
+            <button className="site-menu-close" type="button" onClick={closeMenu}>Close</button>
           </div>
-          <nav className="site-mobile-nav" aria-label="Mobile preview sections">
-            {previewLinks.map((link) => (
-              <a href={link.href} key={link.href} onClick={closeMenu}>{link.label}</a>
+          <nav className="site-mobile-nav" aria-label="Mobile navigation">
+            {navigation.map((item) => (
+              <Link
+                href={item.href}
+                key={item.href}
+                aria-current={pathname === item.href ? "page" : undefined}
+                onClick={closeMenu}
+                className={pathname === item.href ? "site-nav-link is-active" : "site-nav-link"}
+              >
+                {item.label}
+              </Link>
             ))}
           </nav>
         </dialog>

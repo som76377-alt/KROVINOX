@@ -20,7 +20,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: isCI ? "npm run start -- --hostname 127.0.0.1" : "npm run dev -- --hostname 127.0.0.1",
+    command: isCI
+      ? "KROVINOX_CATALOGUE_MODE=preview npm run start -- --hostname 127.0.0.1"
+      : "npm run dev -- --hostname 127.0.0.1",
     url: "http://127.0.0.1:3000",
     reuseExistingServer: !isCI,
     timeout: 120_000,

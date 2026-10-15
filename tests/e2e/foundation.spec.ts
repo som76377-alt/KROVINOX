@@ -1,27 +1,82 @@
 import { expect, test } from "@playwright/test";
 
-test("mobile foundation fits a 390px viewport", async ({ page }) => {
+test("mobile homepage fits 390px and shows a two-column concept grid", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Quiet by design. Precise by default." })).toBeVisible();
-  await expect(page.getByText(/internal design-system specimen, not a storefront/i)).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "A study in form. A discipline of detail." })).toBeVisible();
+  await expect(page.getByText("Not for sale · Concept fixtures only")).toBeVisible();
+  await expect(page.getByRole("list", { name: "KROVINOX concept studies" })).toBeVisible();
 
   const layout = await page.evaluate(() => ({
     viewportWidth: document.documentElement.clientWidth,
     scrollWidth: document.documentElement.scrollWidth,
-    heroFontSize: getComputedStyle(document.querySelector(".hero-title")!).fontSize,
+    columns: getComputedStyle(document.querySelector(".product-grid")!).gridTemplateColumns.trim().split(/\s+/).length,
   }));
   expect(layout.scrollWidth).toBeLessThanOrEqual(layout.viewportWidth);
-  expect(Number.parseFloat(layout.heroFontSize)).toBeCloseTo(40, 0);
+  expect(layout.columns).toBe(2);
+  await expect(page.getByRole("listitem")).toHaveCount(3);
 });
 
-test("desktop typography scales without exceeding the defined maximum", async ({ page }) => {
+test("desktop concept grid starts at three columns", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
-  const size = await page.locator(".hero-title").evaluate((node) => getComputedStyle(node).fontSize);
-  expect(Number.parseFloat(size)).toBeCloseTo(72, 0);
-  const fontFamily = await page.locator("body").evaluate((node) => getComputedStyle(node).fontFamily);
-  expect(fontFamily.toLowerCase()).toContain("manrope");
+  const columns = await page.locator(".product-grid").evaluate((node) => getComputedStyle(node).gridTemplateColumns.trim().split(/\s+/).length);
+  expect(columns).toBe(3);
+  const family = await page.locator("body").evaluate((node) => getComputedStyle(node).fontFamily);
+  expect(family.toLowerCase()).toContain("manrope");
+});
+
+test("the homepage puts concept cards before the brand-direction section", async ({ page }) => {
+  await page.goto("/");
+  const cardsTop = await page.locator(".home-studies").evaluate((node) => node.getBoundingClientRect().top);
+  const directionTop = await page.locator(".home-direction").evaluate((node) => node.getBoundingClientRect().top);
+  expect(cardsTop).toBeLessThan(directionTop);
+  await expect(page.getByText(/not photographs of manufactured garments/i)).toBeVisible();
+});
+
+test("the primary CTA routes to a working shop collection page", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: /explore concept studies/i }).click();
+  await expect(page).toHaveURL(/\/shop$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Shop" })).toBeVisible();
+  await expect(page.getByRole("listitem")).toHaveCount(3);
+});
+
+test("a concept card opens its product route without a fabricated price or purchase action", async ({ page }) => {
+  await page.goto("/shop");
+  await page.getByRole("link", { name: "View Form Study 01" }).click();
+  await expect(page).toHaveURL(/\/products\/form-study-01$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Form Study 01" })).toBeVisible();
+  await expect(page.getByText("Concept fixture · Not for sale")).toBeVisible();
+  await expect(page.getByText(/not a photograph or prototype of a manufactured garment/i)).toBeVisible();
+  await expect(page.getByText(/₹\s?0(?:\.00)?/)).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /buy|add to bag|checkout/i })).toHaveCount(0);
+});
+
+test("unknown product slugs use a helpful not-found page", async ({ page }) => {
+  await page.goto("/products/not-a-real-product");
+  await expect(page.getByRole("heading", { level: 1, name: "This page does not exist." })).toBeVisible();
+  await expect(page.getByRole("link", { name: /go to shop/i })).toHaveAttribute("href", "/shop");
+});
+
+test("about page states only confirmed project facts", async ({ page }) => {
+  await page.goto("/about");
+  await expect(page.getByRole("heading", { level: 1, name: "About KROVINOX" })).toBeVisible();
+  await expect(page.getByText(/manufactured garments, approved artwork, materials or production methods/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /explore concept studies/i })).toHaveAttribute("href", "/shop");
+});
+
+test("mobile navigation opens, closes with Escape, and restores focus", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const trigger = page.getByRole("button", { name: "Menu" });
+  await trigger.click();
+  const dialog = page.getByRole("dialog", { name: "Navigation" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("link", { name: "Shop" })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect(trigger).toBeFocused();
 });
 
 test("skip link becomes visible on keyboard focus", async ({ page }) => {
@@ -32,32 +87,9 @@ test("skip link becomes visible on keyboard focus", async ({ page }) => {
   await expect(skipLink).toHaveCSS("transform", "matrix(1, 0, 0, 1, 0, 0)");
 });
 
-test("the foundation preview makes no false shop or checkout promise", async ({ page }) => {
+test("preview is noindex and the footer does not imply commerce", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText(/no products, bag, payment or order flow exists/i)).toBeVisible();
-  await expect(page.getByRole("button", { name: "Checkout is not available" })).toBeDisabled();
-  await expect(page.getByLabel("Read-only reference")).toHaveAttribute("readonly", "");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
-});
-
-
-test("mobile navigation opens, closes with Escape, and restores focus", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
-  const trigger = page.getByRole("button", { name: "Menu" });
-  await trigger.click();
-  const dialog = page.getByRole("dialog", { name: "Preview navigation" });
-  await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole("link", { name: "Color system" })).toBeVisible();
-  await page.keyboard.press("Escape");
-  await expect(dialog).not.toBeVisible();
-  await expect(trigger).toBeFocused();
-});
-
-test("shared shell has working preview navigation and a truthful footer", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.getByRole("banner")).toBeVisible();
-  await expect(page.getByRole("navigation", { name: "Preview sections" })).toBeVisible();
-  await expect(page.getByRole("contentinfo")).toContainText("no products for sale");
-  await expect(page.getByRole("link", { name: "Back to preview" })).toHaveAttribute("href", "#main-content");
+  await expect(page.getByRole("contentinfo")).toContainText("No products for sale");
+  await expect(page.getByRole("contentinfo")).toContainText("No orders or payment accepted");
 });
