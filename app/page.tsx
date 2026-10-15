@@ -24,7 +24,6 @@ const spacingTokens = [
 export default function FoundationPreviewPage() {
   return (
     <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" className="preview-page">
           <section className="hero" aria-labelledby="page-title">
           <p className="eyebrow">Phase 1 · Design foundations</p>

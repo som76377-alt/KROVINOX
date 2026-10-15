@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Manrope } from "next/font/google";
-import "./globals.css";
 import SiteFooter from "@/components/site-footer";
 import SiteHeader from "@/components/site-header";
+import "./globals.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -40,7 +40,10 @@ export default function RootLayout({
   return (
     <html lang="en-IN">
       <body className={`${manrope.variable} ${plexMono.variable}`}>
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
