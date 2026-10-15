@@ -1,6 +1,6 @@
 # Phase 1 — Design foundation acceptance
 
-**Status:** Implemented in source; remote CI verification pending. Do not mark the phase PASS until the workflow is green and the lockfile is committed.
+**Status:** Implemented in source; automated verification pending. The first CI attempt exposed an invalid Node runtime pin (22.20.5, not a published runtime); the pin has been corrected to Node 22.23.3. Do not mark the phase PASS until lint, types, token checks, build and browser tests pass, and the generated lockfile is reviewed and committed.
 
 ## Scope
 
