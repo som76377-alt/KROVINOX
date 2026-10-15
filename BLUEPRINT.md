@@ -1,6 +1,6 @@
 # KROVINOX — Project Blueprint
 
-**Status:** Fresh-start implementation blueprint; Phase 0 inventory complete, implementation not yet started.  
+**Status:** Phase 1 foundation files drafted on the rebuild branch; workflow verification and a committed lockfile are still pending.  
 **Authority:** `docs/product/KROVINOX_Master_PRD_v1.0.md` is the complete product specification.  
 **Market assumption:** India-first, INR presentation; legal and operational details remain launch-gated.  
 **Last audited:** 15 October 2026.
@@ -91,4 +91,4 @@ The standalone `KROVINOX_AI_Quality_Guardrails.zip` and its source files remain 
 
 ## 8. Current status
 
-The inspected remote repository contained only a minimal `README.md`; it had no app, package manifest, lockfile, tests, assets, or workflows. The three visible branch heads were identical. This is a fresh implementation, not a refactor of an existing application. The baseline report records what the GitHub connector could verify and what remains untested locally.
+Phase 0 established that the pre-rebuild application branch had no application runtime. Phase 1 now drafts the toolchain, typography/design tokens, a no-commerce foundation preview, a token-check script, Playwright browser tests, and a GitHub Actions workflow on `rebuild/krovinox-clean-start`. The workflow has not yet been verified. A generated dependency lockfile must be reviewed and committed before dependency reproducibility can pass. No claim is made that lint, typechecking, production build, browser tests, or visual art-direction review have passed. The `main` branch remains unchanged.

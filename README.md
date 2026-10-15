@@ -10,11 +10,15 @@ An experimental, design-led clothing storefront. This repository is being rebuil
 
 ## Status
 
-**Phase 0 audit recorded. Application implementation has not started.** There is not yet a runnable storefront in this branch. Do not treat this repository or any demo state as production-ready.
+**Phase 1 source is drafted; automated verification is pending.** The current page is only an internal design-foundation preview, not a storefront. Do not treat it or any demo state as production-ready.
 
 ## Planned technical direction
 
-Next.js App Router, TypeScript, Tailwind CSS v4, server rendering by default, local catalog data, and minimal client-side code. Exact dependency versions, scripts, and package manager must be deliberately selected and verified in a separate implementation step; none have been verified by this baseline audit.
+Next.js App Router, TypeScript, Tailwind CSS v4, server rendering by default, local catalog data, and minimal client-side code. Exact versions and scripts are declared in `package.json`; dependency installation, a committed `package-lock.json`, and the full CI run remain to be verified.
+
+## Current preview
+
+The `/` route is a design-system specimen covering the color palette, typography, spacing and basic accessible controls. It intentionally contains no catalog, bag/cart, payment form or order flow. Its metadata marks it noindex/nofollow.
 
 ## Product-truth and launch boundary
 
