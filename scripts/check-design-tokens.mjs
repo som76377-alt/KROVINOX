@@ -4,6 +4,8 @@ import { readFile } from "node:fs/promises";
 const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
 const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+const header = await readFile(new URL("../components/site-header.tsx", import.meta.url), "utf8");
+const footer = await readFile(new URL("../components/site-footer.tsx", import.meta.url), "utf8");
 const pkg = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
 
 function escapeRegex(value) {
@@ -60,7 +62,11 @@ assert.match(css, /--aspect-product:\s*4\s*\/\s*5;/, "Product media ratio must b
 assert.match(css, /--font-size-hero:\s*clamp\(2\.5rem,\s*5vw,\s*5rem\);/, "Hero typography must remain fluid within its approved bounds.");
 assert.match(layout, /index:\s*false/);
 assert.match(layout, /follow:\s*false/);
-assert.match(page, /FOUNDATION PREVIEW \/ NOT A SHOP/);
+assert.match(header, /DESIGN PREVIEW · NOT FOR SALE/);
+assert.match(footer, /no products for sale · no checkout/i);
+assert.match(layout, /<SiteHeader \/>/);
+assert.match(layout, /<SiteFooter \/>/);
+assert.match(layout, /className="skip-link"/);
 assert.match(page, /readOnly/);
 assert.match(page, /disabled/);
 assert.equal(pkg.scripts["check:tokens"], "node scripts/check-design-tokens.mjs");

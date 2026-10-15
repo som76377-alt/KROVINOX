@@ -1,6 +1,6 @@
 # Phase 1 — Design foundation and global shell acceptance
 
-**Status:** Core CI checks passed on the TypeScript compatibility fix; the mobile-menu and shared-shell checks are now included in this phase and must pass before Phase 1 is closed. Dependency lockfile review and manual visual sign-off remain required.
+**Status:** The initial design-token and build checks passed; the shell integration exposed a stale assertion that expected the preview status to live in the page instead of the shared header. That assertion has been corrected to verify the actual shared components. Mobile-menu and shell browser checks must pass before Phase 1 is closed. Dependency lockfile review and manual visual sign-off remain required.
 
 ## Scope
 - Exact-version Next.js App Router, TypeScript, and Tailwind CSS v4 toolchain.
