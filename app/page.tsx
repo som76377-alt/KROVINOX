@@ -117,7 +117,7 @@ export default function FoundationPreviewPage() {
                 <input className="sample-input" id="sample-reference" value="KX-FOUNDATION-01" readOnly />
               </div>
               <div>
-                <label className="control-label" htmlFor="sample-disabled">Unavailable action sample</label>
+                <span className="control-label">Unavailable action sample</span>
                 <button className="sample-button" id="sample-disabled" type="button" disabled>Checkout is not available</button>
               </div>
               <p className="section-copy">Reduced-motion preferences are respected. Interactive controls are not represented as active shopping functionality in this preview.</p>
