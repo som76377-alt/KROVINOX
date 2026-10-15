@@ -1,6 +1,6 @@
 # Phase 1 — Design foundation acceptance
 
-**Status:** Implemented in source; automated verification pending. The first CI attempt exposed an invalid Node runtime pin (22.20.5, not a published runtime); the pin has been corrected to Node 22.23.3. Do not mark the phase PASS until lint, types, token checks, build and browser tests pass, and the generated lockfile is reviewed and committed.
+**Status:** Implemented in source; automated verification pending. The first CI attempt exposed an invalid Node runtime pin (22.20.5, not a published runtime); the pin has been corrected to Node 22.23.3. The second attempt exposed setup-node's implicit npm cache requiring a lockfile before the install step could generate one; caching is now disabled until a committed lockfile exists. Do not mark the phase PASS until lint, types, token checks, build and browser tests pass, and the generated lockfile is reviewed and committed.
 
 ## Scope
 
