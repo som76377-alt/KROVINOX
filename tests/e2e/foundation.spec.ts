@@ -4,7 +4,7 @@ test("mobile foundation fits a 390px viewport", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Quiet by design. Precise by default." })).toBeVisible();
-  await expect(page.getByText("FOUNDATION PREVIEW / NOT A SHOP")).toBeVisible();
+  await expect(page.getByText(/internal design-system specimen, not a storefront/i)).toBeVisible();
 
   const layout = await page.evaluate(() => ({
     viewportWidth: document.documentElement.clientWidth,

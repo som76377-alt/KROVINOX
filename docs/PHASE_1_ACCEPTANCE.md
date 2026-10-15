@@ -1,6 +1,6 @@
 # Phase 1 — Design foundation and global shell acceptance
 
-**Status:** The initial design-token and build checks passed; the shell integration exposed a stale assertion that expected the preview status to live in the page instead of the shared header. That assertion has been corrected to verify the actual shared components. Mobile-menu and shell browser checks must pass before Phase 1 is closed. Dependency lockfile review and manual visual sign-off remain required.
+**Status:** The initial design-token and build checks passed; the shell integration exposed a stale assertion that expected the preview status to live in the page instead of the shared header. That assertion has been corrected to verify the actual shared components. The mobile-layout test also now checks the visible non-storefront explanation instead of a status label that intentionally hides on narrow screens. Mobile-menu and shell browser checks must pass before Phase 1 is closed. Dependency lockfile review and manual visual sign-off remain required.
 
 ## Scope
 - Exact-version Next.js App Router, TypeScript, and Tailwind CSS v4 toolchain.
