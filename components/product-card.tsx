@@ -34,8 +34,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             <p className="product-card-description">{product.shortDescription}</p>
             {isDemo ? (
               <p className="product-card-status">Illustrative fixture · Not for sale</p>
-            ) : (
+            ) : typeof product.pricePaise === "number" ? (
               <p className="product-card-price">{formatPricePaise(product.pricePaise)}</p>
+            ) : (
+              <p className="product-card-status">Price unavailable</p>
             )}
           </div>
         </Link>

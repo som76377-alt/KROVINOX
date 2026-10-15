@@ -29,7 +29,8 @@ export type Product = {
   name: string;
   shortDescription: string;
   description?: string;
-  pricePaise: number;
+  /** Omit until an approved product has a verified price. Demo records must never use a placeholder amount. */
+  pricePaise?: number;
   currency: "INR";
   images: ProductImage[];
   variants: ProductVariant[];

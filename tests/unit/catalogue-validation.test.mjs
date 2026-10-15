@@ -13,6 +13,8 @@ test("approved and demo source files satisfy the product contract", () => {
   assert.deepEqual(validateCatalogue(approved, { rootDir, approvedOnly: true }), []);
   assert.deepEqual(validateCatalogue(demo, { rootDir, demoOnly: true }), []);
   assert.deepEqual(validateCatalogue([...approved, ...demo], { rootDir }), []);
+  assert.ok(demo.every((product) => !Object.hasOwn(product, "pricePaise")),
+    "demo fixtures must omit price entirely rather than encode an invented zero price");
 });
 
 test("approved products cannot be inserted into the demo fixture file", () => {
@@ -100,8 +102,16 @@ test("the second concept panel is registered and not presented as a product view
   assert.deepEqual(errors, []);
 });
 
-test("demo product cards do not get a zero currency price", () => {
+test("demo fixtures without prices are rendered as non-saleable concepts", () => {
   const raw = readFileSync("components/product-card.tsx", "utf8");
   assert.match(raw, /product\.lifecycle === "demo"/);
   assert.match(raw, /Illustrative fixture · Not for sale/);
+  assert.match(raw, /typeof product\.pricePaise === "number"/);
+});
+
+test("demo price fields are rejected even if a zero value is supplied", () => {
+  const records = structuredClone(demo);
+  records[0].pricePaise = 0;
+  const errors = validateCatalogue(records, { rootDir, demoOnly: true });
+  assert.ok(errors.some((message) => message.includes("demo fixtures must omit pricePaise")));
 });

@@ -58,10 +58,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <h1 id="product-title" className="product-detail-title">{product.name}</h1>
             <p className="product-detail-lede">{product.shortDescription}</p>
 
-            {product.lifecycle === "approved" && !isDemo ? (
+            {product.lifecycle === "approved" && !isDemo && typeof product.pricePaise === "number" ? (
               <p className="product-detail-price">{formatPricePaise(product.pricePaise)}</p>
             ) : (
-              <p className="product-detail-status">Concept fixture · Not for sale</p>
+              <p className="product-detail-status">
+                {isDemo ? "Concept fixture · Not for sale" : "Verified price unavailable"}
+              </p>
             )}
 
             {product.description ? <p className="product-detail-description">{product.description}</p> : null}
