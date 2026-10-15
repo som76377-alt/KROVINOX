@@ -1,0 +1,97 @@
+[
+  {
+    "id": "kx-demo-001",
+    "slug": "form-study-01",
+    "lifecycle": "demo",
+    "name": "Form Study 01",
+    "shortDescription": "An abstract layout fixture for testing product-card composition.",
+    "description": "Illustrative design-system fixture only. This is not a manufactured garment and is not for sale.",
+    "pricePaise": 0,
+    "currency": "INR",
+    "isPlaceholder": true,
+    "demoStatus": "layout-test",
+    "images": [
+      {
+        "id": "kx-demo-001-primary",
+        "src": "/placeholders/kx-concept-01.svg",
+        "alt": "Abstract geometric concept placeholder marked not for sale; not a photograph of a manufactured product.",
+        "role": "primary",
+        "width": 800,
+        "height": 1000,
+        "assetRegisterId": "ASSET-KX-PLACEHOLDER-01"
+      }
+    ],
+    "variants": [
+      {
+        "id": "kx-demo-001-variant-a",
+        "label": "Sample state A",
+        "availability": "unknown"
+      },
+      {
+        "id": "kx-demo-001-variant-b",
+        "label": "Sample state B",
+        "availability": "unavailable"
+      }
+    ]
+  },
+  {
+    "id": "kx-demo-002",
+    "slug": "form-study-02",
+    "lifecycle": "demo",
+    "name": "Form Study 02",
+    "shortDescription": "A second neutral fixture with a different composition and longer label.",
+    "description": "Illustrative design-system fixture only. Product facts, sizing, price and availability are intentionally unresolved.",
+    "pricePaise": 0,
+    "currency": "INR",
+    "isPlaceholder": true,
+    "demoStatus": "layout-test",
+    "images": [
+      {
+        "id": "kx-demo-002-primary",
+        "src": "/placeholders/kx-concept-02.svg",
+        "alt": "Abstract diagonal-line concept placeholder marked not for sale; not a photograph of a manufactured product.",
+        "role": "primary",
+        "width": 800,
+        "height": 1000,
+        "assetRegisterId": "ASSET-KX-PLACEHOLDER-02"
+      }
+    ],
+    "variants": [
+      {
+        "id": "kx-demo-002-variant-a",
+        "label": "Sample state A",
+        "availability": "unknown"
+      }
+    ]
+  },
+  {
+    "id": "kx-demo-003",
+    "slug": "form-study-03",
+    "lifecycle": "demo",
+    "name": "Form Study 03 — Extended Composition",
+    "shortDescription": "A deliberately longer fixture title for line-wrap and grid testing.",
+    "description": "Illustrative design-system fixture only. Do not infer garment construction, material, fit or production capability from this graphic.",
+    "pricePaise": 0,
+    "currency": "INR",
+    "isPlaceholder": true,
+    "demoStatus": "illustrative",
+    "images": [
+      {
+        "id": "kx-demo-003-primary",
+        "src": "/placeholders/kx-concept-03.svg",
+        "alt": "Abstract framed concept placeholder marked not for sale; not a photograph of a manufactured product.",
+        "role": "primary",
+        "width": 800,
+        "height": 1000,
+        "assetRegisterId": "ASSET-KX-PLACEHOLDER-03"
+      }
+    ],
+    "variants": [
+      {
+        "id": "kx-demo-003-variant-a",
+        "label": "Sample state",
+        "availability": "unknown"
+      }
+    ]
+  }
+]

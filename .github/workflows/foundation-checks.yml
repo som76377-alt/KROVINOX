@@ -50,6 +50,12 @@ jobs:
       - name: Validate design tokens
         run: npm run check:tokens
 
+      - name: Validate product catalogue and demo isolation
+        run: npm run check:catalogue
+
+      - name: Unit tests for catalogue validation
+        run: npm run test:unit
+
       - name: Production build
         run: npm run build
 
