@@ -26,12 +26,7 @@ export default function FoundationPreviewPage() {
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" className="preview-page">
-        <header className="preview-header">
-          <span className="wordmark">KROVINOX</span>
-          <span className="preview-status">FOUNDATION PREVIEW / NOT A SHOP</span>
-        </header>
-
-        <section className="hero" aria-labelledby="page-title">
+          <section className="hero" aria-labelledby="page-title">
           <p className="eyebrow">Phase 1 · Design foundations</p>
           <h1 id="page-title" className="hero-title">Quiet by design. Precise by default.</h1>
           <p className="hero-copy">
@@ -125,9 +120,6 @@ export default function FoundationPreviewPage() {
           </section>
         </div>
 
-        <footer className="preview-footer">
-          Internal implementation specimen · no products for sale · no checkout · not approved for launch.
-        </footer>
       </main>
     </>
   );

@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Manrope } from "next/font/google";
 import "./globals.css";
+import SiteFooter from "@/components/site-footer";
+import SiteHeader from "@/components/site-header";
 
 const manrope = Manrope({
   subsets: ["latin"],

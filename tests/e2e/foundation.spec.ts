@@ -39,3 +39,25 @@ test("the foundation preview makes no false shop or checkout promise", async ({ 
   await expect(page.getByLabel("Read-only reference")).toHaveAttribute("readonly", "");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
 });
+
+
+test("mobile navigation opens, closes with Escape, and restores focus", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const trigger = page.getByRole("button", { name: "Menu" });
+  await trigger.click();
+  const dialog = page.getByRole("dialog", { name: "Preview navigation" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("link", { name: "Color system" })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect(trigger).toBeFocused();
+});
+
+test("shared shell has working preview navigation and a truthful footer", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("banner")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Preview sections" })).toBeVisible();
+  await expect(page.getByRole("contentinfo")).toContainText("no products for sale");
+  await expect(page.getByRole("link", { name: "Back to preview" })).toHaveAttribute("href", "#main-content");
+});

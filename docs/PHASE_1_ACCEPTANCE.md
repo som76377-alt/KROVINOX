@@ -1,33 +1,31 @@
-# Phase 1 — Design foundation acceptance
+# Phase 1 — Design foundation and global shell acceptance
 
-**Status:** Implemented in source; automated verification pending. The first CI attempt exposed an invalid Node runtime pin; the pin is now Node 22.23.3. The next run exposed TypeScript 7 incompatibility with the current Next.js ESLint toolchain (`typescript-eslint` rejects TS 7.0). TypeScript is pinned to 5.9.3, within the toolchain's supported peer range. CI still generates a temporary lockfile if none is committed. Do not mark the phase PASS until lint, types, token checks, build and browser tests pass, and the lockfile is reviewed and committed.
+**Status:** Core CI checks passed on the TypeScript compatibility fix; the mobile-menu and shared-shell checks are now included in this phase and must pass before Phase 1 is closed. Dependency lockfile review and manual visual sign-off remain required.
 
 ## Scope
-
-- Establish an exact-version Next.js App Router, TypeScript, Tailwind CSS v4 toolchain.
-- Add centralized semantic color, typography, spacing, control, content-width, and product-ratio tokens.
-- Load Manrope as the primary typeface and reserve IBM Plex Mono for technical metadata.
-- Provide visible keyboard focus, a skip link, semantic labels, reduced-motion handling, and appropriate contrast checks.
-- Add a deliberately non-commerce foundation preview with no products, cart, payment, order flow, or live-shop implication.
-- Add token assertions, responsive/keyboard/browser tests, and a CI workflow.
+- Exact-version Next.js App Router, TypeScript, and Tailwind CSS v4 toolchain.
+- Central semantic color, typography, spacing, control, content-width, and product-ratio tokens.
+- Manrope primary typography and IBM Plex Mono for limited technical metadata.
+- Shared header, accessible responsive navigation/menu, footer, and consistent container tokens.
+- Visible keyboard focus, skip link, semantic labels, reduced-motion handling, and contrast assertions.
+- Deliberately non-commerce foundation preview with no products, bag, payment, or order flow.
+- Token assertions, responsive/keyboard/browser tests, and CI workflow.
 
 ## Acceptance gates
 
 | Gate | Evidence | Status |
 |---|---|---|
-| Token values and canonical declarations | `scripts/check-design-tokens.mjs` | NOT RUN locally |
-| Text contrast checks for approved text pairs | Contrast assertions in token script | NOT RUN locally |
-| TypeScript strict check | `npm run typecheck` in CI | NOT RUN |
-| ESLint | `npm run lint` in CI | NOT RUN |
-| Production build | `npm run build` in CI | NOT RUN |
-| 390px and 1440px layout / keyboard tests | Playwright Chromium suite | NOT RUN |
-| Dependency reproducibility | Committed `package-lock.json` | BLOCKED pending CI-generated lockfile review |
+| Token values, canonical declarations, contrast, spacing, type and focus | `scripts/check-design-tokens.mjs` | PASS in CI at commit `7bc23e4` |
+| TypeScript strict check | `npm run typecheck` | PASS in CI at commit `7bc23e4` |
+| ESLint | `npm run lint` | PASS in CI at commit `7bc23e4` |
+| Production build | `npm run build` | PASS in CI at commit `7bc23e4` |
+| Mobile/desktop layout and keyboard navigation | Playwright Chromium suite | PASS in CI at commit `c0c14b9` before shell expansion |
+| Mobile menu open/Escape/focus restoration | Playwright Chromium suite | PENDING after shell expansion |
+| Dependency reproducibility | Committed `package-lock.json` | BLOCKED; CI currently creates a temporary lockfile artifact |
 | Manual art-direction sign-off | Owner inspection at real device sizes | NOT RUN |
 
 ## Explicit non-goals
-
-No navigation/footer shell, catalog, product cards, product details, bag, checkout, live product records, CMS, database, analytics, policy pages, invented product photography, or business claims are implemented in this phase.
+No catalogue, product cards, product details, live product records, bag, checkout, CMS, database, analytics, policy pages, invented product photography, or business claims.
 
 ## Required honesty
-
-A successful build does not prove visual quality or launch readiness. CI results and browser screenshots must be reviewed, and the owner must inspect the actual page. No check is PASS until there is observable evidence.
+A successful build does not prove visual quality or launch readiness. CI results and browser screenshots must be reviewed, and the owner must inspect the actual page. No check is PASS without observable evidence.
