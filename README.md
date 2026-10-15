@@ -14,7 +14,7 @@ An experimental, design-led clothing storefront. This repository is being rebuil
 
 ## Planned technical direction
 
-Next.js App Router, TypeScript, Tailwind CSS v4, server rendering by default, local catalog data, and minimal client-side code. Exact versions and scripts are declared in `package.json`; CI has passed lint, typecheck, token checks, catalogue validation, unit tests, production build, and Playwright browser checks. A committed `package-lock.json` is still outstanding; CI currently generates a temporary lockfile artifact.
+Next.js App Router, TypeScript, Tailwind CSS v4, server rendering by default, local catalog data, and minimal client-side code. Exact versions and scripts are declared in `package.json`; CI has passed lint, typecheck, token checks, catalogue validation, unit tests, production build, and Playwright browser checks. A committed `package-lock.json` is still outstanding; CI currently generates a temporary lockfile artifact. The production-only dependency audit reports zero vulnerabilities, but the full dev-tooling audit has five high findings from one unpatched `braces` advisory; see `docs/DEPENDENCY_AUDIT.md`. Release security status is not cleared.
 
 ## Current preview
 

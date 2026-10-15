@@ -22,6 +22,8 @@
 | Mobile/desktop layout and keyboard navigation | Playwright Chromium suite | PASS in CI at commit `82c33b6` |
 | Mobile menu open/Escape/focus restoration | Playwright Chromium suite | PASS in CI at commit `82c33b6` |
 | Dependency reproducibility | Committed `package-lock.json` | BLOCKED; CI currently creates a temporary lockfile artifact |
+| Production dependency audit | `npm audit --omit=dev` report | PASS: 0 production dependency vulnerabilities in audit snapshot |
+| Full dependency audit | `npm audit` report | BLOCKED: 5 high dev-toolchain findings from one unpatched `braces` advisory; see `docs/DEPENDENCY_AUDIT.md` |
 | Manual art-direction sign-off | Owner inspection at real device sizes | NOT RUN |
 
 ## Explicit non-goals
