@@ -3,9 +3,9 @@
 import {
   createContext,
   useContext,
-  useEffect,
-  useRef,
+  useMemo,
   useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import type { Product } from "@/lib/products/types";
@@ -40,9 +40,78 @@ type CartContextValue = {
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
+const STORAGE_UNAVAILABLE = "__KROVINOX_STORAGE_UNAVAILABLE__";
+const subscribers = new Map<string, Set<() => void>>();
+const cachedSnapshots = new Map<string, string>();
 
 function storageKey(mode: CartMode): string {
   return "krovinox:bag:" + mode + ":v1";
+}
+
+/**
+ * localStorage is an external store, not component state. useSyncExternalStore
+ * provides a stable empty server snapshot and then reconciles to browser storage
+ * after hydration without effect-driven cascading state updates.
+ */
+function getSnapshot(mode: CartMode): string {
+  const key = storageKey(mode);
+  const cached = cachedSnapshots.get(key);
+  if (cached !== undefined) return cached;
+
+  try {
+    return window.localStorage.getItem(key) ?? "";
+  } catch {
+    return STORAGE_UNAVAILABLE;
+  }
+}
+
+function getServerSnapshot(): null {
+  return null;
+}
+
+function subscribe(mode: CartMode, listener: () => void): () => void {
+  const key = storageKey(mode);
+  let listeners = subscribers.get(key);
+  if (!listeners) {
+    listeners = new Set();
+    subscribers.set(key, listeners);
+  }
+  listeners.add(listener);
+
+  function onStorage(event: StorageEvent) {
+    if (event.key === key || event.key === null) {
+      cachedSnapshots.delete(key);
+      listener();
+    }
+  }
+
+  window.addEventListener("storage", onStorage);
+  return () => {
+    window.removeEventListener("storage", onStorage);
+    listeners?.delete(listener);
+    if (listeners?.size === 0) subscribers.delete(key);
+  };
+}
+
+function notifySubscribers(mode: CartMode): void {
+  for (const listener of subscribers.get(storageKey(mode)) ?? []) listener();
+}
+
+function saveSnapshot(mode: CartMode, lines: CartLine[]): boolean {
+  const key = storageKey(mode);
+  const serialized = JSON.stringify(serializeCart(lines, mode));
+
+  // Keep a memory-backed snapshot if storage is disabled or full. The cart can
+  // still work for this page session, while the UI truthfully warns about saving.
+  cachedSnapshots.set(key, serialized);
+  try {
+    window.localStorage.setItem(key, serialized);
+    return true;
+  } catch {
+    return false;
+  } finally {
+    notifySubscribers(mode);
+  }
 }
 
 export function CartProvider({
@@ -54,38 +123,28 @@ export function CartProvider({
   products: Product[];
   children: ReactNode;
 }) {
-  const [lines, setLines] = useState<CartLine[]>([]);
-  const [loadedMode, setLoadedMode] = useState<CartMode | null>(null);
   const [notice, setNotice] = useState("");
-  const linesRef = useRef<CartLine[]>([]);
-  const ready = loadedMode === mode;
-
-  useEffect(() => {
-    let saved: unknown = null;
-
+  const snapshot = useSyncExternalStore(
+    (listener) => subscribe(mode, listener),
+    () => getSnapshot(mode),
+    getServerSnapshot,
+  );
+  const ready = snapshot !== null;
+  const lines = useMemo(() => {
+    if (snapshot === null || snapshot === STORAGE_UNAVAILABLE || snapshot === "") return [];
     try {
-      const serialized = window.localStorage.getItem(storageKey(mode));
-      saved = serialized ? JSON.parse(serialized) : null;
+      return normalizeCart(JSON.parse(snapshot), mode, products);
     } catch {
-      // Malformed or blocked browser storage is treated as an empty bag.
-      saved = null;
+      return [];
     }
+  }, [snapshot, mode, products]);
 
-    const normalized = normalizeCart(saved, mode, products);
-    linesRef.current = normalized;
-    setLines(normalized);
-    setLoadedMode(mode);
-  }, [mode, products]);
-
-  useEffect(() => {
-    if (loadedMode !== mode) return;
-
-    try {
-      window.localStorage.setItem(storageKey(mode), JSON.stringify(serializeCart(lines, mode)));
-    } catch {
-      setNotice("This browser could not save the bag. Items may not persist after leaving this page.");
-    }
-  }, [lines, loadedMode, mode]);
+  function commit(next: CartLine[], successMessage: string): void {
+    const saved = saveSnapshot(mode, next);
+    setNotice(saved
+      ? successMessage
+      : successMessage + " This browser could not save the bag; changes may be lost when you leave.");
+  }
 
   function addItem(productId: string, variantId: string): CartActionResult {
     if (!ready) return { ok: false, message: "The bag is still loading. Try again in a moment." };
@@ -96,13 +155,11 @@ export function CartProvider({
       if (!product || !variant) throw new Error("That product option is no longer available in this catalogue.");
 
       const line = createCartLine(product, variant, mode);
-      const next = addCartLine(linesRef.current, line);
-      linesRef.current = next;
-      setLines(next);
+      const next = addCartLine(lines, line);
       const message = mode === "preview"
         ? "Added " + product.name + " to your demo bag. This concept is not for sale."
         : "Added " + product.name + " to your bag. Checkout is not enabled in this release.";
-      setNotice(message);
+      commit(next, message);
       return { ok: true, message };
     } catch (error) {
       const message = error instanceof Error ? error.message : "The item could not be added.";
@@ -115,13 +172,11 @@ export function CartProvider({
     if (!ready) return { ok: false, message: "The bag is still loading. Try again in a moment." };
 
     try {
-      const next = updateCartQuantity(linesRef.current, key, quantity);
-      linesRef.current = next;
-      setLines(next);
+      const next = updateCartQuantity(lines, key, quantity);
       const message = quantity === 0
         ? "Item removed from the bag."
         : "Bag quantity updated to " + quantity + ".";
-      setNotice(message);
+      commit(next, message);
       return { ok: true, message };
     } catch (error) {
       const message = error instanceof Error ? error.message : "The bag quantity could not be updated.";
@@ -132,33 +187,30 @@ export function CartProvider({
 
   function removeItem(key: string): CartActionResult {
     if (!ready) return { ok: false, message: "The bag is still loading. Try again in a moment." };
-    if (!linesRef.current.some((line) => line.key === key)) {
+    if (!lines.some((line) => line.key === key)) {
       const message = "That item is no longer in the bag.";
       setNotice(message);
       return { ok: false, message };
     }
 
-    const next = removeCartLine(linesRef.current, key);
-    linesRef.current = next;
-    setLines(next);
-    const message = "Item removed from the bag.";
-    setNotice(message);
-    return { ok: true, message };
+    commit(removeCartLine(lines, key), "Item removed from the bag.");
+    return { ok: true, message: "Item removed from the bag." };
   }
 
   function clear(): void {
-    linesRef.current = [];
-    setLines([]);
-    setNotice("Bag cleared.");
+    commit([], "Bag cleared.");
   }
 
+  const storageNotice = snapshot === STORAGE_UNAVAILABLE
+    ? "Browser storage is unavailable. Your bag can work for this page session, but cannot be restored after leaving."
+    : "";
   const value: CartContextValue = {
     mode,
     lines,
     itemCount: getCartCount(lines),
     subtotalPaise: calculateSubtotalPaise(lines),
     ready,
-    notice,
+    notice: storageNotice || notice,
     addItem,
     updateQuantity,
     removeItem,
