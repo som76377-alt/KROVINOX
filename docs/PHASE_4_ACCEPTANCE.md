@@ -1,6 +1,6 @@
 # Phase 4 — Product detail, gallery and size information
 
-**Status:** Implementation committed; CI verification pending. This phase makes product detail routes usable while preserving the distinction between concept artwork and a manufactured garment.
+**Status:** PASS at commit `2568a3c2586121512e075d0eb511cf389f67132e`. [GitHub Actions run 38762783818](https://github.com/som76377-alt/KROVINOX/actions/runs/38762783818) passed the clean install, production dependency audit, lint, strict types, token and catalogue validation, unit tests, production build, and all 13 Playwright tests. This phase makes product detail routes usable while preserving the distinction between concept artwork and a manufactured garment.
 
 ## Task contract
 Build the first product-detail interaction layer from the existing validated product contract. Gallery selection must work with touch, pointer and keyboard; image failure must not break layout. Product options must use only approved size/availability/measurement records. A demo fixture must never show invented measurements or a working purchase action.
@@ -18,13 +18,13 @@ Build the first product-detail interaction layer from the existing validated pro
 
 | Gate | Evidence | Status |
 |---|---|---|
-| Gallery changes the main image and reports selected thumbnail | Playwright keyboard interaction | Pending CI |
-| Gallery selection is reachable with named, focusable controls | Playwright plus semantic button state | Pending CI |
-| Broken active image displays fallback and keeps layout usable | Playwright network-abort test | Pending CI |
-| Demo content never invents sizes or measurements | Unit and Playwright assertions | Pending CI |
-| Size guide reveals a truthful no-measurement state | Playwright details/summary test | Pending CI |
-| Purchase control remains disabled for demo records | Playwright test | Pending CI |
-| Catalogue, asset register, lint/types, build and full browser suite | GitHub Actions | Pending CI |
+| Gallery changes the main image and reports selected thumbnail | Playwright keyboard interaction | PASS at commit `2568a3c` |
+| Gallery selection is reachable with named, focusable controls | Playwright plus semantic button state | PASS at commit `2568a3c` |
+| Broken active image displays fallback and keeps layout usable | Playwright network-abort test | PASS at commit `2568a3c` |
+| Demo content never invents sizes or measurements | Unit and Playwright assertions | PASS at commit `2568a3c` |
+| Size guide reveals a truthful no-measurement state | Playwright details/summary test | PASS at commit `2568a3c` |
+| Purchase control remains disabled for demo records | Playwright test | PASS at commit `2568a3c` |
+| Catalogue, asset register, lint/types, build and full browser suite | GitHub Actions | PASS at commit `2568a3c` |
 
 ## Explicit non-goals
 No live add-to-bag, cart persistence, checkout, payment, image zoom/lightbox, swipe-only navigation, invented size chart, or final garment photography.
