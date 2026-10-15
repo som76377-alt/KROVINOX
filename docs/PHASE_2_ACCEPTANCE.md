@@ -1,6 +1,6 @@
 # Catalogue contract and demo isolation — acceptance
 
-**Status:** Implementation committed; CI verification pending. This phase does not add product cards or expose the fixtures in the UI.
+**Status:** Core schema, unit tests, production build, and browser checks passed on the prior commit. This commit strengthens validation so image asset IDs must exist in the asset register, and approved products may reference only assets marked approved for sale. CI verification is pending. This phase does not add product cards or expose the fixtures in the UI.
 
 ## Scope
 - Typed product, variant, image, lifecycle, and availability contracts.

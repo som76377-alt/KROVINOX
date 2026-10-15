@@ -31,6 +31,13 @@ test("missing alt text and missing image files are rejected", () => {
   assert.ok(errors.some((message) => message.includes("asset does not exist")));
 });
 
+test("unknown asset-register IDs are rejected", () => {
+  const records = structuredClone(demo);
+  records[0].images[0].assetRegisterId = "ASSET-NOT-REGISTERED";
+  const errors = validateCatalogue(records, { rootDir });
+  assert.ok(errors.some((message) => message.includes("assetRegisterId is not present in the asset register")));
+});
+
 test("demo fixtures cannot claim sale availability", () => {
   const records = structuredClone(demo);
   records[0].variants[0].availability = "available";
