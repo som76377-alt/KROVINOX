@@ -52,7 +52,7 @@ test("a concept card opens its product route without a fabricated price or purch
   await expect(page.getByText(/₹\s?0(?:\.00)?/)).toHaveCount(0);
   await expect(page.getByRole("button", { name: /buy|add to bag|checkout/i })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Add concept to demo bag" })).toBeDisabled();
-  await expect(page.getByText(/no approved sizes, fit details or measurements/i)).toBeVisible();
+  await expect(page.getByText(/no approved size, fit or measurement data has been published/i)).toBeVisible();
 });
 
 test("product gallery switches concept panels by keyboard and exposes selected state", async ({ page }) => {
@@ -144,7 +144,7 @@ test("preview state adds to a persistent demo bag without inventing a price or e
 
   await expect(page).toHaveURL(/bag$/);
   await expect(page.getByRole("heading", { level: 1, name: "Bag" })).toBeVisible();
-  await expect(page.getByText("Form Study 01", { exact: false })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 3, name: "Form Study 01" })).toBeVisible();
   await expect(page.getByText("Preview state (not a size): Sample state A")).toBeVisible();
   await expect(page.getByText("No approved price", { exact: true })).toBeVisible();
   await expect(page.getByText(/no approved prices exist for these concept fixtures/i)).toBeVisible();
