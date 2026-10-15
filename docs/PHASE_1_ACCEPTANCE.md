@@ -1,6 +1,6 @@
 # Phase 1 — Design foundation acceptance
 
-**Status:** Implemented in source; automated verification pending. The first CI attempt exposed an invalid Node runtime pin (22.20.5, not a published runtime); the pin has been corrected to Node 22.23.3. The second attempt exposed setup-node's implicit npm cache requiring a lockfile before the install step could generate one; caching is now disabled until a committed lockfile exists. Do not mark the phase PASS until lint, types, token checks, build and browser tests pass, and the generated lockfile is reviewed and committed.
+**Status:** Implemented in source; automated verification pending. The first CI attempt exposed an invalid Node runtime pin; the pin is now Node 22.23.3. The next run exposed TypeScript 7 incompatibility with the current Next.js ESLint toolchain (`typescript-eslint` rejects TS 7.0). TypeScript is pinned to 5.9.3, within the toolchain's supported peer range. CI still generates a temporary lockfile if none is committed. Do not mark the phase PASS until lint, types, token checks, build and browser tests pass, and the lockfile is reviewed and committed.
 
 ## Scope
 
