@@ -1,6 +1,6 @@
 # Phase 3 — ProductCard, ProductGrid and homepage acceptance
 
-**Status:** Implementation committed; automated checks pending.
+**Status:** PASS on commit `8ea76dc154ca81de8c2f11a1f39f15e14f62f30f`. [GitHub Actions run 38761992828](https://github.com/som76377-alt/KROVINOX/actions/runs/38761992828) passed clean `npm ci`, production dependency audit, lint, typecheck, token and catalogue checks, unit tests, production build and the Playwright suite.
 
 ## Task contract
 Deliver a functional homepage and shared product-card/grid using only the isolated preview catalogue, with valid Shop/About/product routes and explicit not-for-sale status. Live mode must read only the approved catalogue. No fabricated price, garment specification, stock or purchase functionality may appear for demo fixtures.
@@ -20,7 +20,7 @@ Deliver a functional homepage and shared product-card/grid using only the isolat
 | Gate | Evidence | Status |
 |---|---|---|
 | Clean lockfile install and least-privilege CI | `npm ci`, read-only workflow token | PASS before this stage |
-| Homepage is product-first and responsive | Playwright at 390px and 1440px | Pending |
+| Homepage is product-first and responsive | Playwright at 390px and 1440px | PASS at commit `8ea76dc` |
 | Two-column mobile and three-column desktop grid | Computed browser layout | Pending |
 | Card and hero links have real destinations | Shop and product-route E2E | Pending |
 | Missing product returns helpful 404 | Playwright invalid-slug test | Pending |

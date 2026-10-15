@@ -51,6 +51,41 @@ test("a concept card opens its product route without a fabricated price or purch
   await expect(page.getByText(/not a photograph or prototype of a manufactured garment/i)).toBeVisible();
   await expect(page.getByText(/₹\s?0(?:\.00)?/)).toHaveCount(0);
   await expect(page.getByRole("button", { name: /buy|add to bag|checkout/i })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /purchase unavailable/i })).toBeDisabled();
+  await expect(page.getByText(/no approved sizes, fit details or measurements/i)).toBeVisible();
+});
+
+test("product gallery switches concept panels by keyboard and exposes selected state", async ({ page }) => {
+  await page.goto("/products/form-study-01");
+  const first = page.getByRole("button", { name: "View concept panel 1" });
+  const second = page.getByRole("button", { name: "View concept panel 2" });
+  await expect(first).toHaveAttribute("aria-pressed", "true");
+  await expect(second).toHaveAttribute("aria-pressed", "false");
+
+  await second.focus();
+  await page.keyboard.press("Enter");
+  await expect(second).toHaveAttribute("aria-pressed", "true");
+  await expect(first).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator(".product-gallery-main img")).toHaveAttribute(
+    "alt",
+    /Second abstract concept panel for Form Study 01/
+  );
+});
+
+test("size guide does not invent sizing or garment measurements for a concept fixture", async ({ page }) => {
+  await page.goto("/products/form-study-01");
+  await page.getByText("Size guide & measurements").click();
+  await expect(page.getByText(/no verified garment measurements have been published/i)).toBeVisible();
+  await expect(page.getByText(/do not use this preview as size guidance/i)).toBeVisible();
+  await expect(page.getByRole("button", { name: /purchase unavailable/i })).toBeDisabled();
+});
+
+test("a broken gallery image uses a fallback without breaking the detail layout", async ({ page }) => {
+  await page.route("**/placeholders/kx-concept-01-detail.svg", (route) => route.abort());
+  await page.goto("/products/form-study-01");
+  await page.getByRole("button", { name: "View concept panel 2" }).click();
+  await expect(page.locator(".product-gallery-main .product-image-fallback")).toBeVisible();
+  await expect(page.locator(".product-gallery-main")).toContainText("Image unavailable");
 });
 
 test("unknown product slugs use a helpful not-found page", async ({ page }) => {

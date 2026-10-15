@@ -92,6 +92,14 @@ test("price formatting is centralised and rejects malformed minor-unit amounts",
   assert.throws(() => formatPricePaise(2.5), /non-negative integer number of paise/);
 });
 
+test("the second concept panel is registered and not presented as a product view", () => {
+  assert.equal(demo[0].images.length, 2);
+  assert.equal(demo[0].images[1].role, "gallery");
+  assert.match(demo[0].images[1].alt, /not a product view or photograph/i);
+  const errors = validateCatalogue(demo, { rootDir, demoOnly: true });
+  assert.deepEqual(errors, []);
+});
+
 test("demo product cards do not get a zero currency price", () => {
   const raw = readFileSync("components/product-card.tsx", "utf8");
   assert.match(raw, /product\.lifecycle === "demo"/);

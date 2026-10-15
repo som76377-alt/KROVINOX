@@ -14,11 +14,20 @@
       {
         "id": "kx-demo-001-primary",
         "src": "/placeholders/kx-concept-01.svg",
-        "alt": "Abstract geometric concept placeholder marked not for sale; not a photograph of a manufactured product.",
+        "alt": "First abstract concept panel for Form Study 01 with concentric circles and guide lines; not a product view or photograph of a manufactured garment.",
         "role": "primary",
         "width": 800,
         "height": 1000,
         "assetRegisterId": "ASSET-KX-PLACEHOLDER-01"
+      },
+      {
+        "id": "kx-demo-001-gallery-02",
+        "src": "/placeholders/kx-concept-01-detail.svg",
+        "alt": "Second abstract concept panel for Form Study 01 using intersecting geometric shapes; not a product view or photograph of a manufactured garment.",
+        "role": "gallery",
+        "width": 800,
+        "height": 1000,
+        "assetRegisterId": "ASSET-KX-PLACEHOLDER-01B"
       }
     ],
     "variants": [

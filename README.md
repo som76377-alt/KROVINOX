@@ -1,29 +1,30 @@
 # KROVINOX
 
-An experimental, design-led clothing storefront. This repository is being rebuilt from a verified empty application baseline, in small stages governed by the master PRD.
+An experimental, design-led clothing storefront, rebuilt in small verified stages against the Master PRD.
 
 ## Source of truth
 
 - [Project Blueprint](BLUEPRINT.md) — locked architecture and implementation order.
-- [Master PRD v1.0](docs/product/KROVINOX_Master_PRD_v1.0.md) — complete product requirements, user journeys, design system, architecture, launch gates, and appended historical support documents.
-- [Rebuild baseline](docs/REBUILD_BASELINE.md) — what was actually found in GitHub and what could not be verified.
+- [Master PRD v1.0](docs/product/KROVINOX_Master_PRD_v1.0.md) — product requirements, journeys, design system, architecture and launch gates.
+- [Rebuild baseline](docs/REBUILD_BASELINE.md) — repository inspection evidence and known limitations.
+- [Dependency audit record](docs/DEPENDENCY_AUDIT.md) — dependency risk and release disposition.
 
-## Status
+## Current verified state
 
-**Verified foundation and catalogue isolation are complete; homepage implementation is in progress.** The rebuild branch has a committed package lockfile and CI passed a clean install, all configured checks, production build and Playwright tests on the prior commit. This branch is still a design preview, not a live shop.
+**Phase 3 — homepage and reusable product grid: PASS.** [The CI run for commit `8ea76dc`](https://github.com/som76377-alt/KROVINOX/actions/runs/38761992828) passed `npm ci`, the production-only security audit, ESLint, TypeScript, design-token and catalogue validation, unit tests, production build, and Playwright browser tests.
 
-## Planned technical direction
+Phase 4 is extending the product-detail page with accessible gallery and honest size/availability states. The preview images are original abstract vector fixtures, not product photography. The approved catalogue remains empty.
 
-Next.js App Router, TypeScript, Tailwind CSS v4, server rendering by default, local catalog data, and minimal client-side code. Exact versions and scripts are declared in `package.json`; CI has passed lint, typecheck, token checks, catalogue validation, unit tests, production build, and Playwright browser checks. A committed `package-lock.json` is still outstanding; CI currently generates a temporary lockfile artifact. The production-only dependency audit reports zero vulnerabilities, but the full dev-tooling audit has five high findings from one unpatched `braces` advisory; see `docs/DEPENDENCY_AUDIT.md`. Release security status is not cleared.
+## Technical stack and reproducibility
 
-## Current preview
+Next.js App Router, TypeScript, Tailwind CSS v4, local JSON catalogues, Server Components by default, and minimal client code for genuine interactions. Exact dependencies are pinned in `package.json` and `package-lock.json`; CI installs using `npm ci`.
 
-The `/` route is a design-system specimen covering the color palette, typography, spacing and basic accessible controls. It intentionally contains no catalog, bag/cart, payment form or order flow. Its metadata marks it noindex/nofollow.
+The production-only dependency audit is a CI gate and has reported zero high-severity production findings. The full development-tooling audit has five high audit entries stemming from one upstream `braces` advisory with no patched release listed at audit time. See `docs/DEPENDENCY_AUDIT.md`; this remains documented rather than being misrepresented as fixed.
 
-## Product-truth and launch boundary
+## Product truth and launch boundary
 
-Any eventual demo products must be unmistakably illustrative and isolated from approved saleable products. Demo checkout must not collect payment data, place real orders, or show false purchase success. Live orders remain blocked until product, business, operational, legal, security, and payment-provider launch gates pass.
+Demo fixtures remain separate from `data/products.json` and are only for the preview catalogue. Final designs, sizes, measurements, material/fit/care facts, price, availability, manufacturing, supplier, shipping, returns, business/legal setup and payment integration are not invented. There is no cart, checkout or order flow, and the preview is marked noindex/nofollow.
 
 ## Working discipline
 
-Build one bounded phase at a time. Record actual checks and evidence. Never mark a check PASS if it was not run. Review mobile and desktop rendering, accessibility, behavior, performance, content truth, asset rights, and the full diff before calling a milestone complete.
+Build one bounded stage at a time. Record checks as PASS/FAIL/NOT RUN/BLOCKED based on evidence. Passing CI does not substitute for the owner's visual review on actual phone and desktop sizes or authorize a commercial launch.

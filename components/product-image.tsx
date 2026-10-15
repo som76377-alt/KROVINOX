@@ -10,7 +10,7 @@ type ProductImageProps = {
   height: number;
   sizes?: string;
   priority?: boolean;
-  variant?: "card" | "hero" | "detail";
+  variant?: "card" | "hero" | "detail" | "thumbnail";
 };
 
 export default function ProductImage({

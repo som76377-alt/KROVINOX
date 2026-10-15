@@ -482,3 +482,105 @@ a { color: inherit; }
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Product detail: keyboard-operable gallery and truthful size/order states */
+.product-gallery { display: grid; gap: 0.75rem; min-width: 0; }
+.product-gallery-main { min-width: 0; }
+.product-gallery-caption {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.035em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+.product-gallery-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin: 0;
+  padding: 0;
+}
+.product-gallery-thumb {
+  width: 5.25rem;
+  min-width: 5.25rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-control);
+  background: transparent;
+  padding: 0;
+  color: var(--color-ink);
+  text-align: left;
+  cursor: pointer;
+}
+.product-gallery-thumb[aria-pressed="true"] { border-color: var(--color-ink); }
+.product-gallery-thumb:focus-visible { outline-offset: 3px; }
+.product-image-frame--thumbnail { width: 100%; aspect-ratio: var(--aspect-product); }
+.product-gallery-thumb-caption {
+  display: block;
+  padding: 0.3rem 0.3rem 0.35rem;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.5625rem;
+  line-height: 1.35;
+}
+.product-gallery-empty {
+  display: grid;
+  min-height: 18rem;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  padding: 1.5rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.product-options { display: grid; gap: 0.875rem; margin-top: 2rem; }
+.product-options-title { margin: 0; font-size: 1rem; font-weight: 600; }
+.product-options-note { margin: 0; color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.65; }
+.product-options-status { margin: 0; color: var(--color-text-secondary); font-size: 0.8125rem; line-height: 1.55; }
+.product-size-fieldset { min-width: 0; margin: 0; border: 0; padding: 0; }
+.product-size-fieldset legend { margin-bottom: 0.75rem; font-size: 0.8125rem; font-weight: 600; }
+.product-size-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.product-size-option {
+  display: grid;
+  min-width: 5.25rem;
+  min-height: 4.25rem;
+  justify-items: start;
+  align-content: center;
+  gap: 0.2rem;
+  border: 1px solid var(--color-control-border);
+  border-radius: var(--radius-control);
+  padding: 0.5rem 0.625rem;
+  cursor: pointer;
+}
+.product-size-option input { margin: 0; accent-color: var(--color-ink); }
+.product-size-option-value { font-size: 0.875rem; font-weight: 600; }
+.product-size-option-status { color: var(--color-text-secondary); font-size: 0.5625rem; line-height: 1.3; }
+.product-size-option.is-unavailable { border-color: var(--color-border); color: var(--color-text-secondary); cursor: not-allowed; }
+.product-size-option.is-unavailable .product-size-option-value { text-decoration: line-through; }
+.product-size-guide { border-block: 1px solid var(--color-border); }
+.product-size-guide summary {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style-position: inside;
+}
+.product-size-guide summary:focus-visible { outline-offset: 1px; }
+.product-size-guide > p { margin: 0 0 1rem; }
+.product-measurement-table-wrap { overflow-x: auto; margin-bottom: 1rem; }
+.product-measurement-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; text-align: left; }
+.product-measurement-table caption { padding-block: 0.5rem; color: var(--color-text-secondary); text-align: left; }
+.product-measurement-table th, .product-measurement-table td { border-bottom: 1px solid var(--color-border); padding: 0.625rem 0.5rem; }
+.product-measurement-table th { font-weight: 600; }
+.product-purchase-disabled { width: 100%; margin-top: 0.25rem; }
+.sample-button:disabled, .product-purchase-disabled:disabled { border-color: var(--color-border); background: var(--color-border); color: var(--color-text-secondary); cursor: not-allowed; }
+.product-purchase-unavailable-note { margin: -0.4rem 0 0; color: var(--color-text-secondary); font-size: 0.75rem; line-height: 1.55; }
+@media (min-width: 760px) {
+  .product-gallery-thumbnails { gap: 0.75rem; }
+  .product-gallery-thumb { width: 5.5rem; min-width: 5.5rem; }
+}

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ProductImage from "@/components/product-image";
+import ProductGallery from "@/components/product-gallery";
+import ProductPurchaseOptions from "@/components/product-purchase-options";
 import { formatPricePaise } from "@/lib/products/format-price.mjs";
 import { getCatalogueMode, getProductBySlug } from "@/lib/products/catalogue";
 
@@ -35,7 +36,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (!product) notFound();
 
   const mode = getCatalogueMode();
-  const image = product.images[0];
   const isDemo = mode === "preview" && product.lifecycle === "demo";
 
   return (
@@ -45,16 +45,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         <div className="product-detail-grid">
           <div className="product-detail-media">
-            <ProductImage
-              key={image.src}
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-              sizes="(max-width: 759px) 100vw, 56vw"
-              variant="detail"
+            <ProductGallery
+              key={product.id}
+              images={product.images}
+              productName={product.name}
+              isDemo={isDemo}
             />
-            <p className="product-detail-caption">Image status: {isDemo ? "abstract concept graphic" : "registered catalogue image"}</p>
           </div>
 
           <section className="product-detail-copy" aria-labelledby="product-title">
@@ -69,6 +65,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
             )}
 
             {product.description ? <p className="product-detail-description">{product.description}</p> : null}
+
+            <ProductPurchaseOptions product={product} mode={mode} />
 
             <div className="product-truth-note" role="note">
               <h2>Preview status</h2>
