@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: foundation-${{ github.ref }}
@@ -31,6 +31,15 @@ jobs:
           node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
+
+      - name: Record lockfile bootstrap state
+        id: lockfile_state
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "bootstrap=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "bootstrap=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Install dependencies and create a temporary lockfile if absent
         run: |
@@ -69,6 +78,19 @@ jobs:
 
       - name: End-to-end foundation checks
         run: npm run test:e2e
+
+      - name: Commit generated lockfile after all checks pass
+        if: github.event_name == 'push' && github.ref == 'refs/heads/rebuild/krovinox-clean-start' && steps.lockfile_state.outputs.bootstrap == 'true'
+        run: |
+          git add package-lock.json
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "chore: commit reproducible npm lockfile"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Verify committed lockfile from a clean install
+        if: steps.lockfile_state.outputs.bootstrap == 'true'
+        run: |
+          npm ci
+          npm run check
 
       - name: Upload dependency audit reports
         if: always()
