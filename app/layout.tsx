@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Manrope } from "next/font/google";
+import { CartProvider } from "@/components/cart/cart-provider";
 import SiteFooter from "@/components/site-footer";
 import SiteHeader from "@/components/site-header";
+import { getCatalogueMode, getCatalogueProducts } from "@/lib/products/catalogue";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -16,6 +18,8 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
   display: "swap",
 });
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
@@ -40,13 +44,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const catalogueMode = getCatalogueMode();
+  const catalogueProducts = getCatalogueProducts();
+
   return (
     <html lang="en-IN">
       <body className={manrope.variable + " " + plexMono.variable}>
         <a className="skip-link" href="#main-content">Skip to content</a>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <CartProvider mode={catalogueMode} products={catalogueProducts}>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </CartProvider>
       </body>
     </html>
   );

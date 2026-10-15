@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Product, ProductVariant } from "@/lib/products/types";
+import { useCart } from "@/components/cart/cart-provider";
 
 type ProductPurchaseOptionsProps = {
   product: Product;
@@ -23,10 +24,16 @@ function availabilityLabel(availability: ProductVariant["availability"]): string
 
 export default function ProductPurchaseOptions({ product, mode }: ProductPurchaseOptionsProps) {
   const [selectedVariantId, setSelectedVariantId] = useState("");
+  const [actionMessage, setActionMessage] = useState("");
+  const cart = useCart();
+  const isDemo = mode === "preview" && product.lifecycle === "demo";
   const isSaleableRecord = mode === "live" && product.lifecycle === "approved";
-  const isDemo = product.lifecycle === "demo";
-  const sizedVariants = product.variants.filter((variant) => typeof variant.size === "string" && variant.size.trim() !== "");
-  const selectedVariant = sizedVariants.find((variant) => variant.id === selectedVariantId);
+  const sizedVariants = isSaleableRecord
+    ? product.variants.filter((variant) => typeof variant.size === "string" && variant.size.trim() !== "")
+    : [];
+  const selectedVariant = isDemo
+    ? product.variants.find((variant) => variant.id === selectedVariantId)
+    : sizedVariants.find((variant) => variant.id === selectedVariantId);
 
   const measuredVariants = isSaleableRecord
     ? product.variants.filter((variant) =>
@@ -40,18 +47,64 @@ export default function ProductPurchaseOptions({ product, mode }: ProductPurchas
     new Set(measuredVariants.flatMap((variant) => Object.keys(variant.measurements ?? {})))
   );
 
+  function handleAdd() {
+    if (!selectedVariant) {
+      setActionMessage(isDemo
+        ? "Choose a preview state first."
+        : "Choose an available, verified size first.");
+      return;
+    }
+    const result = cart.addItem(product.id, selectedVariant.id);
+    setActionMessage(result.message);
+  }
+
   return (
     <section className="product-options" aria-labelledby="product-options-title">
-      <h2 id="product-options-title" className="product-options-title">Size & ordering</h2>
+      <h2 id="product-options-title" className="product-options-title">
+        {isDemo ? "Demo bag" : "Size & ordering"}
+      </h2>
 
-      {isSaleableRecord && sizedVariants.length > 0 ? (
+      {isDemo ? (
+        <>
+          <p className="product-options-note">
+            This is a concept fixture. These are interface-test states, not sizes, stock states or orderable options.
+          </p>
+          <fieldset className="product-size-fieldset">
+            <legend>Choose a preview state. This is not a size or availability option.</legend>
+            <div className="product-size-options">
+              {product.variants.map((variant) => {
+                const inputId = "preview-state-" + product.id + "-" + variant.id;
+                return (
+                  <label className="product-size-option preview-state-option" htmlFor={inputId} key={variant.id}>
+                    <input
+                      id={inputId}
+                      type="radio"
+                      name={"preview-state-" + product.id}
+                      value={variant.id}
+                      checked={selectedVariantId === variant.id}
+                      onChange={() => {
+                        setSelectedVariantId(variant.id);
+                        setActionMessage("");
+                      }}
+                    />
+                    <span className="product-size-option-value">{variant.label}</span>
+                    <span className="product-size-option-status">Preview state only</span>
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
+          <p className="product-options-status" role="note">
+            No size, stock, price or purchase meaning is attached to the selected state.
+          </p>
+        </>
+      ) : isSaleableRecord && sizedVariants.length > 0 ? (
         <fieldset className="product-size-fieldset">
           <legend>Choose a size. No size is preselected.</legend>
           <div className="product-size-options">
             {sizedVariants.map((variant) => {
               const canSelect = variant.availability === "available" || variant.availability === "made_to_order";
               const inputId = "size-" + product.id + "-" + variant.id;
-
               return (
                 <label
                   className={canSelect ? "product-size-option" : "product-size-option is-unavailable"}
@@ -65,7 +118,10 @@ export default function ProductPurchaseOptions({ product, mode }: ProductPurchas
                     value={variant.id}
                     checked={selectedVariantId === variant.id}
                     disabled={!canSelect}
-                    onChange={() => setSelectedVariantId(variant.id)}
+                    onChange={() => {
+                      setSelectedVariantId(variant.id);
+                      setActionMessage("");
+                    }}
                   />
                   <span className="product-size-option-value">{variant.size}</span>
                   <span className="product-size-option-status">{availabilityLabel(variant.availability)}</span>
@@ -76,8 +132,8 @@ export default function ProductPurchaseOptions({ product, mode }: ProductPurchas
         </fieldset>
       ) : (
         <p className="product-options-note">
-          {isDemo
-            ? "This is a concept fixture. No approved sizes, fit details or measurements have been published."
+          {product.lifecycle === "demo"
+            ? "Preview states are not sizes or stock states. No approved size, fit or measurement data has been published."
             : "No verified size options are available for this catalogue record."}
         </p>
       )}
@@ -122,17 +178,18 @@ export default function ProductPurchaseOptions({ product, mode }: ProductPurchas
       </details>
 
       <button
-        className="sample-button product-purchase-disabled"
+        className="sample-button product-add-button"
         type="button"
-        disabled
-        aria-describedby="product-purchase-unavailable-note"
+        disabled={!cart.ready || (isDemo ? !selectedVariant : (!isSaleableRecord || !selectedVariant ||
+          (selectedVariant.availability !== "available" && selectedVariant.availability !== "made_to_order")))}
+        onClick={handleAdd}
       >
-        {isDemo ? "Purchase unavailable — not for sale" : "Add to bag — unavailable in this build"}
+        {isDemo ? "Add concept to demo bag" : "Add to bag"}
       </button>
-      <p id="product-purchase-unavailable-note" className="product-purchase-unavailable-note">
-        {isDemo
-          ? "This concept fixture cannot be purchased. No order or payment can be accepted."
-          : "The bag and checkout workflow has not been implemented. No order or payment can be accepted."}
+      <p className="product-options-live-region" role="status" aria-live="polite" aria-atomic="true">
+        {actionMessage || (isDemo
+          ? "The demo bag stores only this fixture and its preview state. It cannot create an order or payment."
+          : "Checkout is not enabled in this release. No order or payment can be accepted.")}
       </p>
     </section>
   );

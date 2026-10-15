@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useCart } from "@/components/cart/cart-provider";
 
 export default function SiteFooter() {
+  const { itemCount } = useCart();
+
   return (
     <footer className="site-footer">
       <div className="site-container site-footer-inner">
@@ -11,6 +16,7 @@ export default function SiteFooter() {
         <nav className="site-footer-nav" aria-label="Footer navigation">
           <Link href="/shop">Shop</Link>
           <Link href="/about">About</Link>
+          <Link href="/bag" aria-label={"Bag (" + itemCount + ")"}>Bag ({itemCount})</Link>
           <Link href="/">Home</Link>
         </nav>
       </div>

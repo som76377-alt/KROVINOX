@@ -51,7 +51,7 @@ test("a concept card opens its product route without a fabricated price or purch
   await expect(page.getByText(/not a photograph or prototype of a manufactured garment/i)).toBeVisible();
   await expect(page.getByText(/₹\s?0(?:\.00)?/)).toHaveCount(0);
   await expect(page.getByRole("button", { name: /buy|add to bag|checkout/i })).toHaveCount(0);
-  await expect(page.getByRole("button", { name: /purchase unavailable/i })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Add concept to demo bag" })).toBeDisabled();
   await expect(page.getByText(/no approved sizes, fit details or measurements/i)).toBeVisible();
 });
 
@@ -77,7 +77,7 @@ test("size guide does not invent sizing or garment measurements for a concept fi
   await page.getByText("Size guide & measurements").click();
   await expect(page.getByText(/no verified garment measurements have been published/i)).toBeVisible();
   await expect(page.getByText(/do not use this preview as size guidance/i)).toBeVisible();
-  await expect(page.getByRole("button", { name: /purchase unavailable/i })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Add concept to demo bag" })).toBeDisabled();
 });
 
 test("a broken gallery image uses a fallback without breaking the detail layout", async ({ page }) => {
@@ -127,4 +127,67 @@ test("preview is noindex and the footer does not imply commerce", async ({ page 
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
   await expect(page.getByRole("contentinfo")).toContainText("No products for sale");
   await expect(page.getByRole("contentinfo")).toContainText("No orders or payment accepted");
+});
+
+
+test("preview state adds to a persistent demo bag without inventing a price or enabling checkout", async ({ page }) => {
+  await page.goto("/products/form-study-01");
+  const state = page.getByRole("radio", { name: /Sample state A/ });
+  await state.check();
+  await expect(page.getByRole("button", { name: "Add concept to demo bag" })).toBeEnabled();
+  await page.getByRole("button", { name: "Add concept to demo bag" }).click();
+
+  await expect(page.getByText(/Added Form Study 01 to your demo bag/i)).toBeVisible();
+  const headerBag = page.locator(".site-desktop-nav").getByRole("link", { name: "Bag (1)" });
+  await expect(headerBag).toBeVisible();
+  await headerBag.click();
+
+  await expect(page).toHaveURL(/bag$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Bag" })).toBeVisible();
+  await expect(page.getByText("Form Study 01", { exact: false })).toBeVisible();
+  await expect(page.getByText("Preview state (not a size): Sample state A")).toBeVisible();
+  await expect(page.getByText("No approved price", { exact: true })).toBeVisible();
+  await expect(page.getByText(/no approved prices exist for these concept fixtures/i)).toBeVisible();
+  await expect(page.getByRole("button", { name: "Checkout unavailable" })).toBeDisabled();
+  await expect(page.getByText(/does not reserve products or create an order/i)).toBeVisible();
+
+  await page.reload();
+  await expect(page.locator(".bag-line")).toHaveCount(1);
+  await expect(page.getByText("Preview state (not a size): Sample state A")).toBeVisible();
+  await expect(page.locator(".site-desktop-nav").getByRole("link", { name: "Bag (1)" })).toBeVisible();
+});
+
+test("bag quantity updates, repeated adds merge, and removing the last line gives the empty state", async ({ page }) => {
+  await page.goto("/products/form-study-01");
+  await page.getByRole("radio", { name: /Sample state A/ }).check();
+  await page.getByRole("button", { name: "Add concept to demo bag" }).click();
+  await page.getByRole("button", { name: "Add concept to demo bag" }).click();
+  await expect(page.locator(".site-desktop-nav").getByRole("link", { name: "Bag (2)" })).toBeVisible();
+
+  await page.locator(".site-desktop-nav").getByRole("link", { name: "Bag (2)" }).click();
+  await expect(page.locator(".bag-line")).toHaveCount(1);
+  await expect(page.locator(".bag-quantity-value")).toHaveText("2");
+  await page.getByRole("button", { name: "Decrease quantity of Form Study 01" }).click();
+  await expect(page.locator(".bag-quantity-value")).toHaveText("1");
+  await page.getByRole("button", { name: "Remove Form Study 01 from bag" }).click();
+
+  await expect(page.getByRole("heading", { name: "Your bag is empty." })).toBeVisible();
+  await expect(page.getByRole("link", { name: /continue shopping/i })).toHaveAttribute("href", "/shop");
+  await expect(page.locator(".site-desktop-nav").getByRole("link", { name: "Bag (0)" })).toBeVisible();
+});
+
+test("preview and live bag storage are isolated and malformed saved cart state is ignored", async ({ page }) => {
+  await page.goto("/");
+  await page.evaluate(() => {
+    localStorage.setItem("krovinox:bag:preview:v1", "{malformed-json");
+    localStorage.setItem("krovinox:bag:live:v1", JSON.stringify({
+      version: 1,
+      mode: "preview",
+      lines: [{ productId: "kx-demo-001", variantId: "kx-demo-001-variant-a", quantity: 1 }]
+    }));
+  });
+  await page.reload();
+  await expect(page.locator(".site-desktop-nav").getByRole("link", { name: "Bag (0)" })).toBeVisible();
+  await page.goto("/bag");
+  await expect(page.getByRole("heading", { name: "Your bag is empty." })).toBeVisible();
 });

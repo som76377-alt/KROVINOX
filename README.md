@@ -11,9 +11,11 @@ An experimental, design-led clothing storefront, rebuilt in small verified stage
 
 ## Current verified state
 
-**Phase 3 — homepage and reusable product grid: PASS.** [CI run 38761992828](https://github.com/som76377-alt/KROVINOX/actions/runs/38761992828) passed clean `npm ci`, production dependency audit, lint, TypeScript, token and catalogue checks, unit tests, production build and Playwright tests.
+**Phase 3 — homepage and reusable product grid: PASS.** [CI run 38761992828](https://github.com/som76377-alt/KROVINOX/actions/runs/38761992828) passed clean `npm ci`, the production dependency audit, lint, TypeScript, token and catalogue checks, unit tests, production build and Playwright tests.
 
-**Phase 4 — product gallery and size/order states: PASS.** [CI run 38762783818](https://github.com/som76377-alt/KROVINOX/actions/runs/38762783818) passed the same gates plus 13 browser tests, including keyboard gallery selection, image-error fallback, and verified absence of invented size measurements or enabled purchase actions.
+**Phase 4 — product gallery and size/order states: PASS.** [CI run 38762783818](https://github.com/som76377-alt/KROVINOX/actions/runs/38762783818) passed those gates plus 13 browser tests, including keyboard gallery selection, image-error fallback, and truthful size-measurement states.
+
+**Phase 5 — bag/cart mechanics: implementation committed; CI verification pending.** The bag uses a versioned, mode-isolated browser store containing only product/variant IDs and quantities. Demo lines have no approved price, subtotal is reported as unavailable, and checkout stays disabled. There is no order, payment, reservation or personal-data collection.
 
 The approved catalogue is empty. The abstract vector assets are only layout/concept fixtures, not product photography. The rebuild branch is not a live shop or launch candidate.
 
@@ -25,11 +27,11 @@ The production-only dependency audit is a CI gate and has reported zero high-sev
 
 ## Product truth and launch boundary
 
-Demo fixtures remain separate from `data/products.json` and are only for the preview catalogue. Final designs, sizes, measurements, material/fit/care facts, price, availability, manufacturing, supplier, shipping, returns, business/legal setup and payment integration are not invented. There is no bag, checkout or order flow, and the preview is marked noindex/nofollow.
+Demo fixtures remain separate from `data/products.json` and are only for the preview catalogue. Final designs, sizes, measurements, material/fit/care facts, price, availability, manufacturing, supplier, shipping, returns, business/legal setup and payment integration are not invented. Checkout is not implemented; the preview is marked noindex/nofollow.
 
 ## Remaining gates and next stage
 
-Phase 5 is bag/cart: selected line items and variants, quantity/removal, honest totals, empty state, errors and a strictly non-purchasable demo checkout boundary. Manual visual review on real phone and desktop sizes is still outstanding. The full development-tooling advisory must stay documented until safely remediated or explicitly risk-accepted.
+Phase 5 must pass the full clean-install, production audit, lint, type, catalogue, unit, build and browser suite. After that, Phase 6 is editorial/trust-content page work under the PRD. Manual visual review on real phone and desktop sizes remains outstanding. The full development-tooling advisory must stay documented until safely remediated or explicitly risk-accepted.
 
 ## Working discipline
 
