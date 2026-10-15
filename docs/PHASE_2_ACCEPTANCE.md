@@ -1,6 +1,6 @@
 # Catalogue contract and demo isolation — acceptance
 
-**Status:** Core schema, unit tests, production build, and browser checks passed on the prior commit. This commit strengthens validation so image asset IDs must exist in the asset register, and approved products may reference only assets marked approved for sale. CI verification is pending. This phase does not add product cards or expose the fixtures in the UI.
+**Status:** Catalogue contract, asset-register cross-checks, unit tests, production build, and browser checks all pass in CI at commit `82c33b6`. The approved catalogue remains empty, and demo fixtures are not rendered in the UI.
 
 ## Scope
 - Typed product, variant, image, lifecycle, and availability contracts.
@@ -15,12 +15,12 @@
 
 | Gate | Evidence | Status |
 |---|---|---|
-| Type contract aligns with the PRD | lib/products/types.ts | Pending CI |
-| Approved and demo records remain separate | data/products.json, data/demo-products.json | Pending CI |
-| Referenced placeholder assets exist and are registered | public/placeholders/*, docs/ASSET_REGISTER_TEMPLATE.csv | Pending CI |
-| Duplicate IDs/slugs, missing alt/assets, saleable demo state fail | tests/unit/catalogue-validation.test.mjs | Pending CI |
-| Production guard rejects non-approved records | assertProductionSafe unit tests and CLI check | Pending CI |
-| Build remains safe with no approved products | Production build and catalogue CLI | Pending CI |
+| Type contract aligns with the PRD | lib/products/types.ts | PASS in CI at commit `82c33b6` |
+| Approved and demo records remain separate | data/products.json, data/demo-products.json | PASS in CI at commit `82c33b6` |
+| Referenced placeholder assets exist and are registered | public/placeholders/*, docs/ASSET_REGISTER_TEMPLATE.csv | PASS in CI at commit `82c33b6` |
+| Duplicate IDs/slugs, missing alt/assets, saleable demo state fail | tests/unit/catalogue-validation.test.mjs | PASS in CI at commit `82c33b6` |
+| Production guard rejects non-approved records | assertProductionSafe unit tests and CLI check | PASS in CI at commit `82c33b6` |
+| Build remains safe with no approved products | Production build and catalogue CLI | PASS in CI at commit `82c33b6` |
 | Demo fixtures are not rendered as saleable products | No product UI exists in this phase; approved catalogue remains empty | Verified by source separation; recheck when UI is added |
 
 ## Non-goals

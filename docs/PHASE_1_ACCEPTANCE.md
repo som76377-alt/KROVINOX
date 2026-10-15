@@ -1,6 +1,6 @@
 # Phase 1 — Design foundation and global shell acceptance
 
-**Status:** The initial design-token and build checks passed; the shell integration exposed a stale assertion that expected the preview status to live in the page instead of the shared header. That assertion has been corrected to verify the actual shared components. The mobile-layout test also now checks the visible non-storefront explanation instead of a status label that intentionally hides on narrow screens. Mobile-menu and shell browser checks must pass before Phase 1 is closed. Dependency lockfile review and manual visual sign-off remain required.
+**Status:** All automated design-foundation and shared-shell checks pass in CI at commit `82c33b6`. Phase 1 is not fully closed because the generated dependency lockfile is not committed and the owner has not yet inspected the visual result on real device sizes.
 
 ## Scope
 - Exact-version Next.js App Router, TypeScript, and Tailwind CSS v4 toolchain.
@@ -15,12 +15,12 @@
 
 | Gate | Evidence | Status |
 |---|---|---|
-| Token values, canonical declarations, contrast, spacing, type and focus | `scripts/check-design-tokens.mjs` | PASS in CI at commit `7bc23e4` |
+| Token values, canonical declarations, contrast, spacing, type and focus | `scripts/check-design-tokens.mjs` | PASS in CI at commit `82c33b6` |
 | TypeScript strict check | `npm run typecheck` | PASS in CI at commit `7bc23e4` |
 | ESLint | `npm run lint` | PASS in CI at commit `7bc23e4` |
 | Production build | `npm run build` | PASS in CI at commit `7bc23e4` |
-| Mobile/desktop layout and keyboard navigation | Playwright Chromium suite | PASS in CI at commit `c0c14b9` before shell expansion |
-| Mobile menu open/Escape/focus restoration | Playwright Chromium suite | PENDING after shell expansion |
+| Mobile/desktop layout and keyboard navigation | Playwright Chromium suite | PASS in CI at commit `82c33b6` |
+| Mobile menu open/Escape/focus restoration | Playwright Chromium suite | PASS in CI at commit `82c33b6` |
 | Dependency reproducibility | Committed `package-lock.json` | BLOCKED; CI currently creates a temporary lockfile artifact |
 | Manual art-direction sign-off | Owner inspection at real device sizes | NOT RUN |
 

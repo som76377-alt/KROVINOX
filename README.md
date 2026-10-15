@@ -10,11 +10,11 @@ An experimental, design-led clothing storefront. This repository is being rebuil
 
 ## Status
 
-**Phase 1 source is drafted; automated verification is pending.** The current page is only an internal design-foundation preview, not a storefront. Do not treat it or any demo state as production-ready.
+**Automated checks pass on the rebuild branch through commit `82c33b6`.** The shared preview shell and isolated catalogue contract are implemented, but the root page is still an internal design-foundation preview, not a storefront. Dependency reproducibility and owner visual sign-off remain open.
 
 ## Planned technical direction
 
-Next.js App Router, TypeScript, Tailwind CSS v4, server rendering by default, local catalog data, and minimal client-side code. Exact versions and scripts are declared in `package.json`; dependency installation, a committed `package-lock.json`, and the full CI run remain to be verified.
+Next.js App Router, TypeScript, Tailwind CSS v4, server rendering by default, local catalog data, and minimal client-side code. Exact versions and scripts are declared in `package.json`; CI has passed lint, typecheck, token checks, catalogue validation, unit tests, production build, and Playwright browser checks. A committed `package-lock.json` is still outstanding; CI currently generates a temporary lockfile artifact.
 
 ## Current preview
 
