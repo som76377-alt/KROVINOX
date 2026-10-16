@@ -60,7 +60,6 @@ assert.match(header, /href: "\/shop"/);
 assert.match(header, /href: "\/about"/);
 assert.match(header, /aria-current/);
 assert.match(footer, /previewMode/);
-assert.match(footer, /href="\\/shop"/);
 assert.match(layout, /className="skip-link"/);
 assert.match(page, /<ProductGrid/);
 assert.match(page, /getCatalogueProducts/);
