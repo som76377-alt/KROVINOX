@@ -25,12 +25,6 @@ export default function SiteHeader({ previewMode }: SiteHeaderProps) {
 
   return (
     <header className="site-header">
-      {previewMode ? (
-        <div className="site-announcement" role="note">
-          <span>First collection in progress · Nothing for sale yet</span>
-        </div>
-      ) : null}
-
       <div className="site-container site-header-inner">
         <Link className="site-wordmark" href="/" aria-label="KROVINOX home">KROVINOX</Link>
 

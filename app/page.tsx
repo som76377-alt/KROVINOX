@@ -16,8 +16,7 @@ export default function HomePage() {
       <div className="site-container">
         <section className="home-hero" aria-labelledby="home-title">
           <div className="home-hero-copy">
-            <p className="eyebrow">{isPreview ? "First collection in development" : "The KROVINOX collection"}</p>
-            <h1 id="home-title" className="home-hero-title">The first collection is taking shape.</h1>
+            <h1 id="home-title" className="home-hero-title">Streetwear, reworked.</h1>
             <p className="home-hero-description">
               {isPreview
                 ? "We're working on the first KROVINOX pieces. Browse the styles we're exploring; the photos are references, not products for sale."

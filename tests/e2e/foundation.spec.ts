@@ -3,8 +3,9 @@ import { expect, test } from "@playwright/test";
 test("mobile homepage feels like a clothing storefront and fits a 390px viewport", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1, name: "The first collection is taking shape." })).toBeVisible();
-  await expect(page.getByText("First collection in progress · Nothing for sale yet")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "Streetwear, reworked." })).toBeVisible();
+  await expect(page.getByText(/photos are references, not products for sale/i)).toBeVisible();
+  await expect(page.locator(".site-announcement")).toHaveCount(0);
   await expect(page.getByRole("list", { name: "KROVINOX style references" })).toBeVisible();
 
   const layout = await page.evaluate(() => ({

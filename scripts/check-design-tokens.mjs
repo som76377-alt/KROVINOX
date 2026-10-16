@@ -55,7 +55,8 @@ assert.match(css, /--aspect-product:\s*4\s*\/\s*5;/, "Product media ratio must b
 assert.match(css, /--font-size-hero:\s*clamp\(2\.5rem,\s*5vw,\s*5rem\);/, "Hero typography must remain fluid within its approved bounds.");
 assert.match(layout, /index:\s*false/);
 assert.match(layout, /follow:\s*false/);
-assert.match(header, /First collection in progress · Nothing for sale yet/);
+assert.doesNotMatch(header, /site-announcement/);
+assert.match(header, /previewMode \? navigation/);
 assert.match(header, /href: "\/shop"/);
 assert.match(header, /href: "\/about"/);
 assert.match(header, /aria-current/);
