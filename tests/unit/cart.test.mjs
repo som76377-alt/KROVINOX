@@ -19,7 +19,12 @@ const demoProduct = demoProducts[0];
 const demoVariant = demoProduct.variants[0];
 
 function approvedFixture(id, variantId, pricePaise) {
-  const image = demoProduct.images[0];
+  const image = {
+    ...demoProduct.images[0],
+    id: id + "-image",
+    src: "/placeholders/kx-concept-01.svg",
+    alt: "Internal approved-path fixture for cart tests.",
+  };
   const variant = {
     id: variantId,
     sku: "TEST-" + variantId,
@@ -55,6 +60,23 @@ test("preview cart lines are concept-only and never carry a sale price", () => {
   assert.equal(line.variantLabel, demoVariant.label);
   assert.equal(line.size, null);
   assert.equal(calculateSubtotalPaise([line]), null);
+});
+
+test("preview permits only Pexels reference URLs for demo items; live items require local image paths", () => {
+  const validPreviewLine = createCartLine(demoProduct, demoVariant, "preview");
+  assert.match(validPreviewLine.imageSrc, /^https:\/\/images\.pexels\.com\/photos\//);
+
+  const untrusted = structuredClone(demoProduct);
+  untrusted.images[0].src = "https://untrusted.example/photos/6311629/pexels-photo-6311629.jpeg";
+  assert.throws(() => createCartLine(untrusted, untrusted.variants[0], "preview"), /registered local image/);
+
+  const insecure = structuredClone(demoProduct);
+  insecure.images[0].src = "http://images.pexels.com/photos/6311629/pexels-photo-6311629.jpeg";
+  assert.throws(() => createCartLine(insecure, insecure.variants[0], "preview"), /registered local image/);
+
+  const approved = approvedFixture("approved-local-image", "approved-local-image-variant", 199900);
+  approved.images[0].src = demoProduct.images[0].src;
+  assert.throws(() => createCartLine(approved, approved.variants[0], "live"), /registered local image/);
 });
 
 test("preview cannot accept approved catalogue records and live mode cannot accept demo fixtures", () => {

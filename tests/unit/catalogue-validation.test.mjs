@@ -118,7 +118,7 @@ test("external catalogue image URLs are restricted to registered secure Pexels p
 test("demo fixtures without prices are rendered as non-saleable concepts", () => {
   const raw = readFileSync("components/product-card.tsx", "utf8");
   assert.match(raw, /product\.lifecycle === "demo"/);
-  assert.match(raw, /Illustrative fixture · Not for sale/);
+  assert.match(raw, /Temporary reference imagery · Not for sale/);
   assert.match(raw, /typeof product\.pricePaise === "number"/);
 });
 
