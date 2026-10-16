@@ -24,20 +24,15 @@ export default function ProductCard({ product }: ProductCardProps) {
               height={image.height}
               variant="card"
             />
-            <span className="product-card-index">{isDemo ? "REFERENCE STUDY" : "KROVINOX"}</span>
           </div>
           <div className="product-card-copy">
-            <div className="product-card-title-row">
-              <h3 className="product-card-title">{product.name}</h3>
-              <span aria-hidden="true" className="product-card-arrow">↗</span>
-            </div>
-            <p className="product-card-description">{product.shortDescription}</p>
+            <h3 className="product-card-title">{product.name}</h3>
             {isDemo ? (
-              <p className="product-card-status">Temporary reference imagery · Not for sale</p>
+              <p className="product-card-status">Style reference</p>
             ) : typeof product.pricePaise === "number" ? (
               <p className="product-card-price">{formatPricePaise(product.pricePaise)}</p>
             ) : (
-              <p className="product-card-status">Price unavailable</p>
+              <p className="product-card-status">Price not available</p>
             )}
           </div>
         </Link>

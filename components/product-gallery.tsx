@@ -14,18 +14,14 @@ export default function ProductGallery({ images, productName, isDemo }: ProductG
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (images.length === 0) {
-    return (
-      <div className="product-gallery-empty" role="status">
-        No registered image is available for this catalogue record.
-      </div>
-    );
+    return <div className="product-gallery-empty" role="status">No product photos are available yet.</div>;
   }
 
   const safeIndex = Math.min(activeIndex, images.length - 1);
   const activeImage = images[safeIndex];
 
   return (
-    <section className="product-gallery" aria-label={productName + " image gallery"}>
+    <section className="product-gallery" aria-label={productName + " photos"}>
       <div className="product-gallery-main">
         <ProductImage
           key={activeImage.src}
@@ -40,19 +36,17 @@ export default function ProductGallery({ images, productName, isDemo }: ProductG
       </div>
 
       <p className="product-gallery-caption" aria-live="polite">
-        {isDemo
-          ? `Reference ${safeIndex + 1} of ${images.length} · Third-party fashion imagery; not a KROVINOX product.`
-          : `Image ${safeIndex + 1} of ${images.length} · Registered catalogue image.`}
+        {isDemo ? "Reference photo " + (safeIndex + 1) + " of " + images.length : "Photo " + (safeIndex + 1) + " of " + images.length}
       </p>
 
       {images.length > 1 ? (
-        <div className="product-gallery-thumbnails" role="group" aria-label="Choose reference image">
+        <div className="product-gallery-thumbnails" role="group" aria-label="Choose a photo">
           {images.map((image, index) => (
             <button
               className="product-gallery-thumb"
               key={image.id}
               type="button"
-              aria-label={(isDemo ? "View reference image " : "View product image ") + (index + 1)}
+              aria-label={"View photo " + (index + 1)}
               aria-pressed={index === safeIndex}
               onClick={() => setActiveIndex(index)}
             >
@@ -64,10 +58,7 @@ export default function ProductGallery({ images, productName, isDemo }: ProductG
                 sizes="84px"
                 variant="thumbnail"
               />
-              <span className="product-gallery-thumb-caption">
-                {isDemo ? "Reference " + (index + 1) : "Image " + (index + 1)}
-                {index === safeIndex ? " · Selected" : ""}
-              </span>
+              <span className="product-gallery-thumb-caption">Photo {index + 1}</span>
             </button>
           ))}
         </div>

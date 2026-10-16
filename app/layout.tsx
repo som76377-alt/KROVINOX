@@ -23,10 +23,10 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
-    default: "KROVINOX — Design Preview",
+    default: "KROVINOX — Clothing in Progress",
     template: "%s | KROVINOX",
   },
-  description: "A private design preview of the KROVINOX clothing project. Concept fixtures only; no products are for sale.",
+  description: "KROVINOX is developing its first clothing collection. The current site uses styling references, not products for sale.",
   robots: {
     index: false,
     follow: false,
@@ -52,9 +52,9 @@ export default function RootLayout({
       <body className={manrope.variable + " " + plexMono.variable}>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <CartProvider mode={catalogueMode} products={catalogueProducts}>
-          <SiteHeader />
+          <SiteHeader previewMode={catalogueMode === "preview"} />
           {children}
-          <SiteFooter />
+          <SiteFooter previewMode={catalogueMode === "preview"} />
         </CartProvider>
       </body>
     </html>

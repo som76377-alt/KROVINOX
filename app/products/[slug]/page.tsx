@@ -15,16 +15,10 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-
-  if (!product) {
-    return {
-      title: "Concept not found",
-      robots: { index: false, follow: false },
-    };
-  }
+  if (!product) return { title: "Item not found", robots: { index: false, follow: false } };
 
   return {
-    title: product.name + " preview",
+    title: product.name,
     description: product.shortDescription,
     robots: { index: false, follow: false },
   };
@@ -37,54 +31,41 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const mode = getCatalogueMode();
   const isDemo = mode === "preview" && product.lifecycle === "demo";
+  const canPurchase = mode === "live" && product.lifecycle === "approved";
 
   return (
     <main id="main-content" className="site-page product-detail-page">
       <div className="site-container">
-        <Link className="text-link product-back-link" href="/shop">← Back to shop</Link>
+        <Link className="text-link product-back-link" href="/shop">← Shop</Link>
 
         <div className="product-detail-grid">
           <div className="product-detail-media">
-            <ProductGallery
-              key={product.id}
-              images={product.images}
-              productName={product.name}
-              isDemo={isDemo}
-            />
+            <ProductGallery key={product.id} images={product.images} productName={product.name} isDemo={isDemo} />
           </div>
 
           <section className="product-detail-copy" aria-labelledby="product-title">
-            <p className="eyebrow">{isDemo ? "FORM STUDY / NOT FOR SALE" : "KROVINOX / PRODUCT PREVIEW"}</p>
+            {isDemo ? <p className="eyebrow">Style reference</p> : null}
             <h1 id="product-title" className="product-detail-title">{product.name}</h1>
-            <p className="product-detail-lede">{product.shortDescription}</p>
 
-            {product.lifecycle === "approved" && !isDemo && typeof product.pricePaise === "number" ? (
-              <p className="product-detail-price">{formatPricePaise(product.pricePaise)}</p>
+            {isDemo ? (
+              <div className="product-reference-note" role="note">
+                <strong>Reference photos · Not for sale</strong>
+                <p>These photos are inspiration, not a KROVINOX product. They show different looks, not multiple views of one garment.</p>
+              </div>
             ) : (
-              <p className="product-detail-status">
-                {isDemo ? "Concept fixture · Not for sale" : "Verified price unavailable"}
-              </p>
+              <>
+                {product.shortDescription ? <p className="product-detail-lede">{product.shortDescription}</p> : null}
+                {product.lifecycle === "approved" && typeof product.pricePaise === "number" ? (
+                  <p className="product-detail-price">{formatPricePaise(product.pricePaise)}</p>
+                ) : (
+                  <p className="product-detail-status">Price not available</p>
+                )}
+                {product.description ? <p className="product-detail-description">{product.description}</p> : null}
+                {canPurchase ? <ProductPurchaseOptions product={product} mode={mode} /> : null}
+              </>
             )}
 
-            {product.description ? <p className="product-detail-description">{product.description}</p> : null}
-
-            <ProductPurchaseOptions product={product} mode={mode} />
-
-            <div className="product-truth-note" role="note">
-              <h2>Preview status</h2>
-              {isDemo ? (
-                <p>
-                  These are temporary third-party Pexels fashion references used to test art direction. They do not depict KROVINOX designs or a single garment.
-                  Material, fit, measurements, size, price, stock and orderability have not been established. The references must be replaced with original approved brand imagery before launch.
-                </p>
-              ) : (
-                <p>
-                  Checkout is not enabled in this release. No order, payment or fulfilment action can be completed here.
-                </p>
-              )}
-            </div>
-
-            <Link className="button-link" href="/shop">Return to shop <span aria-hidden="true">↗</span></Link>
+            <Link className="text-link product-more-link" href="/shop">← Back to all styles</Link>
           </section>
         </div>
       </div>

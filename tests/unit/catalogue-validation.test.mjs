@@ -95,9 +95,9 @@ test("price formatting is centralised and rejects malformed minor-unit amounts",
 });
 
 test("external Pexels reference galleries are registered and not saleable product views", () => {
-  assert.equal(demo[0].images.length, 4);
+  assert.equal(demo[0].images.length, 3);
   assert.equal(demo[0].images[1].role, "gallery");
-  assert.match(demo[0].images[1].alt, /not a KROVINOX design or product photograph/i);
+  assert.match(demo[0].images[1].alt, /not the same garment/i);
   assert.ok(demo.every((product) => product.images.length >= 2), "each visual study should contain multiple references");
   const errors = validateCatalogue(demo, { rootDir, demoOnly: true });
   assert.deepEqual(errors, []);
@@ -118,7 +118,7 @@ test("external catalogue image URLs are restricted to registered secure Pexels p
 test("demo fixtures without prices are rendered as non-saleable concepts", () => {
   const raw = readFileSync("components/product-card.tsx", "utf8");
   assert.match(raw, /product\.lifecycle === "demo"/);
-  assert.match(raw, /Temporary reference imagery · Not for sale/);
+  assert.match(raw, /Style reference/);
   assert.match(raw, /typeof product\.pricePaise === "number"/);
 });
 

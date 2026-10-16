@@ -9,27 +9,23 @@ export default function HomePage() {
   const mode = getCatalogueMode();
   const isPreview = mode === "preview";
   const products = getCatalogueProducts();
-  const leadImage = products[0]?.images[0];
+  const leadImage = products[0]?.images[1] ?? products[0]?.images[0];
 
   return (
     <main id="main-content" className="home-page">
       <div className="site-container">
         <section className="home-hero" aria-labelledby="home-title">
           <div className="home-hero-copy">
-            <p className="eyebrow">KROVINOX / {isPreview ? "DESIGN PREVIEW" : "COLLECTION"}</p>
-            <h1 id="home-title" className="home-hero-title">A study in form. A discipline of detail.</h1>
+            <p className="eyebrow">{isPreview ? "First collection in development" : "The KROVINOX collection"}</p>
+            <h1 id="home-title" className="home-hero-title">Streetwear, with a point of view.</h1>
             <p className="home-hero-description">
               {isPreview
-                ? "KROVINOX is being developed as a design-led clothing project. These temporary third-party fashion photographs help test the art direction; they do not depict KROVINOX designs or products."
-                : "Explore the published KROVINOX catalogue. Product details are drawn from the approved catalogue; checkout is not enabled in this release."}
+                ? "We're working on the first KROVINOX pieces. Browse the styles we're exploring; the photos are references, not products for sale."
+                : "Explore the current KROVINOX collection."}
             </p>
             <div className="home-hero-actions">
-              <Link className="button-link" href="/shop">
-                {isPreview ? "Explore concept studies" : "Explore the collection"} <span aria-hidden="true">↗</span>
-              </Link>
-              <span className="home-hero-note">
-                {isPreview ? "No products for sale. No checkout." : "Catalogue view only. Checkout is not enabled."}
-              </span>
+              <Link className="button-link" href="/shop">Browse the styles <span aria-hidden="true">→</span></Link>
+              {isPreview ? <span className="home-hero-note">First collection in progress</span> : null}
             </div>
           </div>
 
@@ -46,77 +42,35 @@ export default function HomePage() {
                 variant="hero"
               />
             ) : (
-              <div className="home-empty-visual">
-                <span className="mono">COLLECTION STATUS / UNPUBLISHED</span>
-                <span>No approved product imagery is available.</span>
-              </div>
+              <div className="home-empty-visual"><span>No product photos yet.</span></div>
             )}
-            <div className="home-visual-caption">
-              {isPreview && leadImage ? (
-                <>
-                  <span>01 / OBSIDIAN LAYER REFERENCES</span>
-                  <span>Third-party fashion photography · Not a KROVINOX product</span>
-                </>
-              ) : leadImage ? (
-                <>
-                  <span>FEATURED / APPROVED CATALOGUE</span>
-                  <span>{products[0].name}</span>
-                </>
-              ) : (
-                <>
-                  <span>COLLECTION / UNPUBLISHED</span>
-                  <span>No approved product image</span>
-                </>
-              )}
-            </div>
+            {leadImage ? (
+              <div className="home-visual-caption">
+                <span>{isPreview ? "Oversized T-shirt styling" : products[0].name}</span>
+                {isPreview ? <span>Reference photo</span> : null}
+              </div>
+            ) : null}
           </div>
         </section>
 
-        <section className="home-studies" aria-labelledby="studies-heading">
+        <section className="home-studies" aria-labelledby="styles-heading">
           <div className="section-heading-row">
-            <div>
-              <p className="eyebrow">CURRENT WORK / {isPreview ? "TEMPORARY REFERENCES" : "APPROVED CATALOGUE"}</p>
-              <h2 id="studies-heading" className="section-title">
-                {isPreview ? "The visual references." : "From the collection."}
-              </h2>
-            </div>
-            <Link className="text-link" href="/shop">
-              View all <span aria-hidden="true">↗</span>
-            </Link>
+            <h2 id="styles-heading" className="section-title">
+              {isPreview ? "Styles we're exploring" : "Shop the collection"}
+            </h2>
+            <Link className="text-link" href="/shop">See all <span aria-hidden="true">→</span></Link>
           </div>
 
           {products.length > 0 ? (
-            <ProductGrid
-              products={products}
-              label={isPreview ? "KROVINOX concept studies" : "KROVINOX products"}
-            />
+            <ProductGrid products={products} label={isPreview ? "KROVINOX style references" : "KROVINOX products"} />
           ) : (
             <div className="empty-catalogue" role="status">
-              <h3>No approved products have been published.</h3>
-              <p>Concept fixtures are intentionally hidden in live mode. This page will only show approved catalogue records.</p>
+              <h3>The first collection is on its way.</h3>
+              <p>Products will appear here once the designs and details are ready.</p>
             </div>
           )}
         </section>
       </div>
-
-      <section className="home-direction" aria-labelledby="direction-heading">
-        <div className="site-container home-direction-inner">
-          <div>
-            <p className="eyebrow">DESIGN INTENT / NOT A PRODUCT CLAIM</p>
-            <h2 id="direction-heading" className="home-direction-title">Build the interface around the garment—not around noise.</h2>
-          </div>
-          <div className="home-direction-copy">
-            <p>
-              The direction is experimental clothing presented through a restrained, editorial interface.
-              Product design, fit, materials, pricing, manufacturing and fulfilment details remain unresolved
-              until they can be verified.
-            </p>
-            <Link className="text-link text-link--light" href="/about">
-              Read the project note <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

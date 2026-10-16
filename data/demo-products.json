@@ -1,11 +1,11 @@
 [
   {
     "id": "kx-demo-001",
-    "slug": "form-study-01",
+    "slug": "oversized-black-tee",
     "lifecycle": "demo",
-    "name": "Obsidian Oversized Tee Study",
-    "shortDescription": "Oversized black tees, graphic placement and relaxed streetwear proportions — temporary visual references.",
-    "description": "A temporary moodboard for KROVINOX art direction. These are independent third-party Pexels photographs showing different streetwear looks, not one matching garment and not KROVINOX designs, prototypes or saleable products. Any graphics visible belong to their respective creators.",
+    "name": "Oversized black T-shirt",
+    "shortDescription": "Oversized T-shirt styling.",
+    "description": "Style reference only. Not a KROVINOX product.",
     "currency": "INR",
     "isPlaceholder": true,
     "demoStatus": "illustrative",
@@ -13,7 +13,7 @@
       {
         "id": "kx-demo-001-photo-28758241",
         "src": "https://images.pexels.com/photos/28758241/pexels-photo-28758241.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        "alt": "Temporary Pexels reference: model wearing an oversized black T-shirt in a clean studio setup. Not a KROVINOX product.",
+        "alt": "Pexels reference photo showing an oversized black T-shirt. Not a KROVINOX product.",
         "role": "primary",
         "width": 6769,
         "height": 6720,
@@ -22,7 +22,7 @@
       {
         "id": "kx-demo-001-photo-28758240",
         "src": "https://images.pexels.com/photos/28758240/pexels-photo-28758240.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        "alt": "Temporary Pexels reference: full-body oversized T-shirt streetwear styling. Separate reference image, not a confirmed view of the same garment.",
+        "alt": "Pexels reference photo showing oversized T-shirt streetwear styling. A separate look, not the same garment.",
         "role": "gallery",
         "width": 6769,
         "height": 6720,
@@ -31,7 +31,7 @@
       {
         "id": "kx-demo-001-photo-6311495",
         "src": "https://images.pexels.com/photos/6311495/pexels-photo-6311495.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        "alt": "Temporary Pexels reference: monochrome casual fashion portrait against a light studio background. Not a KROVINOX product.",
+        "alt": "Pexels reference photo showing monochrome casual streetwear. Not a KROVINOX product.",
         "role": "gallery",
         "width": 3840,
         "height": 5760,
@@ -53,11 +53,11 @@
   },
   {
     "id": "kx-demo-002",
-    "slug": "form-study-02",
+    "slug": "black-hoodie",
     "lifecycle": "demo",
-    "name": "Night Form Hoodie Study",
-    "shortDescription": "Black hoodies, layered silhouettes and dark studio styling — temporary visual references.",
-    "description": "A visual direction study only. These independent third-party photographs explore dark hooded layers and utility styling; they are not guaranteed to depict one identical garment and do not show KROVINOX products. Fit, fabric, construction, pricing and availability are not established.",
+    "name": "Black hoodie",
+    "shortDescription": "Black hoodie and cargo-trouser styling.",
+    "description": "Style reference only. Not a KROVINOX product.",
     "currency": "INR",
     "isPlaceholder": true,
     "demoStatus": "illustrative",
@@ -65,7 +65,7 @@
       {
         "id": "kx-demo-002-photo-19461554",
         "src": "https://images.pexels.com/photos/19461554/pexels-photo-19461554.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        "alt": "Temporary Pexels reference: model in a black printed hoodie with denim cargo trousers, studio styling. Not a KROVINOX design.",
+        "alt": "Pexels reference photo of a model wearing a black printed hoodie with cargo jeans. Not a KROVINOX product.",
         "role": "primary",
         "width": 4000,
         "height": 5334,
@@ -74,7 +74,7 @@
       {
         "id": "kx-demo-002-photo-19461561",
         "src": "https://images.pexels.com/photos/19461561/pexels-photo-19461561.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        "alt": "Temporary Pexels reference: black hoodie and faded dark cargo denim in a studio pose, related styling reference but not verified as the identical garment.",
+        "alt": "Pexels reference photo of a dark hoodie and cargo outfit in a studio. A separate look, not the same garment.",
         "role": "gallery",
         "width": 4050,
         "height": 5400,
@@ -83,7 +83,7 @@
       {
         "id": "kx-demo-002-photo-19338727",
         "src": "https://images.pexels.com/photos/19338727/pexels-photo-19338727.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        "alt": "Temporary Pexels reference: close fashion portrait of a model adjusting a black hoodie. Not a KROVINOX product photograph.",
+        "alt": "Pexels reference photo of a model wearing a black hoodie. Not a KROVINOX product.",
         "role": "gallery",
         "width": 1200,
         "height": 1800,
@@ -100,11 +100,11 @@
   },
   {
     "id": "kx-demo-003",
-    "slug": "form-study-03",
+    "slug": "cargo-trousers",
     "lifecycle": "demo",
-    "name": "Utility Silhouette Study",
-    "shortDescription": "Cargo trousers, dark separates and functional streetwear proportions — temporary visual references.",
-    "description": "A moodboard for silhouette and styling direction, not a representation of one garment or a finished KROVINOX design. The photographs are third-party references selected to explore utility shapes, dark layers and restrained street styling. No product is for sale.",
+    "name": "Cargo trousers",
+    "shortDescription": "Utility trouser styling.",
+    "description": "Style reference only. Not a KROVINOX product.",
     "currency": "INR",
     "isPlaceholder": true,
     "demoStatus": "illustrative",
@@ -112,7 +112,7 @@
       {
         "id": "kx-demo-003-photo-19751093",
         "src": "https://images.pexels.com/photos/19751093/pexels-photo-19751093.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        "alt": "Temporary Pexels reference: model wearing black cargo pants with a graphite shirt in soft studio light. Not a KROVINOX product.",
+        "alt": "Pexels reference photo showing black cargo trousers with a graphite shirt. Not a KROVINOX product.",
         "role": "primary",
         "width": 4453,
         "height": 6679,
@@ -121,7 +121,7 @@
       {
         "id": "kx-demo-003-photo-5366340",
         "src": "https://images.pexels.com/photos/5366340/pexels-photo-5366340.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        "alt": "Temporary Pexels reference: cargo-trouser streetwear styling with accessories. Separate reference, not confirmed as the same garment.",
+        "alt": "Pexels reference photo showing cargo-trouser streetwear styling. A separate look, not the same garment.",
         "role": "gallery",
         "width": 4000,
         "height": 6000,
@@ -130,7 +130,7 @@
       {
         "id": "kx-demo-003-photo-28466774",
         "src": "https://images.pexels.com/photos/28466774/pexels-photo-28466774.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        "alt": "Temporary Pexels reference: urban oversized streetwear styling with dark silhouettes. Not a KROVINOX product.",
+        "alt": "Pexels reference photo showing oversized streetwear and dark trousers. Not a KROVINOX product.",
         "role": "gallery",
         "width": 1200,
         "height": 1800,

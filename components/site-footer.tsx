@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useCart } from "@/components/cart/cart-provider";
 
-export default function SiteFooter() {
+type SiteFooterProps = { previewMode: boolean };
+
+export default function SiteFooter({ previewMode }: SiteFooterProps) {
   const { itemCount } = useCart();
 
   return (
@@ -11,13 +13,14 @@ export default function SiteFooter() {
       <div className="site-container site-footer-inner">
         <div>
           <Link className="site-wordmark site-footer-wordmark" href="/">KROVINOX</Link>
-          <p className="site-footer-note">Design preview · No products for sale · No orders or payment accepted.</p>
+          <p className="site-footer-note">
+            {previewMode ? "The first collection is in development." : "KROVINOX clothing."}
+          </p>
         </div>
         <nav className="site-footer-nav" aria-label="Footer navigation">
           <Link href="/shop">Shop</Link>
           <Link href="/about">About</Link>
-          <Link href="/bag" aria-label={"Bag (" + itemCount + ")"}>Bag ({itemCount})</Link>
-          <Link href="/">Home</Link>
+          {!previewMode ? <Link href="/bag" aria-label={"Bag (" + itemCount + ")"}>Bag ({itemCount})</Link> : null}
         </nav>
       </div>
     </footer>
