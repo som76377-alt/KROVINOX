@@ -13,13 +13,13 @@ export default function AboutPage() {
       <div className="site-container about-content">
         <h1 className="page-title">About KROVINOX</h1>
         <p className="about-lede">
-          We're building a clothing label focused on expressive streetwear and original garment design.
+          KROVINOX is being built around expressive streetwear and original garment design.
         </p>
         <div className="about-rule" />
         <section aria-labelledby="collection-status">
           <h2 id="collection-status" className="section-title">The first collection is in progress.</h2>
           <p>
-            The photos on this site are styling references, not KROVINOX products. Original designs, fit, materials and prices will be shown once they're ready.
+            The photos on this site are styling references, not KROVINOX products. Original designs, fit, materials and prices will be added once they are ready.
           </p>
         </section>
         <Link className="button-link" href="/shop">Browse the styles <span aria-hidden="true">→</span></Link>
