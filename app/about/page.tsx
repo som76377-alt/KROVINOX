@@ -22,7 +22,7 @@ export default function AboutPage() {
             The photos on this site are styling references, not KROVINOX products. Original designs, fit, materials and prices will be added once they are ready.
           </p>
         </section>
-        <Link className="button-link" href="/shop">Browse the styles <span aria-hidden="true">→</span></Link>
+        <Link className="button-link" href="/shop">Explore the styles <span aria-hidden="true">→</span></Link>
       </div>
     </main>
   );
