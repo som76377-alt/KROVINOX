@@ -31,7 +31,7 @@ test("the homepage puts concept cards before the brand-direction section", async
   const cardsTop = await page.locator(".home-studies").evaluate((node) => node.getBoundingClientRect().top);
   const directionTop = await page.locator(".home-direction").evaluate((node) => node.getBoundingClientRect().top);
   expect(cardsTop).toBeLessThan(directionTop);
-  await expect(page.getByText(/not photographs of manufactured garments/i)).toBeVisible();
+  await expect(page.getByText(/temporary third-party fashion photographs help test the art direction/i)).toBeVisible();
 });
 
 test("the primary CTA routes to a working shop collection page", async ({ page }) => {
@@ -42,23 +42,23 @@ test("the primary CTA routes to a working shop collection page", async ({ page }
   await expect(page.getByRole("listitem")).toHaveCount(3);
 });
 
-test("a concept card opens its product route without a fabricated price or purchase action", async ({ page }) => {
+test("a reference-study card opens without a fabricated price or purchase action", async ({ page }) => {
   await page.goto("/shop");
-  await page.getByRole("link", { name: "View Form Study 01" }).click();
+  await page.getByRole("link", { name: "View Obsidian Layer Study" }).click();
   await expect(page).toHaveURL(/\/products\/form-study-01$/);
-  await expect(page.getByRole("heading", { level: 1, name: "Form Study 01" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "Obsidian Layer Study" })).toBeVisible();
   await expect(page.getByText("Concept fixture · Not for sale")).toBeVisible();
-  await expect(page.getByText(/not a photograph or prototype of a manufactured garment/i)).toBeVisible();
+  await expect(page.getByText(/temporary third-party Pexels fashion references/i)).toBeVisible();
   await expect(page.getByText(/₹\s?0(?:\.00)?/)).toHaveCount(0);
   await expect(page.getByRole("button", { name: /buy|add to bag|checkout/i })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Add concept to demo bag" })).toBeDisabled();
-  await expect(page.getByText(/no approved size, fit or measurement data has been published/i)).toBeVisible();
+  await expect(page.getByText(/material, fit, measurements, size, price, stock and orderability have not been established/i)).toBeVisible();
 });
 
 test("product gallery switches concept panels by keyboard and exposes selected state", async ({ page }) => {
   await page.goto("/products/form-study-01");
-  const first = page.getByRole("button", { name: "View concept panel 1" });
-  const second = page.getByRole("button", { name: "View concept panel 2" });
+  const first = page.getByRole("button", { name: "View reference image 1" });
+  const second = page.getByRole("button", { name: "View reference image 2" });
   await expect(first).toHaveAttribute("aria-pressed", "true");
   await expect(second).toHaveAttribute("aria-pressed", "false");
 
@@ -68,7 +68,7 @@ test("product gallery switches concept panels by keyboard and exposes selected s
   await expect(first).toHaveAttribute("aria-pressed", "false");
   await expect(page.locator(".product-gallery-main img")).toHaveAttribute(
     "alt",
-    /Second abstract concept panel for Form Study 01/
+    /Temporary Pexels fashion reference/
   );
 });
 
@@ -78,12 +78,14 @@ test("size guide does not invent sizing or garment measurements for a concept fi
   await expect(page.getByText(/no verified garment measurements have been published/i)).toBeVisible();
   await expect(page.getByText(/do not use this preview as size guidance/i)).toBeVisible();
   await expect(page.getByRole("button", { name: "Add concept to demo bag" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "View reference image 4" })).toBeVisible();
+  await expect(page.getByText(/Reference 1 of 4 · Third-party fashion imagery; not a KROVINOX product/i)).toBeVisible();
 });
 
 test("a broken gallery image uses a fallback without breaking the detail layout", async ({ page }) => {
-  await page.route("**/placeholders/kx-concept-01-detail.svg", (route) => route.abort());
+  await page.route("**/photos/6311495/**", (route) => route.abort());
   await page.goto("/products/form-study-01");
-  await page.getByRole("button", { name: "View concept panel 2" }).click();
+  await page.getByRole("button", { name: "View reference image 2" }).click();
   await expect(page.locator(".product-gallery-main .product-image-fallback")).toBeVisible();
   await expect(page.locator(".product-gallery-main")).toContainText("Image unavailable");
 });
@@ -137,14 +139,14 @@ test("preview state adds to a persistent demo bag without inventing a price or e
   await expect(page.getByRole("button", { name: "Add concept to demo bag" })).toBeEnabled();
   await page.getByRole("button", { name: "Add concept to demo bag" }).click();
 
-  await expect(page.getByText(/Added Form Study 01 to your demo bag/i)).toBeVisible();
+  await expect(page.getByText(/Added Obsidian Layer Study to your demo bag/i)).toBeVisible();
   const headerBag = page.locator(".site-desktop-nav").getByRole("link", { name: "Bag (1)" });
   await expect(headerBag).toBeVisible();
   await headerBag.click();
 
   await expect(page).toHaveURL(/bag$/);
   await expect(page.getByRole("heading", { level: 1, name: "Bag" })).toBeVisible();
-  await expect(page.getByRole("heading", { level: 3, name: "Form Study 01" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 3, name: "Obsidian Layer Study" })).toBeVisible();
   await expect(page.getByText("Preview state (not a size): Sample state A")).toBeVisible();
   await expect(page.getByText("No approved price", { exact: true })).toBeVisible();
   await expect(page.getByText(/no approved prices exist for these concept fixtures/i)).toBeVisible();
@@ -167,9 +169,9 @@ test("bag quantity updates, repeated adds merge, and removing the last line give
   await page.locator(".site-desktop-nav").getByRole("link", { name: "Bag (2)" }).click();
   await expect(page.locator(".bag-line")).toHaveCount(1);
   await expect(page.locator(".bag-quantity-value")).toHaveText("2");
-  await page.getByRole("button", { name: "Decrease quantity of Form Study 01" }).click();
+  await page.getByRole("button", { name: "Decrease quantity of Obsidian Layer Study" }).click();
   await expect(page.locator(".bag-quantity-value")).toHaveText("1");
-  await page.getByRole("button", { name: "Remove Form Study 01 from bag" }).click();
+  await page.getByRole("button", { name: "Remove Obsidian Layer Study from bag" }).click();
 
   await expect(page.getByRole("heading", { name: "Your bag is empty." })).toBeVisible();
   await expect(page.getByRole("link", { name: /continue shopping/i })).toHaveAttribute("href", "/shop");

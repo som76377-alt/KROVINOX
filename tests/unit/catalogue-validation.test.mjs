@@ -94,12 +94,25 @@ test("price formatting is centralised and rejects malformed minor-unit amounts",
   assert.throws(() => formatPricePaise(2.5), /non-negative integer number of paise/);
 });
 
-test("the second concept panel is registered and not presented as a product view", () => {
-  assert.equal(demo[0].images.length, 2);
+test("external Pexels reference galleries are registered and not saleable product views", () => {
+  assert.equal(demo[0].images.length, 4);
   assert.equal(demo[0].images[1].role, "gallery");
-  assert.match(demo[0].images[1].alt, /not a product view or photograph/i);
+  assert.match(demo[0].images[1].alt, /not a KROVINOX design or product photograph/i);
+  assert.ok(demo.every((product) => product.images.length >= 2), "each visual study should contain multiple references");
   const errors = validateCatalogue(demo, { rootDir, demoOnly: true });
   assert.deepEqual(errors, []);
+});
+
+test("external catalogue image URLs are restricted to registered secure Pexels photo assets", () => {
+  const untrusted = structuredClone(demo);
+  untrusted[0].images[0].src = "https://untrusted.example/photos/6311629/pexels-photo-6311629.jpeg";
+  const untrustedErrors = validateCatalogue(untrusted, { rootDir, demoOnly: true });
+  assert.ok(untrustedErrors.some((message) => message.includes("secure registered Pexels CDN photo URL")));
+
+  const mismatched = structuredClone(demo);
+  mismatched[0].images[0].src = "https://images.pexels.com/photos/6311629/pexels-photo-6311629.jpeg?auto=compress&cs=tinysrgb&w=800";
+  const mismatchedErrors = validateCatalogue(mismatched, { rootDir, demoOnly: true });
+  assert.ok(mismatchedErrors.some((message) => message.includes("does not match the registered asset path")));
 });
 
 test("demo fixtures without prices are rendered as non-saleable concepts", () => {

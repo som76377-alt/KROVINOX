@@ -3,41 +3,59 @@
     "id": "kx-demo-001",
     "slug": "form-study-01",
     "lifecycle": "demo",
-    "name": "Form Study 01",
-    "shortDescription": "An abstract layout fixture for testing product-card composition.",
-    "description": "Illustrative design-system fixture only. This is not a manufactured garment and is not for sale.",
+    "name": "Obsidian Layer Study",
+    "shortDescription": "Black hooded layers and restrained studio styling — temporary visual references.",
+    "description": "A temporary moodboard for KROVINOX art direction. These are third-party Pexels photographs, not KROVINOX designs, prototypes or a single garment. No product is for sale.",
     "currency": "INR",
     "isPlaceholder": true,
-    "demoStatus": "layout-test",
+    "demoStatus": "illustrative",
     "images": [
       {
-        "id": "kx-demo-001-primary",
-        "src": "/placeholders/kx-concept-01.svg",
-        "alt": "First abstract concept panel for Form Study 01 with concentric circles and guide lines; not a product view or photograph of a manufactured garment.",
+        "id": "kx-demo-001-photo-6311629",
+        "src": "https://images.pexels.com/photos/6311629/pexels-photo-6311629.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: model adjusting a black hooded layer in a light studio. Not a KROVINOX design or product photograph.",
         "role": "primary",
-        "width": 800,
-        "height": 1000,
-        "assetRegisterId": "ASSET-KX-PLACEHOLDER-01"
+        "width": 3840,
+        "height": 5760,
+        "assetRegisterId": "ASSET-KX-PHOTO-6311629"
       },
       {
-        "id": "kx-demo-001-gallery-02",
-        "src": "/placeholders/kx-concept-01-detail.svg",
-        "alt": "Second abstract concept panel for Form Study 01 using intersecting geometric shapes; not a product view or photograph of a manufactured garment.",
+        "id": "kx-demo-001-photo-6311495",
+        "src": "https://images.pexels.com/photos/6311495/pexels-photo-6311495.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: model in a black hoodie against a light studio background. Not a KROVINOX design or product photograph.",
         "role": "gallery",
-        "width": 800,
-        "height": 1000,
-        "assetRegisterId": "ASSET-KX-PLACEHOLDER-01B"
+        "width": 3840,
+        "height": 5760,
+        "assetRegisterId": "ASSET-KX-PHOTO-6311495"
+      },
+      {
+        "id": "kx-demo-001-photo-6311506",
+        "src": "https://images.pexels.com/photos/6311506/pexels-photo-6311506.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: black hoodie and trousers styled in a studio. Not a KROVINOX design or product photograph.",
+        "role": "gallery",
+        "width": 3840,
+        "height": 5760,
+        "assetRegisterId": "ASSET-KX-PHOTO-6311506"
+      },
+      {
+        "id": "kx-demo-001-photo-6311272",
+        "src": "https://images.pexels.com/photos/6311272/pexels-photo-6311272.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: black hooded streetwear styled in a studio. Not a KROVINOX design or product photograph.",
+        "role": "gallery",
+        "width": 3840,
+        "height": 5760,
+        "assetRegisterId": "ASSET-KX-PHOTO-6311272"
       }
     ],
     "variants": [
       {
         "id": "kx-demo-001-variant-a",
-        "label": "Sample state A",
+        "label": "Reference selection A",
         "availability": "unknown"
       },
       {
         "id": "kx-demo-001-variant-b",
-        "label": "Sample state B",
+        "label": "Reference selection B",
         "availability": "unavailable"
       }
     ]
@@ -46,27 +64,54 @@
     "id": "kx-demo-002",
     "slug": "form-study-02",
     "lifecycle": "demo",
-    "name": "Form Study 02",
-    "shortDescription": "A second neutral fixture with a different composition and longer label.",
-    "description": "Illustrative design-system fixture only. Product facts, sizing, price and availability are intentionally unresolved.",
+    "name": "Night Form Study",
+    "shortDescription": "Low-light hoodie portraits and dark studio styling — temporary visual references.",
+    "description": "A visual direction study only. The images are independent third-party fashion references and do not show a KROVINOX garment. Fit, fabric, construction, pricing and availability are not established.",
     "currency": "INR",
     "isPlaceholder": true,
-    "demoStatus": "layout-test",
+    "demoStatus": "illustrative",
     "images": [
       {
-        "id": "kx-demo-002-primary",
-        "src": "/placeholders/kx-concept-02.svg",
-        "alt": "Abstract diagonal-line concept placeholder marked not for sale; not a photograph of a manufactured product.",
+        "id": "kx-demo-002-photo-6963916",
+        "src": "https://images.pexels.com/photos/6963916/pexels-photo-6963916.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: black hoodie in a moody studio portrait. Not a KROVINOX design or product photograph.",
         "role": "primary",
-        "width": 800,
-        "height": 1000,
-        "assetRegisterId": "ASSET-KX-PLACEHOLDER-02"
+        "width": 3932,
+        "height": 5561,
+        "assetRegisterId": "ASSET-KX-PHOTO-6963916"
+      },
+      {
+        "id": "kx-demo-002-photo-14241847",
+        "src": "https://images.pexels.com/photos/14241847/pexels-photo-14241847.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: black hoodie and cap against a dark studio background. Not a KROVINOX design or product photograph.",
+        "role": "gallery",
+        "width": 1200,
+        "height": 1800,
+        "assetRegisterId": "ASSET-KX-PHOTO-14241847"
+      },
+      {
+        "id": "kx-demo-002-photo-19338727",
+        "src": "https://images.pexels.com/photos/19338727/pexels-photo-19338727.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: hoodie and sunglasses in a dark studio portrait. Not a KROVINOX design or product photograph.",
+        "role": "gallery",
+        "width": 1200,
+        "height": 1800,
+        "assetRegisterId": "ASSET-KX-PHOTO-19338727"
+      },
+      {
+        "id": "kx-demo-002-photo-8206226",
+        "src": "https://images.pexels.com/photos/8206226/pexels-photo-8206226.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: dark hooded silhouette in a low-light studio. Not a KROVINOX design or product photograph.",
+        "role": "gallery",
+        "width": 1200,
+        "height": 1800,
+        "assetRegisterId": "ASSET-KX-PHOTO-8206226"
       }
     ],
     "variants": [
       {
         "id": "kx-demo-002-variant-a",
-        "label": "Sample state A",
+        "label": "Reference selection A",
         "availability": "unknown"
       }
     ]
@@ -75,27 +120,54 @@
     "id": "kx-demo-003",
     "slug": "form-study-03",
     "lifecycle": "demo",
-    "name": "Form Study 03 — Extended Composition",
-    "shortDescription": "A deliberately longer fixture title for line-wrap and grid testing.",
-    "description": "Illustrative design-system fixture only. Do not infer garment construction, material, fit or production capability from this graphic.",
+    "name": "Monochrome Silhouette Study",
+    "shortDescription": "Sculptural dark layers and monochrome streetwear — temporary visual references.",
+    "description": "A moodboard for silhouette and styling direction, not a representation of one garment or a finished KROVINOX design. These third-party photographs are placeholders for future original brand imagery.",
     "currency": "INR",
     "isPlaceholder": true,
     "demoStatus": "illustrative",
     "images": [
       {
-        "id": "kx-demo-003-primary",
-        "src": "/placeholders/kx-concept-03.svg",
-        "alt": "Abstract framed concept placeholder marked not for sale; not a photograph of a manufactured product.",
+        "id": "kx-demo-003-photo-4456610",
+        "src": "https://images.pexels.com/photos/4456610/pexels-photo-4456610.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: monochrome styling in a black coat and trousers. Not a KROVINOX design or product photograph.",
         "role": "primary",
-        "width": 800,
-        "height": 1000,
-        "assetRegisterId": "ASSET-KX-PLACEHOLDER-03"
+        "width": 2736,
+        "height": 4104,
+        "assetRegisterId": "ASSET-KX-PHOTO-4456610"
+      },
+      {
+        "id": "kx-demo-003-photo-36289363",
+        "src": "https://images.pexels.com/photos/36289363/pexels-photo-36289363.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: black-and-white oversized tailoring editorial. Not a KROVINOX design or product photograph.",
+        "role": "gallery",
+        "width": 3943,
+        "height": 4929,
+        "assetRegisterId": "ASSET-KX-PHOTO-36289363"
+      },
+      {
+        "id": "kx-demo-003-photo-29980469",
+        "src": "https://images.pexels.com/photos/29980469/pexels-photo-29980469.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: monochrome streetwear in an urban setting. Not a KROVINOX design or product photograph.",
+        "role": "gallery",
+        "width": 1200,
+        "height": 1800,
+        "assetRegisterId": "ASSET-KX-PHOTO-29980469"
+      },
+      {
+        "id": "kx-demo-003-photo-28466774",
+        "src": "https://images.pexels.com/photos/28466774/pexels-photo-28466774.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "alt": "Temporary Pexels fashion reference: dark oversized streetwear against concrete. Not a KROVINOX design or product photograph.",
+        "role": "gallery",
+        "width": 1200,
+        "height": 1800,
+        "assetRegisterId": "ASSET-KX-PHOTO-28466774"
       }
     ],
     "variants": [
       {
         "id": "kx-demo-003-variant-a",
-        "label": "Sample state",
+        "label": "Reference selection",
         "availability": "unknown"
       }
     ]

@@ -74,8 +74,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <h2>Preview status</h2>
               {isDemo ? (
                 <p>
-                  This graphic is an interface fixture, not a photograph or prototype of a manufactured garment.
-                  Material, fit, measurements, size, price, stock and orderability have not been established.
+                  These are temporary third-party Pexels fashion references used to test art direction. They do not depict KROVINOX designs or a single garment.
+                  Material, fit, measurements, size, price, stock and orderability have not been established. The references must be replaced with original approved brand imagery before launch.
                 </p>
               ) : (
                 <p>

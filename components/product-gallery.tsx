@@ -40,19 +40,19 @@ export default function ProductGallery({ images, productName, isDemo }: ProductG
       </div>
 
       <p className="product-gallery-caption" aria-live="polite">
-        Panel {safeIndex + 1} of {images.length}
-        {" · "}
-        {isDemo ? "Abstract concept graphic; not product photography." : "Registered catalogue image."}
+        {isDemo
+          ? `Reference ${safeIndex + 1} of ${images.length} · Third-party fashion imagery; not a KROVINOX product.`
+          : `Image ${safeIndex + 1} of ${images.length} · Registered catalogue image.`}
       </p>
 
       {images.length > 1 ? (
-        <div className="product-gallery-thumbnails" role="group" aria-label="Choose image panel">
+        <div className="product-gallery-thumbnails" role="group" aria-label="Choose reference image">
           {images.map((image, index) => (
             <button
               className="product-gallery-thumb"
               key={image.id}
               type="button"
-              aria-label={(isDemo ? "View concept panel " : "View product image ") + (index + 1)}
+              aria-label={(isDemo ? "View reference image " : "View product image ") + (index + 1)}
               aria-pressed={index === safeIndex}
               onClick={() => setActiveIndex(index)}
             >
@@ -65,7 +65,7 @@ export default function ProductGallery({ images, productName, isDemo }: ProductG
                 variant="thumbnail"
               />
               <span className="product-gallery-thumb-caption">
-                {isDemo ? "Panel " + (index + 1) : "Image " + (index + 1)}
+                {isDemo ? "Reference " + (index + 1) : "Image " + (index + 1)}
                 {index === safeIndex ? " · Selected" : ""}
               </span>
             </button>

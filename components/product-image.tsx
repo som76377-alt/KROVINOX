@@ -30,7 +30,7 @@ export default function ProductImage({
       {failed ? (
         <div className="product-image-fallback" role="img" aria-label={alt}>
           <span>Image unavailable</span>
-          <small>The concept image could not be loaded.</small>
+          <small>The image source could not be loaded.</small>
         </div>
       ) : (
         <Image
@@ -40,6 +40,7 @@ export default function ProductImage({
           height={height}
           sizes={sizes}
           priority={priority}
+          unoptimized={src.startsWith("https://images.pexels.com/")}
           onError={() => setFailed(true)}
           className="product-image-source"
         />
