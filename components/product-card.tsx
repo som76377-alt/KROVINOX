@@ -13,7 +13,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <li className="product-grid-item">
-      <article className="product-card">
+      <article className={isDemo ? "product-card product-card--reference" : "product-card"}>
         <Link className="product-card-link" href={"/products/" + product.slug} aria-label={"View " + product.name}>
           <div className="product-card-media">
             <ProductImage
@@ -27,13 +27,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
           <div className="product-card-copy">
             <h3 className="product-card-title">{product.name}</h3>
-            {isDemo ? (
-              <p className="product-card-status">Style reference</p>
-            ) : typeof product.pricePaise === "number" ? (
+            {!isDemo && typeof product.pricePaise === "number" ? (
               <p className="product-card-price">{formatPricePaise(product.pricePaise)}</p>
-            ) : (
-              <p className="product-card-status">Price not available</p>
-            )}
+            ) : null}
           </div>
         </Link>
       </article>

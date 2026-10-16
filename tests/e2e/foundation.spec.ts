@@ -4,7 +4,7 @@ test("mobile homepage feels like a clothing storefront and fits a 390px viewport
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1, name: "Streetwear, reworked." })).toBeVisible();
-  await expect(page.getByText(/photos are references, not products for sale/i)).toBeVisible();
+  await expect(page.getByText(/styling reference · Not a KROVINOX product/i)).toBeVisible();
   await expect(page.locator(".site-announcement")).toHaveCount(0);
   await expect(page.getByRole("list", { name: "KROVINOX style references" })).toBeVisible();
 
@@ -29,7 +29,7 @@ test("desktop product grid starts at three columns", async ({ page }) => {
 
 test("homepage avoids internal design slogans and gives a clear route to the styles", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("link", { name: /browse the styles/i })).toHaveAttribute("href", "/shop");
+  await expect(page.getByRole("link", { name: /explore the styles/i })).toHaveAttribute("href", "/shop");
   await expect(page.getByRole("heading", { name: "Styles we're exploring" })).toBeVisible();
   await expect(page.getByText(/build the interface around the garment/i)).toHaveCount(0);
   await expect(page.getByText(/temporary third-party fashion photographs help test the art direction/i)).toHaveCount(0);
@@ -37,7 +37,7 @@ test("homepage avoids internal design slogans and gives a clear route to the sty
 
 test("primary CTA opens the shop page", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: /browse the styles/i }).first().click();
+  await page.getByRole("link", { name: /explore the styles/i }).first().click();
   await expect(page).toHaveURL(/\/shop$/);
   await expect(page.getByRole("heading", { level: 1, name: "Shop" })).toBeVisible();
   await expect(page.getByRole("listitem")).toHaveCount(3);
@@ -88,7 +88,7 @@ test("about page explains the current photo references without invented brand cl
   await page.goto("/about");
   await expect(page.getByRole("heading", { level: 1, name: "About KROVINOX" })).toBeVisible();
   await expect(page.getByText(/photos on this site are styling references, not KROVINOX products/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /browse the styles/i })).toHaveAttribute("href", "/shop");
+  await expect(page.getByRole("link", { name: /explore the styles/i })).toHaveAttribute("href", "/shop");
 });
 
 test("mobile menu opens, closes with Escape and restores focus", async ({ page }) => {
@@ -121,4 +121,21 @@ test("preview is noindex, has no purchase bag in navigation and keeps honest foo
   await expect(page.getByRole("heading", { level: 1, name: "Shopping bag" })).toBeVisible();
   await expect(page.getByText(/shopping bag will be available when the first collection launches/i)).toBeVisible();
   await expect(page.getByRole("button", { name: /checkout|add to bag/i })).toHaveCount(0);
+});
+
+
+test("homepage gives the photography visual priority and uses restrained interaction motion", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const hero = page.locator(".home-hero");
+  await expect(hero).toHaveCSS("background-color", "rgb(12, 13, 12)");
+  const imageBox = await page.locator(".home-hero-visual .product-image-frame--hero").boundingBox();
+  expect(imageBox).not.toBeNull();
+  expect(imageBox!.width).toBeGreaterThan(400);
+  expect(imageBox!.height).toBeGreaterThan(450);
+
+  const button = page.getByRole("link", { name: /explore the styles/i });
+  await expect(button).toHaveCSS("transition-property", /transform/);
+  await expect(button.locator("span")).toHaveCSS("transition-property", /transform/);
+  await expect(page.getByRole("heading", { name: "Original garments are in development." })).toBeVisible();
 });

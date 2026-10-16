@@ -118,8 +118,9 @@ test("external catalogue image URLs are restricted to registered secure Pexels p
 test("demo fixtures without prices are rendered as non-saleable concepts", () => {
   const raw = readFileSync("components/product-card.tsx", "utf8");
   assert.match(raw, /product\.lifecycle === "demo"/);
-  assert.match(raw, /Style reference/);
-  assert.match(raw, /typeof product\.pricePaise === "number"/);
+  assert.match(raw, /<h3 className="product-card-title">\{product\.name\}<\/h3>/);
+  assert.match(raw, /!isDemo && typeof product\.pricePaise === "number"/);
+  assert.doesNotMatch(raw, /Style reference/);
 });
 
 test("demo price fields are rejected even if a zero value is supplied", () => {
