@@ -17,7 +17,7 @@ export default function HomePage() {
         <section className="home-hero" aria-labelledby="home-title">
           <div className="home-hero-copy">
             <p className="eyebrow">{isPreview ? "First collection in development" : "The KROVINOX collection"}</p>
-            <h1 id="home-title" className="home-hero-title">Streetwear, with a point of view.</h1>
+            <h1 id="home-title" className="home-hero-title">The first collection is taking shape.</h1>
             <p className="home-hero-description">
               {isPreview
                 ? "We're working on the first KROVINOX pieces. Browse the styles we're exploring; the photos are references, not products for sale."
@@ -25,7 +25,6 @@ export default function HomePage() {
             </p>
             <div className="home-hero-actions">
               <Link className="button-link" href="/shop">Browse the styles <span aria-hidden="true">→</span></Link>
-              {isPreview ? <span className="home-hero-note">First collection in progress</span> : null}
             </div>
           </div>
 
@@ -58,7 +57,6 @@ export default function HomePage() {
             <h2 id="styles-heading" className="section-title">
               {isPreview ? "Styles we're exploring" : "Shop the collection"}
             </h2>
-            <Link className="text-link" href="/shop">See all <span aria-hidden="true">→</span></Link>
           </div>
 
           {products.length > 0 ? (

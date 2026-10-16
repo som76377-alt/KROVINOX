@@ -219,7 +219,6 @@ a { color: inherit; }
 }
 .button-link:hover { background: transparent; color: var(--color-ink); }
 .button-link span { font-size: 1rem; }
-.home-hero-note { color: var(--color-text-secondary); font-size: 0.8125rem; }
 .home-hero-visual { min-width: 0; }
 .product-image-frame {
   position: relative;
@@ -409,7 +408,6 @@ a { color: inherit; }
   padding-block: 1.5rem 2rem;
 }
 .site-footer-wordmark { display: inline-block; }
-.site-footer-note { margin: 0.75rem 0 0; color: var(--color-text-secondary); font-size: 0.8125rem; line-height: 1.6; }
 .site-footer-nav { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; }
 .site-footer-nav a { font-size: 0.8125rem; text-underline-offset: 0.25rem; }
 
@@ -691,4 +689,3 @@ a { color: inherit; }
   font-size: 0.9375rem;
   line-height: 1.55;
 }
-.product-more-link { margin-top: 1.75rem; }

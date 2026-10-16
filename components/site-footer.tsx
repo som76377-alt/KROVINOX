@@ -13,9 +13,6 @@ export default function SiteFooter({ previewMode }: SiteFooterProps) {
       <div className="site-container site-footer-inner">
         <div>
           <Link className="site-wordmark site-footer-wordmark" href="/">KROVINOX</Link>
-          <p className="site-footer-note">
-            {previewMode ? "The first collection is in development." : "KROVINOX clothing."}
-          </p>
         </div>
         <nav className="site-footer-nav" aria-label="Footer navigation">
           <Link href="/shop">Shop</Link>

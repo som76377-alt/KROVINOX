@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("mobile homepage feels like a clothing storefront and fits a 390px viewport", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1, name: "Streetwear, with a point of view." })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "The first collection is taking shape." })).toBeVisible();
   await expect(page.getByText("First collection in progress · Nothing for sale yet")).toBeVisible();
   await expect(page.getByRole("list", { name: "KROVINOX style references" })).toBeVisible();
 
@@ -114,7 +114,7 @@ test("skip link is visible on keyboard focus", async ({ page }) => {
 test("preview is noindex, has no purchase bag in navigation and keeps honest footer copy", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
-  await expect(page.getByRole("contentinfo")).toContainText("The first collection is in development.");
+  await expect(page.getByRole("contentinfo")).toContainText("KROVINOX");
   await expect(page.locator(".site-desktop-nav").getByRole("link", { name: /^Bag/ })).toHaveCount(0);
   await page.goto("/bag");
   await expect(page.getByRole("heading", { level: 1, name: "Shopping bag" })).toBeVisible();

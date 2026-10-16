@@ -44,7 +44,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
 
           <section className="product-detail-copy" aria-labelledby="product-title">
-            {isDemo ? <p className="eyebrow">Style reference</p> : null}
             <h1 id="product-title" className="product-detail-title">{product.name}</h1>
 
             {isDemo ? (
@@ -65,7 +64,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </>
             )}
 
-            <Link className="text-link product-more-link" href="/shop">← Back to all styles</Link>
           </section>
         </div>
       </div>

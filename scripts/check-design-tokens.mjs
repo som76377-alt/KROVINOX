@@ -55,12 +55,12 @@ assert.match(css, /--aspect-product:\s*4\s*\/\s*5;/, "Product media ratio must b
 assert.match(css, /--font-size-hero:\s*clamp\(2\.5rem,\s*5vw,\s*5rem\);/, "Hero typography must remain fluid within its approved bounds.");
 assert.match(layout, /index:\s*false/);
 assert.match(layout, /follow:\s*false/);
-assert.match(header, /DESIGN PREVIEW · NOT FOR SALE/);
+assert.match(header, /First collection in progress · Nothing for sale yet/);
 assert.match(header, /href: "\/shop"/);
 assert.match(header, /href: "\/about"/);
 assert.match(header, /aria-current/);
-assert.match(footer, /No products for sale/i);
-assert.match(footer, /No orders or payment accepted/i);
+assert.match(footer, /previewMode/);
+assert.match(footer, /href="\\/shop"/);
 assert.match(layout, /className="skip-link"/);
 assert.match(page, /<ProductGrid/);
 assert.match(page, /getCatalogueProducts/);
