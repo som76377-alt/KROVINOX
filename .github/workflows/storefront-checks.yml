@@ -1,7 +1,7 @@
 name: Storefront checks
 on:
   push:
-    branches: [rebuild/krovinox-clean-start]
+    branches: [rebuild/krovinox-clean-start, main]
   pull_request:
     branches: [rebuild/krovinox-clean-start]
   workflow_dispatch:
