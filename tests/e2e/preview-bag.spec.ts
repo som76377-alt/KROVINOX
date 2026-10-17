@@ -21,7 +21,7 @@ test("concepts can be saved, updated, and removed without enabling checkout", as
 test("empty preview bag points back to apparel", async ({ page }) => {
   await page.goto("/bag");
   await expect(page.getByRole("heading", { name: "Start with a direction." })).toBeVisible();
-  await page.getByRole("link", { name: /explore apparel/i }).click();
+  await page.locator(".bag-empty").getByRole("link", { name: /explore apparel/i }).click();
   await expect(page).toHaveURL(/\/shop$/);
 });
 
