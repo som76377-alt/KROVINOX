@@ -20,6 +20,8 @@ jobs:
         with:
           node-version: 22.20.0
           cache: npm
+      - name: Regenerate lockfile for the updated lint toolchain
+        run: npm install --package-lock-only --ignore-scripts
       - run: npm ci
       - name: Audit dependency advisories
         run: |
@@ -41,5 +43,6 @@ jobs:
             playwright-report/
             test-results/
             npm-audit.json
+            package-lock.json
           if-no-files-found: ignore
           retention-days: 14
