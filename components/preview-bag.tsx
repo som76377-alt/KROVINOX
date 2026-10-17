@@ -26,7 +26,7 @@ export function BagProvider({ children }: Readonly<{ children: React.ReactNode }
         const valid = Object.fromEntries(Object.entries(saved).filter(([key, value]) =>
           validSlugs.has(key) && typeof value === "number" && Number.isInteger(value) && value > 0 && value <= 10
         )) as BagItems;
-        setItems(valid);
+        // Hydrate client-only storage after SSR to keep the server and first client render identical.\n        // eslint-disable-next-line react-hooks/set-state-in-effect\n        setItems(valid);
       }
     } catch {
       // Storage may be unavailable in private or restricted browsing contexts.
