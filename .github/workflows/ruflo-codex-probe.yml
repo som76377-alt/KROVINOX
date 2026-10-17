@@ -1,0 +1,97 @@
+name: Ruflo Codex activation probe
+
+on:
+  push:
+    branches:
+      - setup/ruflo-codex-activation
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ruflo-codex-probe-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  activate-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out setup branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.20.0'
+          cache: npm
+
+      - name: Install existing project dependencies
+        run: npm ci
+
+      - name: Preserve project instructions before Ruflo init
+        run: |
+          mkdir -p /tmp/ruflo-audit
+          cp AGENTS.md /tmp/ruflo-audit/AGENTS.md
+          cp .mcp.json /tmp/ruflo-audit/mcp.json
+          if [ -d .agents ]; then cp -a .agents /tmp/ruflo-audit/agents; fi
+          git status --short > /tmp/ruflo-audit/status-before.txt
+
+      - name: Install the Codex adapter in the temporary runner
+        run: npm install --no-save --package-lock=false @claude-flow/codex@3.0.2
+
+      - name: Initialize Ruflo for Codex
+        id: init
+        continue-on-error: true
+        env:
+          CI: '1'
+          NONINTERACTIVE: '1'
+        run: |
+          set +e
+          npx --yes ruflo@latest init --codex 2>&1 | tee /tmp/ruflo-audit/init.log
+          echo "${PIPESTATUS[0]}" > /tmp/ruflo-audit/init.exit
+          exit 0
+
+      - name: Run Ruflo diagnostics
+        id: doctor
+        continue-on-error: true
+        run: |
+          set +e
+          npx --yes ruflo@latest doctor 2>&1 | tee /tmp/ruflo-audit/doctor.log
+          echo "${PIPESTATUS[0]}" > /tmp/ruflo-audit/doctor.exit
+          exit 0
+
+      - name: Audit generated changes and preserve guardrails
+        if: always()
+        run: |
+          git status --short > /tmp/ruflo-audit/status-after.txt
+          git diff -- AGENTS.md .mcp.json .agents > /tmp/ruflo-audit/guardrail-diff.patch || true
+          git diff -- package.json package-lock.json > /tmp/ruflo-audit/dependency-diff.patch || true
+          cp AGENTS.md /tmp/ruflo-audit/AGENTS-after.md
+          cp .mcp.json /tmp/ruflo-audit/mcp-after.json
+          if [ -d .agents ]; then tar -czf /tmp/ruflo-audit/agents-after.tar.gz .agents; fi
+          {
+            echo "Ruflo Codex activation probe"
+            echo "Node: $(node --version)"
+            echo "npm: $(npm --version)"
+            echo "Adapter package:"
+            npm ls @claude-flow/codex --depth=0 || true
+            echo "Init exit: $(cat /tmp/ruflo-audit/init.exit 2>/dev/null || echo not-run)"
+            echo "Doctor exit: $(cat /tmp/ruflo-audit/doctor.exit 2>/dev/null || echo not-run)"
+            echo
+            echo "Status before:"
+            cat /tmp/ruflo-audit/status-before.txt
+            echo
+            echo "Status after:"
+            cat /tmp/ruflo-audit/status-after.txt
+          } > /tmp/ruflo-audit/summary.txt
+
+      - name: Upload diagnostics for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ruflo-codex-audit
+          path: /tmp/ruflo-audit/
+          if-no-files-found: error
+          retention-days: 7
