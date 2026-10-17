@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { apparelReferences } from "@/data/apparel";
 
 type BagItems = Record<string, number>;
 type BagContextValue = {
@@ -12,6 +13,7 @@ type BagContextValue = {
 };
 const BagContext = createContext<BagContextValue | null>(null);
 const STORAGE_KEY = "krovinox-preview-bag-v1";
+const validSlugs = new Set<string>(apparelReferences.map((item) => item.slug));
 
 export function BagProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const [items, setItems] = useState<BagItems>({});
@@ -22,31 +24,38 @@ export function BagProvider({ children }: Readonly<{ children: React.ReactNode }
       const saved: unknown = JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "{}");
       if (saved && typeof saved === "object" && !Array.isArray(saved)) {
         const valid = Object.fromEntries(Object.entries(saved).filter(([key, value]) =>
-          /^[a-z0-9-]+$/.test(key) && Number.isInteger(value) && Number(value) > 0 && Number(value) <= 10
+          validSlugs.has(key) && typeof value === "number" && Number.isInteger(value) && value > 0 && value <= 10
         )) as BagItems;
         setItems(valid);
       }
     } catch {
-      window.localStorage.removeItem(STORAGE_KEY);
+      // Storage may be unavailable in private or restricted browsing contexts.
     }
     setHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (hydrated) window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    if (!hydrated) return;
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    } catch {
+      // The in-memory bag remains usable for this page session.
+    }
   }, [hydrated, items]);
 
   const addItem = useCallback((slug: string) => {
+    if (!validSlugs.has(slug)) return;
     setItems((current) => ({ ...current, [slug]: Math.min(10, (current[slug] ?? 0) + 1) }));
   }, []);
   const setQuantity = useCallback((slug: string, quantity: number) => {
+    if (!validSlugs.has(slug) || !Number.isFinite(quantity)) return;
     setItems((current) => {
       if (quantity <= 0) {
         const next = { ...current };
         delete next[slug];
         return next;
       }
-      return { ...current, [slug]: Math.min(10, Math.floor(quantity)) };
+      return { ...current, [slug]: Math.min(10, Math.max(1, Math.floor(quantity))) };
     });
   }, []);
   const removeItem = useCallback((slug: string) => {
