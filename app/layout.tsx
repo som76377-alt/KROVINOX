@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Manrope } from "next/font/google";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
+import { BagProvider } from "@/components/preview-bag";
 import "./globals.css";
+import "./premium.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
 const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono", display: "swap" });
@@ -17,5 +19,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#f1efe8", colorScheme: "light" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en-IN"><body className={`${manrope.variable} ${plexMono.variable}`}><a className="skip-link" href="#main-content">Skip to content</a><SiteHeader />{children}<SiteFooter /></body></html>;
+  return <html lang="en-IN"><body className={`${manrope.variable} ${plexMono.variable}`}><a className="skip-link" href="#main-content">Skip to content</a><BagProvider><SiteHeader />{children}<SiteFooter /></BagProvider></body></html>;
 }
