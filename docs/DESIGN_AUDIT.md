@@ -21,3 +21,6 @@ The redesign is not visually accepted until the new CI run passes and the fresh 
 
 ## Second rendered review
 The new screenshots passed build and browser assertions, but visual inspection showed the hero photo still had a bright red graphic tee and novelty sunglasses. That image did not match the intended restrained, utility-led clothing direction. It is being replaced with a real Unsplash photograph of a model in a black hoodie and trousers in an urban setting. The photograph remains clearly labeled as a reference, not a KROVINOX product. The change must be verified in a fresh screenshot before acceptance.
+
+
+The first hero replacement was reviewed from a fresh CI screenshot. It still showed prominent graphic branding on the back of the jacket, which made the reference too brand-specific for KROVINOX. The hero source has now been changed again to a separate real Unsplash clothing photograph without relying on that visibly branded look. This latest replacement still requires fresh screenshot inspection before final visual acceptance.

@@ -13,7 +13,7 @@ export default function HomePage() {
         <p className="hero-note">Photography on this preview is reference material, not KROVINOX product photography.</p>
       </div>
       <div className="hero-image-wrap">
-        <Image src="https://images.unsplash.com/photo-1611482874156-405cec3d5d05?auto=format&fit=crop&w=1600&q=90" alt="A model in black streetwear walking on a city sidewalk, used as an editorial reference" fill priority unoptimized sizes="(max-width: 640px) 100vw, 52vw" className="hero-image" />
+        <Image src="https://images.unsplash.com/photo-1773848091915-e703753f43ba?auto=format&fit=crop&w=1600&q=90" alt="A young man in a hoodie and trousers photographed outdoors, used as an editorial reference" fill priority unoptimized sizes="(max-width: 640px) 100vw, 52vw" className="hero-image" />
         <div className="image-index"><span>Campaign reference</span><span>Not for sale</span></div>
       </div>
     </section>
