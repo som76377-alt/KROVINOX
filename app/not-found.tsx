@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function NotFound(){return <main id="main-content" className="text-page"><p className="eyebrow">404 / Page not found</p><h1>This page is not here.</h1><p className="text-lead">The address may have changed. Return to the apparel direction to continue browsing.</p><Link className="button button-primary" href="/">Back to KROVINOX <span className="arrow-mark" aria-hidden="true" /></Link></main>;}
