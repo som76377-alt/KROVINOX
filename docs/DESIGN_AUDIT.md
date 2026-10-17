@@ -17,3 +17,7 @@ Reviewed the GitHub Actions browser-review artifact for commit `1a645439363da47f
 
 ## Re-review gate
 The redesign is not visually accepted until the new CI run passes and the fresh desktop/mobile screenshots are opened and inspected. Build success alone is not visual proof.
+
+
+## Second rendered review
+The new screenshots passed build and browser assertions, but visual inspection showed the hero photo still had a bright red graphic tee and novelty sunglasses. That image did not match the intended restrained, utility-led clothing direction. It is being replaced with a real Unsplash photograph of a model in a black hoodie and trousers in an urban setting. The photograph remains clearly labeled as a reference, not a KROVINOX product. The change must be verified in a fresh screenshot before acceptance.
