@@ -24,3 +24,7 @@ The new screenshots passed build and browser assertions, but visual inspection s
 
 
 The first hero replacement was reviewed from a fresh CI screenshot. It still showed prominent graphic branding on the back of the jacket, which made the reference too brand-specific for KROVINOX. The hero source has now been changed again to a separate real Unsplash clothing photograph without relying on that visibly branded look. This latest replacement still requires fresh screenshot inspection before final visual acceptance.
+
+
+## Final screenshot polish findings
+The latest render confirmed the image now better fits the clothing direction, but two smaller hierarchy issues remained: the hero headline broke into three lines on desktop, and the diagonal-arrow glyph rendered as a blue emoji-like square in Chromium. The next pass reduces desktop headline scale so the intended two-line lockup holds and replaces the glyph with a CSS-drawn arrow. Re-review the next screenshot to verify both changes.

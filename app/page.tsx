@@ -9,7 +9,7 @@ export default function HomePage() {
         <p className="eyebrow">Independent clothing / First release in development</p>
         <h1 id="hero-title">Utility,<br />cut with intent.</h1>
         <p className="hero-description">KROVINOX is an independent clothing label developing oversized essentials, hard-wearing layers, and considered details for people who want function without looking uniform.</p>
-        <div className="hero-actions"><Link className="button button-primary" href="#apparel">Explore the apparel direction <span aria-hidden="true">↗</span></Link><Link className="text-link" href="/about">How we approach clothing</Link></div>
+        <div className="hero-actions"><Link className="button button-primary" href="#apparel">Explore the apparel direction <span className="arrow-mark" aria-hidden="true" /></Link><Link className="text-link" href="/about">How we approach clothing</Link></div>
         <p className="hero-note">Photography on this preview is reference material, not KROVINOX product photography.</p>
       </div>
       <div className="hero-image-wrap">
@@ -26,7 +26,7 @@ export default function HomePage() {
     </section>
     <section className="design-note" aria-labelledby="design-note-title">
       <div className="design-note-image"><Image src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1400&q=85" alt="Clothing displayed in a fashion retail setting as visual reference" fill unoptimized sizes="(max-width: 760px) 100vw, 48vw" className="design-note-photo" /></div>
-      <div className="design-note-copy"><p className="eyebrow">Design approach</p><h2 id="design-note-title">Start with the garment. Keep the noise out.</h2><p>We are developing the first pieces around silhouette, wearability, fabric hand-feel, and useful construction. Branding should support the garment, not compete with it.</p><Link className="button button-outline" href="/about">Read the approach <span aria-hidden="true">↗</span></Link></div>
+      <div className="design-note-copy"><p className="eyebrow">Design approach</p><h2 id="design-note-title">Start with the garment. Keep the noise out.</h2><p>We are developing the first pieces around silhouette, wearability, fabric hand-feel, and useful construction. Branding should support the garment, not compete with it.</p><Link className="button button-outline" href="/about">Read the approach <span className="arrow-mark" aria-hidden="true" /></Link></div>
     </section>
     <section className="release-band"><div><p className="eyebrow">Before the first release</p><h2>Real samples first.<br />Then the details.</h2></div><p>Measurements, material information, pricing, and purchase options will be published when verified. No placeholder product is offered for sale.</p></section>
   </main>;
