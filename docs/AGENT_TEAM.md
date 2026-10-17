@@ -1,28 +1,32 @@
 # Ruflo agent-team setup
 
-Ruflo is an external agent-orchestration runtime, not a normal website dependency. Official project: https://github.com/ruvnet/ruflo. Quick start: https://github.com/ruvnet/ruflo/wiki/Quick-Start.
+Ruflo is an external agent-orchestration runtime for supported coding-agent clients, not a website dependency. Official project and current setup instructions: https://github.com/ruvnet/ruflo.
 
-## Prerequisites
-- Node.js 20 or newer and npm.
-- A compatible local agent client and model-provider credentials configured privately.
-- Never commit API keys or local secrets.
+## Current setup path
 
-## Initialize from the repository root
+This repository includes `.mcp.json` for a local stdio Ruflo server and `scripts/setup-ruflo.sh` to launch the official project setup wizard.
+
+Prerequisites:
+- Node.js and npm.
+- A supported local client, such as Codex or Claude Code.
+- Any required model-provider credentials configured privately in that client.
+
+From the repository root, run:
+
 ```sh
-npx ruflo@latest init
-npx ruflo@latest doctor
-npx ruflo@latest swarm init --topology hierarchical --max-agents 6 --strategy specialized
-npx ruflo@latest agent spawn -t researcher --name design-researcher
-npx ruflo@latest agent spawn -t coder --name storefront-builder
-npx ruflo@latest agent spawn -t reviewer --name quality-critic
-npx ruflo@latest agent list
+bash scripts/setup-ruflo.sh
 ```
 
-This setup has not been run in GitHub Actions. Do not report a swarm as active until the doctor passes and the agent list confirms the workers. The current chat environment can edit GitHub files and inspect CI artifacts, but cannot claim that a local Ruflo runtime was started.
+The script runs the upstream setup wizard. After setup, restart the supported client so it can read the Ruflo configuration. For clients using local stdio MCP, Ruflo's documented server command is `npx -y ruflo@latest mcp start`, matching the command in `.mcp.json`.
 
-## Team responsibilities
-- Researcher: collect concrete reference patterns and cite URLs.
-- Builder: implement responsive, accessible Next.js UI.
-- Merchandising reviewer: verify product truth, image relevance, and CTA behavior.
-- Quality critic: audit typography, spacing, scale, alignment, contrast, mobile layout, and screenshot evidence.
-- Release verifier: run tests and inspect fresh desktop/mobile screenshots.
+Claude Code users should follow the current upstream plugin instructions and review any plugins or mods before enabling them. Ruflo integrations run with the permissions of the configured client.
+
+## Intended specialist responsibilities
+
+- **Design researcher**: gather real fashion e-commerce references and explain specific layout choices with links.
+- **Storefront builder**: implement the approved direction and responsive navigation.
+- **Merchandising reviewer**: verify product truth, image context, and CTA destinations.
+- **Quality critic**: audit typography, spacing, scale, alignment, contrast, responsive behavior, keyboard access, and screenshots.
+- **Release verifier**: run lint, typecheck, build, browser tests, and inspect fresh screenshots.
+
+The Ruflo runtime has **not** been launched from this chat. The team brief describes intended roles, not proof that agents are active. Do not report a Ruflo-built change until the configured client actually runs it.

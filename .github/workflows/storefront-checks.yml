@@ -21,6 +21,8 @@ jobs:
           node-version: 22.20.0
           cache: npm
       - run: npm ci
+      - name: Verify Playwright CLI
+        run: npm run browser:cli -- --help
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run build
