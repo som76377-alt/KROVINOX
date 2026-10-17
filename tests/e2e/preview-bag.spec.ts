@@ -50,3 +50,10 @@ test("saved concepts survive navigation and reload", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "The oversized tee" })).toBeVisible();
   await expect(page.getByText("1 concept saved")).toBeVisible();
 });
+
+test("editorial motion respects reduced-motion preference", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const animationName = await page.locator(".brand-principles").evaluate((element) => getComputedStyle(element).animationName);
+  expect(animationName).toBe("none");
+});
