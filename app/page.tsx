@@ -1,11 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const references = [
-  { number: "01", category: "Everyday base", name: "The oversized tee", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=85", alt: "Cotton T-shirt photographed as a clothing reference" },
-  { number: "02", category: "Outer layer", name: "The utility layer", image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=85", alt: "Structured jacket photographed as a clothing reference" },
-  { number: "03", category: "Daily uniform", name: "The wide-leg trouser", image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1000&q=85", alt: "Denim trousers photographed as a clothing reference" },
-];
+import { apparelReferences } from "@/data/apparel";
 
 export default function HomePage() {
   return <main id="main-content">
@@ -24,8 +19,8 @@ export default function HomePage() {
     </section>
     <section className="collection section-wrap" id="apparel" aria-labelledby="collection-title">
       <div className="section-heading"><div><p className="eyebrow">Apparel / Direction 01</p><h2 id="collection-title">A wardrobe with purpose.</h2></div><p className="section-intro">Three starting points for the first clothing release. Final garments, materials, fit, and prices will be shown only after samples are confirmed.</p></div>
-      <div className="reference-grid">{references.map((item) => <article className="reference-item" key={item.number}>
-        <Link href="/about" className="reference-image-link" aria-label={`Read about the ${item.name} direction`}><div className="reference-image-frame"><Image src={item.image} alt={item.alt} fill unoptimized sizes="(max-width: 640px) 90vw, (max-width: 980px) 45vw, 30vw" className="reference-image" /><span className="image-number">{item.number}</span></div></Link>
+      <div className="reference-grid">{apparelReferences.map((item) => <article className="reference-item" key={item.number}>
+        <Link href={`/shop/${item.slug}`} className="reference-image-link" aria-label={`Read about the ${item.name} direction`}><div className="reference-image-frame"><Image src={item.image} alt={item.alt} fill unoptimized sizes="(max-width: 640px) 90vw, (max-width: 980px) 45vw, 30vw" className="reference-image" /><span className="image-number">{item.number}</span></div></Link>
         <div className="reference-meta"><span>{item.category}</span><span>Reference only</span></div><h3>{item.name}</h3>
       </article>)}</div>
     </section>
