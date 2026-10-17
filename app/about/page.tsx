@@ -1,29 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "About KROVINOX",
-  description: "The story behind the KROVINOX clothing project.",
-  robots: { index: false, follow: false },
-};
-
+export const metadata: Metadata = { title: "About", description: "The approach behind KROVINOX, an independent clothing label in development." };
 export default function AboutPage() {
-  return (
-    <main id="main-content" className="site-page about-page">
-      <div className="site-container about-content">
-        <h1 className="page-title">About KROVINOX</h1>
-        <p className="about-lede">
-          KROVINOX is being built around expressive streetwear and original garment design.
-        </p>
-        <div className="about-rule" />
-        <section aria-labelledby="collection-status">
-          <h2 id="collection-status" className="section-title">The first collection is in progress.</h2>
-          <p>
-            The photos on this site are styling references, not KROVINOX products. Original designs, fit, materials and prices will be added once they are ready.
-          </p>
-        </section>
-        <Link className="button-link" href="/shop">Explore the styles <span aria-hidden="true">→</span></Link>
-      </div>
-    </main>
-  );
+ return <main id="main-content" className="text-page"><p className="eyebrow">About KROVINOX</p><h1>Clothing should earn its place.</h1><p className="text-lead">KROVINOX is an independent clothing label being built around useful silhouettes, thoughtful proportions, and details that make sense in daily wear.</p><div className="text-rule" /><section><h2>What we are working toward</h2><p>The first release is focused on apparel. The work begins with fit and construction, then moves through material choice, sample testing, and honest product information. A garment should be clear about what it is, how it wears, and what it costs.</p></section><section><h2>Who it is for</h2><p>For people who want everyday clothing with a more deliberate point of view. Not costume utility, not a logo doing all the work, and not a promise made before the sample exists.</p></section><section><h2>Where things stand</h2><p>This site is a design preview. Imagery is editorial reference photography, not finished KROVINOX garments. Product specifications, prices, availability, shipping, and returns will be published only when confirmed.</p></section><Link className="button button-primary" href="/#apparel">Explore the apparel direction <span aria-hidden="true">↗</span></Link></main>;
 }
