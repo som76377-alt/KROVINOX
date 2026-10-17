@@ -76,13 +76,13 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Upload test reports
+      - name: Upload test reports and visual-review screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: phase-3-test-reports
+          name: storefront-browser-review
           path: |
             playwright-report/
             test-results/
           if-no-files-found: ignore
-          retention-days: 7
+          retention-days: 14
