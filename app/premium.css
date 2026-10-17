@@ -15,7 +15,7 @@
 /* Scroll-driven reveal only runs in browsers that support view timelines. */
 @supports (animation-timeline: view()) {
   .reveal-section{animation: editorial-reveal linear both;animation-timeline:view();animation-range:entry 0% entry 28%}
-  @keyframes editorial-reveal{from{opacity:.35;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes editorial-reveal{from{opacity:1;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 }
 .bag-page{max-width:var(--content-width);margin:0 auto;padding:clamp(65px,8vw,112px) var(--page-gutter) clamp(90px,12vw,150px)}
 .bag-heading{max-width:850px;padding-bottom:36px;border-bottom:1px solid var(--line)}
