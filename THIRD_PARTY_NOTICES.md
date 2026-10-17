@@ -1,13 +1,16 @@
 # Third-party skill notices
 
-These are portable copies of selected skill instructions. They remain attributed to their original authors. Review the upstream repositories for current versions and complete license terms before redistributing changes.
+Portable skill instructions are stored in `.agents/skills/`, with original source names retained in this file. License copies are stored in `third_party/licenses/` when available.
 
-- **Taste Skill and Image to Code**: https://github.com/Leonxlnx/taste-skill (MIT, https://github.com/Leonxlnx/taste-skill/blob/main/LICENSE)
-- **Anti UI Slop**: https://github.com/minagishl/anti-ui-slop (MIT, https://github.com/minagishl/anti-ui-slop/blob/main/LICENSE)
-- **Impeccable**: https://github.com/daskoon/impeccable (Apache-2.0, https://github.com/daskoon/impeccable/blob/main/LICENSE)
-- **Emil design engineering**: https://github.com/emilkowalski/skills (see the upstream repository license)
-- **Vercel Agent Skills**: https://github.com/vercel-labs/agent-skills (see the upstream repository license)
-- **Playwright CLI**: https://github.com/microsoft/playwright-cli (Apache-2.0, https://github.com/microsoft/playwright-cli/blob/main/LICENSE)
-- **Awesome Design Skills**: https://github.com/bergside/awesome-design-skills (MIT, https://github.com/bergside/awesome-design-skills/blob/main/LICENSE)
+- Taste Skill and Image to Code: https://github.com/Leonxlnx/taste-skill (MIT, local license copy included)
+- Anti UI Slop: https://github.com/minagishl/anti-ui-slop (MIT, local license copy included)
+- Impeccable: https://github.com/daskoon/impeccable (Apache-2.0, local license copy included)
+- Emil design engineering: https://github.com/emilkowalski/skills (see current upstream license at https://github.com/emilkowalski/skills)
+- Vercel Agent Skills: https://github.com/vercel-labs/agent-skills (see current upstream license at https://github.com/vercel-labs/agent-skills)
+- Playwright CLI: https://github.com/microsoft/playwright-cli (Apache-2.0, local license copy included)
+- Awesome Design Skills: https://github.com/bergside/awesome-design-skills (MIT, local license copy included)
 
-Skill copies are kept in separate folders so their origin is visible. The KROVINOX-specific project rules in `AGENTS.md` take precedence where they are stricter.
+Emil license paths detected: LICENSE.
+Vercel license paths detected: no license-named file found in repository tree.
+
+The skills remain attributed to their authors. Check upstream repositories for updates and complete terms before redistributing modifications. KROVINOX-specific rules in `AGENTS.md` take precedence where stricter.
