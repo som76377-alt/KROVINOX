@@ -3,7 +3,7 @@ on:
   push:
     branches: [rebuild/krovinox-clean-start, main]
   pull_request:
-    branches: [rebuild/krovinox-clean-start]
+    branches: [rebuild/krovinox-clean-start, main]
   workflow_dispatch:
 permissions:
   contents: read
