@@ -21,6 +21,10 @@ jobs:
           node-version: 22.20.0
           cache: npm
       - run: npm ci
+      - name: Audit dependency advisories
+        run: |
+          npm audit --json > npm-audit.json || true
+          node -e 'const a=require("./npm-audit.json"); console.log(JSON.stringify(a.metadata?.vulnerabilities ?? {})); for (const [name,v] of Object.entries(a.vulnerabilities ?? {})) console.log(`${name}: severity=${v.severity}, direct=${v.isDirect}, fixAvailable=${JSON.stringify(v.fixAvailable)}`)'
       - name: Verify Playwright CLI
         run: npm run browser:cli -- --help
       - run: npm run lint
@@ -36,5 +40,6 @@ jobs:
           path: |
             playwright-report/
             test-results/
+            npm-audit.json
           if-no-files-found: ignore
           retention-days: 14
