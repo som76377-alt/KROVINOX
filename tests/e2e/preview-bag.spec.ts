@@ -23,3 +23,17 @@ test("empty preview bag points back to apparel", async ({ page }) => {
   await page.getByRole("link", { name: /explore apparel/i }).click();
   await expect(page).toHaveURL(/\/shop$/);
 });
+
+test("bag reflows at narrow mobile and wide desktop widths", async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 320, height: 780 });
+  await page.goto("/bag");
+  let overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  expect(overflow).toBe(false);
+  await page.screenshot({ path: testInfo.outputPath("bag-mobile-320.png"), fullPage: true });
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/bag");
+  overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  expect(overflow).toBe(false);
+  await page.screenshot({ path: testInfo.outputPath("bag-desktop.png"), fullPage: true });
+});
