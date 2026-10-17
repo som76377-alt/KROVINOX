@@ -13,6 +13,7 @@ test("concepts can be saved, updated, and removed without enabling checkout", as
   await expect(page.getByText("3 concepts saved")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Not available to order." })).toBeVisible();
   await expect(page.getByText("Checkout", { exact: true })).toBeVisible();
+  await expect(page.getByText("Not set", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: /remove the oversized tee from preview bag/i }).click();
   await expect(page.getByRole("heading", { name: "Start with a direction." })).toBeVisible();
 });
