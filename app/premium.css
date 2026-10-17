@@ -49,3 +49,8 @@
 @media(max-width:800px){.brand-principles{grid-template-columns:1fr;gap:36px}.bag-layout{grid-template-columns:1fr}.bag-summary{position:static;max-width:none}}
 @media(max-width:560px){.brand-principles{padding-top:72px;padding-bottom:78px}.brand-principles h2{font-size:clamp(3rem,14vw,5rem)}.principle-list li{padding:16px 0}.bag-page{padding-top:60px}.bag-heading h1{font-size:clamp(3rem,14vw,5.2rem)}.bag-item{grid-template-columns:84px minmax(0,1fr);gap:14px}.bag-remove{grid-column:2;justify-self:start;margin-top:-3px}.bag-summary{padding:20px}.editorial-caption{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.reveal-section{animation:none!important;transform:none!important;opacity:1!important}}
+
+.collection-footer{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-top:32px;padding-top:17px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
+.collection-footer .text-link{display:inline-flex;align-items:center;gap:10px;color:var(--ink)}
+.collection-footer .text-link:hover{color:var(--signal)}
+@media(max-width:560px){.collection-footer{align-items:flex-start;flex-direction:column;gap:13px;margin-top:24px}}
