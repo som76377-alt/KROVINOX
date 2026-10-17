@@ -37,3 +37,15 @@ test("bag reflows at narrow mobile and wide desktop widths", async ({ page }, te
   expect(overflow).toBe(false);
   await page.screenshot({ path: testInfo.outputPath("bag-desktop.png"), fullPage: true });
 });
+
+test("saved concepts survive navigation and reload", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/shop/oversized-tee");
+  await page.getByRole("button", { name: /add concept to preview bag/i }).click();
+  await page.reload();
+  const bagLink = page.getByRole("link", { name: /preview bag, 1 items/i });
+  await expect(bagLink).toBeVisible();
+  await bagLink.click();
+  await expect(page.getByRole("heading", { name: "The oversized tee" })).toBeVisible();
+  await expect(page.getByText("1 concept saved")).toBeVisible();
+});
