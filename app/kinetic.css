@@ -202,3 +202,7 @@ h1,h2,h3,.wordmark{font-family:var(--font-display)}
   .brand-principles h2,.principle-list,.principle-list li{min-width:0;max-width:100%}
   .brand-principles h2{overflow-wrap:anywhere}
 }
+
+/* Clip intentional off-canvas decoration at its own boundary, not at the document root. */
+.site-atmosphere{clip-path:inset(0)}
+.editorial-caption{contain:paint;max-width:100%}
