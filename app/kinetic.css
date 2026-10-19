@@ -160,7 +160,7 @@ h1,h2,h3,.wordmark{font-family:var(--font-display)}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-   .site-atmosphere,.site-atmosphere *,.hero-copy>*,.hero-image-wrap,.hero-orbit-mark svg,.editorial-caption-track,.reference-image,.shop-item .reference-image,.site-scroll-progress span,.reveal-section,.section-heading,.reference-item,.shop-item,.product-page-image,.product-page-copy,.text-page section,.bag-item{animation:none!important;transition:none!important;transform:none!important;clip-path:none!important;opacity:1}
+   .site-atmosphere,.site-atmosphere *,.hero-copy>*,.hero-image-wrap,.hero-image,.hero-orbit-mark svg,.editorial-caption-track,.reference-image,.shop-item .reference-image,.site-scroll-progress span,.reveal-section,.section-heading,.reference-item,.shop-item,.product-page-image,.product-page-copy,.text-page section,.bag-item{animation:none!important;transition:none!important;transform:none!important;clip-path:none!important;opacity:1}
   .site-atmosphere{opacity:.16}
   .site-scroll-progress{display:none}
   .editorial-caption-track{width:100%;min-width:0;flex-wrap:wrap}
