@@ -271,6 +271,204 @@ export const catalogProducts: CatalogProduct[] = [
     composition: "The resale listing does not verify the exact fibre composition or product season.",
     construction: ["Double-breasted front", "Wide lapels", "Matching waist belt", "Adjustable cuff tabs"],
     designNote: "The belt and long lapels organise the volume of the outer layer; composition and water resistance are not verified."
+  },
+  {
+    slug: "mens-black-linen-cotton-shirt", sku: "REF-M-SH-03", audience: "Men", category: "Shirts", name: "Black Linen-Cotton Regular-Fit Shirt", color: "Black",
+    priceInr: 2990, image: "https://static.zara.net/assets/public/1244/0af4/0f364e899e16/142d3e1d9262/04597148800-p/04597148800-p.jpg?ts=1775725915397&w=900",
+    alt: "Model wearing a black regular-fit linen-cotton shirt with long sleeves in a neutral studio.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/linen-cotton-regular-fit-shirt-p04597148.html", sourceType: "product",
+    composition: "The linked product describes a linen-cotton blend; confirm the current exact percentages on the retailer page.",
+    construction: ["Button-down front", "Long sleeves with cuffs", "Chest patch pocket", "Regular collar"],
+    designNote: "The dark matte surface lets collar shape, button spacing and pocket placement do the visual work."
+  },
+  {
+    slug: "mens-mid-blue-denim-overshirt", sku: "REF-M-SH-04", audience: "Men", category: "Shirts", name: "Mid-Blue Cotton-Lyocell Denim Overshirt", color: "Mid blue",
+    priceInr: 3990, image: "https://static.zara.net/assets/public/f3d7/86d3/b4e947739984/b4f146954a9e/03991310427-a1/03991310427-a1.jpg?ts=1784022793585&w=900",
+    alt: "Model wearing a mid-blue denim overshirt with a regular collar and button front against a light backdrop.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/cotton-lyocell-denim-overshirt-p03991310.html", sourceType: "product",
+    composition: "The linked retailer listing identifies a cotton and lyocell blend; verify the precise percentages on the live listing.",
+    construction: ["Regular collar", "Button front", "Buttoned cuffs", "Faded denim surface"],
+    designNote: "The overshirt sits between a shirt and light jacket, so its body volume should remain clear in styling."
+  },
+  {
+    slug: "mens-white-linen-boxy-shirt", sku: "REF-M-SH-05", audience: "Men", category: "Shirts", name: "White 100% Linen Boxy-Fit Shirt", color: "White",
+    priceInr: 3290, image: "https://static.zara.net/assets/public/698c/d084/20ec41258242/6d2d1568b300/04376300250-p/04376300250-p.jpg?ts=1777022126082&w=900",
+    alt: "Model wearing a white short-sleeve boxy linen shirt with dark shorts in a clean studio setting.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/boxy-fit-100-linen-shirt-p04376300.html", sourceType: "product",
+    composition: "The product listing identifies the shirt as 100% linen.",
+    construction: ["Boxy fit", "Short sleeves", "Regular collar", "Button-up front"],
+    designNote: "A boxier body and short sleeve create a different proportion from the long-sleeve tailored shirts."
+  },
+  {
+    slug: "mens-sand-cotton-linen-blazer", sku: "REF-M-BL-04", audience: "Men", category: "Blazers", name: "Sand Relaxed Cotton-Linen Suit Blazer", color: "Sand",
+    priceInr: 7490, image: "https://static.zara.net/assets/public/f535/4059/290349358316/8da611c61abd/04558147711-p/04558147711-p.jpg?ts=1776245433535&w=900",
+    alt: "Model wearing a sand relaxed-fit blazer with matching tailored trousers in a neutral studio.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/relaxed-fit-cotton-linen-suit-blazer-p04558147.html", sourceType: "product",
+    composition: "The product listing describes a cotton-linen shell blend; see its current details for the exact percentages and lining.",
+    construction: ["Notch lapel", "Three-button front", "Buttoned cuffs", "Concealed seam pockets"],
+    designNote: "The warm neutral palette keeps attention on lapel geometry and the blazer's relaxed, elongated silhouette."
+  },
+  {
+    slug: "mens-navy-100-linen-blazer", sku: "REF-M-BL-05", audience: "Men", category: "Blazers", name: "Dark Navy 100% Linen Suit Blazer", color: "Dark navy",
+    priceInr: 8290, image: "https://static.zara.net/assets/public/9bfe/0529/bdb240b3bee5/6158c01322fb/01003905422-a1/01003905422-a1.jpg?ts=1778675253346&w=900",
+    alt: "Model wearing a dark navy linen suit blazer over a light shirt in a controlled studio portrait.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/regular-fit-100-linen-suit-blazer-p01003905.html", sourceType: "product",
+    composition: "The linked product identifies a 100% linen outer shell and lists the lining separately; verify the current lining details at source.",
+    construction: ["Notched lapels", "Button front", "Chest welt pocket", "Front flap pockets"],
+    designNote: "The dark colour gives the tailored panel breaks a quieter treatment than the sand blazer reference."
+  },
+  {
+    slug: "mens-black-cropped-wide-leg-pleated-trousers", sku: "REF-M-TR-03", audience: "Men", category: "Trousers", name: "Black Cropped Wide-Leg Pleated Trousers", color: "Black",
+    priceInr: 3990, image: "https://static.zara.net/assets/public/6e90/2a99/e75340438ff8/7632c72c64a9/04460308800-p/04460308800-p.jpg?f=auto&ts=1772787402288&w=900",
+    alt: "Model wearing black cropped wide-leg trousers with front pleats against a pale studio background.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/cropped-wide-leg-pleated-trousers-p04460308.html", sourceType: "product",
+    composition: "Confirm fibre composition on the linked retailer page before making any material claim.",
+    construction: ["Cropped length", "Wide leg", "Front pleats", "Front pockets"],
+    designNote: "The cropped hem makes footwear part of the silhouette rather than hiding it under the trouser break."
+  },
+  {
+    slug: "mens-navy-linen-pleated-trousers", sku: "REF-M-TR-04", audience: "Men", category: "Trousers", name: "Navy 100% Linen Pleated Trousers", color: "Navy blue",
+    priceInr: 3690, image: "https://static.zara.net/assets/public/51bf/07ad/afcc4b03afff/e9f66af9cdf6/04676405401-p/04676405401-p.jpg?ts=1778594352410&w=900",
+    alt: "Model wearing navy linen pleated trousers with a blue shirt in a light studio setting.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/100-linen-pleated-trousers-p04676405.html", sourceType: "product",
+    composition: "The linked retailer listing identifies the main fabric as 100% linen, excluding any lining.",
+    construction: ["Pleated waist", "Straight leg", "Front pockets", "Rear pocket detail"],
+    designNote: "The pleated front adds volume at the waist while keeping the lower leg line straight."
+  },
+  {
+    slug: "mens-brown-flowing-trousers", sku: "REF-M-TR-05", audience: "Men", category: "Trousers", name: "Brown Relaxed-Fit Flowing Trousers", color: "Brown",
+    priceInr: 3490, image: "https://static.zara.net/assets/public/45bd/9119/d7324bb58bcf/ee94819520b3/04277029800-p/04277029800-p.jpg?ts=1767782842084&w=900",
+    alt: "Model wearing relaxed brown flowing trousers with a coordinating dark shirt in a neutral studio.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/relaxed-fit-flowing-trousers-p04277029.html", sourceType: "product",
+    composition: "Exact fibre content is not stated here; consult the linked product's composition section.",
+    construction: ["Relaxed fit", "Fluid drape", "Elasticated waist appearance", "Side pockets"],
+    designNote: "The fluid leg gives a softer contrast to the sharper pleated tailoring references."
+  },
+  {
+    slug: "mens-indigo-basic-denim-jacket", sku: "REF-M-JK-04", audience: "Men", category: "Jackets", name: "Indigo Basic Denim Jacket", color: "Indigo blue",
+    priceInr: 4990, image: "https://static.zara.net/assets/public/c466/d0f4/2eee4cbf98c1/ef654c14ebae/01416474405-a1/01416474405-a1.jpg?ts=1773999381089&w=900",
+    alt: "Model wearing an indigo denim jacket with chest flap pockets and a white T-shirt against a light backdrop.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/jp/ja/%E3%83%98%E3%82%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF%E3%83%87%E3%83%8B%E3%83%A0%E3%82%B7%E3%82%99%E3%83%A3%E3%82%B1%E3%83%83%E3%83%88-p01416474.html", sourceType: "product",
+    composition: "The linked Japan-region product describes a regular-fit denim jacket; check that page for current material details.",
+    construction: ["Rigid denim appearance", "Chest flap pockets", "Button front", "Buttoned cuffs"],
+    designNote: "The dark indigo wash emphasises pocket placement and panel seams without the faded treatment of the existing light-blue reference."
+  },
+  {
+    slug: "mens-black-leather-collar-bomber", sku: "REF-M-JK-05", audience: "Men", category: "Jackets", name: "Black Leather-Collar Bomber Jacket", color: "Black",
+    priceInr: 5990, image: "https://static.zara.net/assets/public/859f/e969/c152467e9e69/28e4564ad7e9/04305315700-e1/04305315700-e1.jpg?f=auto&ts=1769680038021&w=900",
+    alt: "Black bomber jacket with a contrasting leather collar, shown clearly on a clean studio background.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/man-jackets-l640.html", sourceType: "category",
+    composition: "Category-level reference: the exact product page and fibre composition were not verified from the listing source.",
+    construction: ["Contrasting collar", "Snap-button front", "Elasticated cuffs and hem", "Slanted side pockets"],
+    designNote: "The contrasting collar adds definition to a dark outer layer without a large graphic or decorative trim."
+  },
+  {
+    slug: "womens-white-oversize-v-neck-tee", sku: "REF-W-TS-03", audience: "Women", category: "T-shirts", name: "White Oversize V-Neck T-Shirt", color: "White",
+    priceInr: 1490, image: "https://static.zara.net/assets/public/b91f/c6a0/719341749a37/6eefa222bafb/00858038250-p/00858038250-p.jpg?ts=1772191074442&w=900",
+    alt: "Model wearing an oversized white V-neck T-shirt with short sleeves in a light studio.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/v-neck-t-shirt-p00858038.html", sourceType: "product",
+    composition: "The linked item describes a cotton yarn T-shirt; verify exact composition on the current retailer listing.",
+    construction: ["V neckline", "Short sleeves", "Regular length", "Straight hem"],
+    designNote: "The open neckline distinguishes this from the crew-neck basics while retaining a restrained silhouette."
+  },
+  {
+    slug: "womens-black-interlock-tee", sku: "REF-W-TS-04", audience: "Women", category: "T-shirts", name: "Black Interlock Short-Sleeve T-Shirt", color: "Black",
+    priceInr: 1350, image: "https://static.zara.net/assets/public/0a35/256b/924245cbbd35/4184ba47b838/01131860800-000-p/01131860800-000-p.jpg?ts=1765361388044&w=900",
+    alt: "Model wearing a black short-sleeve interlock T-shirt with a clean round neckline and simple styling.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/us/en/interlock-short-sleeve-t-shirt-p01131860.html", sourceType: "product",
+    composition: "The linked retailer listing describes an elastic and flexible knit; confirm the current fibre percentages at source.",
+    construction: ["Round neckline", "Short sleeves", "Compact knit appearance", "Straight hem"],
+    designNote: "A clean black surface makes neckline shape and sleeve length the key visible details."
+  },
+  {
+    slug: "womens-black-cropped-tee", sku: "REF-W-TS-05", audience: "Women", category: "T-shirts", name: "Black Cropped Short-Sleeve T-Shirt", color: "Black",
+    priceInr: 650, image: "https://static.zara.net/assets/public/dd2e/fdc6/00464f1884b4/f765c0332ddd/03641305800-p/03641305800-p.jpg?ts=1781785603573&w=900",
+    alt: "Model wearing a black cropped short-sleeve T-shirt with a round neck and a minimal urban setting.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/cropped-short-sleeve-t-shirt-p03641305.html", sourceType: "product",
+    composition: "The linked retailer listing describes a cotton-blend yarn; verify the precise fibre percentages at source.",
+    construction: ["Cropped length", "Round neckline", "Short sleeves", "Straight hem"],
+    designNote: "The shorter body line is the focal proportion; it should be presented without extra filters or artificial body reshaping."
+  },
+  {
+    slug: "womens-white-zw-poplin-shirt", sku: "REF-W-SH-04", audience: "Women", category: "Shirts", name: "ZW Collection White Poplin Shirt", color: "White",
+    priceInr: 3490, image: "https://static.zara.net/assets/public/e12e/8421/4fce4f67994a/d020c41977f3/01330026250-p/01330026250-p.jpg?ts=1786431412411&w=900",
+    alt: "Model wearing a structured white poplin shirt with dark denim against a soft neutral background.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/zw-collection-poplin-shirt-p01330026.html", sourceType: "product",
+    composition: "The listing identifies cotton poplin; check the page for exact current material details and care.",
+    construction: ["Regular collar", "Concealed button placket", "Long sleeves", "Rounded hem"],
+    designNote: "A structured white shirt works as a crisp reference for collar proportions and concealed fastening."
+  },
+  {
+    slug: "womens-yellow-linen-shirt-look", sku: "REF-W-SH-05", audience: "Women", category: "Shirts", name: "Butter-Yellow Linen Shirt — Editorial Reference", color: "Butter yellow",
+    priceInr: 2990, image: "https://cdn.mos.cms.futurecdn.net/miE7YrftvUSnAnaJBoVUtT.jpg",
+    alt: "Model wearing a butter-yellow oversized linen shirt with beige wide-leg trousers in an editorial studio image.",
+    retailer: "Who What Wear / Zara editorial reference", sourceUrl: "https://www.whowhatwear.com/fashion/shopping/best-zara-linen-pieces-2025", sourceType: "category",
+    composition: "Editorial/category reference only: the exact product identity and fibre percentages are not verified from this image.",
+    construction: ["Oversized-looking fit", "Classic collar", "Button front", "Long sleeves"],
+    designNote: "This reference is included for colour and silhouette direction, not as a verified individual product listing."
+  },
+  {
+    slug: "womens-black-peplum-blazer", sku: "REF-W-BL-04", audience: "Women", category: "Blazers", name: "Black Tailored Peplum Blazer", color: "Black",
+    priceInr: 3990, image: "https://static.zara.net/assets/public/f6b7/088f/318f4d629ce7/cbf624bb2e13/07976844800-p/07976844800-p.jpg?ts=1790156898763&w=900",
+    alt: "Model wearing a black tailored peplum blazer with padded shoulders against a textured stone backdrop.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/tailored-peplum-blazer-p07976844.html", sourceType: "product",
+    composition: "The source listing describes a polyester-viscose-elastane shell and acetate lining; confirm current proportions on the retailer page.",
+    construction: ["Collarless neckline", "Structured shoulders", "Fitted waist", "Peplum hem"],
+    designNote: "The shaped waist and peplum hem create a distinct silhouette from the conventional straight blazer."
+  },
+  {
+    slug: "womens-black-tailored-blazer-reference", sku: "REF-W-BL-05", audience: "Women", category: "Blazers", name: "Black Notch-Lapel Tailored Blazer Reference", color: "Black",
+    priceInr: 4290, image: "https://static.zara.net/assets/public/36f8/906a/349c49488683/cb0176b89710/03002143800-p/03002143800-p.jpg?ts=1776333542455&w=900",
+    alt: "Model wearing a black notch-lapel blazer with a white top and matching trousers in a pale studio.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/uk/en/woman-blazers-black-l2173.html", sourceType: "category",
+    composition: "Category-level image reference: the exact blazer listing and composition were not confirmed from the category page.",
+    construction: ["Notch lapels", "Long sleeves", "Front flap pockets", "Tailored straight silhouette"],
+    designNote: "This category reference shows classic blazer proportion; it is not a claim about a specific product's fibre content."
+  },
+  {
+    slug: "womens-black-high-waist-wide-leg-trousers", sku: "REF-W-TR-03", audience: "Women", category: "Trousers", name: "Black High-Waist Wide-Leg Trousers", color: "Black",
+    priceInr: 2990, image: "https://static.zara.net/assets/public/c6a7/ae8f/0c764d629329/5028e8fdbc38/02263763800-p/02263763800-p.jpg?ts=1771417921598&w=900",
+    alt: "Model wearing black high-waist wide-leg trousers with a white top in a bright, clean studio.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/high-waist-wide-leg-trousers-p02263763.html", sourceType: "product",
+    composition: "The linked product listing identifies 100% polyester; re-check the live page before using material claims.",
+    construction: ["High waist", "Wide leg", "Front pockets", "Zip fastening"],
+    designNote: "The continuous dark leg line gives a clear reference for a clean tailored silhouette."
+  },
+  {
+    slug: "womens-black-wide-leg-trouser-editorial", sku: "REF-W-TR-04", audience: "Women", category: "Trousers", name: "Black Wide-Leg Trousers — Category Reference", color: "Black",
+    priceInr: 2790, image: "https://static.zara.net/assets/public/1423/d33a/2c2b418cba10/05c7237052a4/01255406800-p/01255406800-p.jpg?ts=1772794448448&w=900",
+    alt: "Model wearing high-waisted black wide-leg trousers with a white sleeveless top against a white backdrop.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/es/en/woman-trousers-l1335.html", sourceType: "category",
+    composition: "Category-level image reference: exact individual listing and fibre details were not verified.",
+    construction: ["High-waist appearance", "Wide legs", "Dark solid surface"],
+    designNote: "The simple studio styling keeps trouser drape and overall proportion readable."
+  },
+  {
+    slug: "womens-ecru-volume-pleated-pants", sku: "REF-W-TR-05", audience: "Women", category: "Trousers", name: "Ecru Pleated Volume Trousers", color: "Ecru",
+    priceInr: 3990, image: "https://static.zara.net/assets/public/aa06/12ae/33eb46d18e88/bedb9e8f801d/02857824712-p/02857824712-p.jpg?f=auto&ts=1777566742046&w=900",
+    alt: "Model wearing ecru volume pleated trousers styled with a matching cropped blazer in a light studio.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/us/en/pleated-volume-pants-p02857824.html", sourceType: "product",
+    composition: "The linked retailer listing describes a viscose-rich blend; verify exact current percentages on the source page.",
+    construction: ["Volume pleats", "High waist", "Wide silhouette", "Front pockets"],
+    designNote: "The generous volume provides a softer counterpart to the sharper black trouser references."
+  },
+  {
+    slug: "womens-black-leather-effect-bomber", sku: "REF-W-JK-04", audience: "Women", category: "Jackets", name: "Black Leather-Effect Bomber Jacket", color: "Black",
+    priceInr: 6990, image: "https://static.zara.net/assets/public/3975/1ef2/8b084dbf8a0b/549ac135212d/04749870800-a1/04749870800-a1.jpg?ts=1770389289872&w=900",
+    alt: "Model wearing a black leather-effect bomber jacket with a central zip and elasticated cuffs in soft studio light.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/es/en/leather-effect-bomber-jacket-p04749870.html", sourceType: "product",
+    composition: "Leather-effect describes the surface category, not real leather; consult the listing for shell and lining fibre details.",
+    construction: ["Bomber silhouette", "Central zip", "Elasticated cuffs and hem", "Front pockets"],
+    designNote: "The dark surface and restrained lighting show the bomber shape without heavy post-processing."
+  },
+  {
+    slug: "womens-black-quilted-leather-effect-bomber", sku: "REF-W-JK-05", audience: "Women", category: "Jackets", name: "Black Quilted Leather-Effect Bomber", color: "Black",
+    priceInr: 7490, image: "https://static.zara.net/assets/public/f015/a895/d7bd4090a7a0/a55ea0de8757/06318055800-a1/06318055800-a1.jpg?ts=1770379583953&w=900",
+    alt: "Model wearing a black quilted leather-effect bomber with a high collar and snap fastening in a clean studio portrait.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/quilted-leather-effect-bomber-jacket-p06318055.html", sourceType: "product",
+    composition: "The retailer describes a quilted leather-effect finish; verify the exact shell, filling and lining composition on the linked page.",
+    construction: ["Quilted surface", "High collar", "Snap-button fastening", "Front welt pockets"],
+    designNote: "The quilting gives the surface more structure than the plain leather-effect bomber reference."
   }
 ];
 
