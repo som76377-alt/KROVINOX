@@ -116,10 +116,11 @@ h1,h2,h3,.wordmark{font-family:var(--font-display)}
 @keyframes hero-copy-enter{from{opacity:0;transform:translateY(20px);clip-path:inset(0 0 8% 0)}to{opacity:1;transform:translateY(0);clip-path:inset(0)}}
 @keyframes hero-image-enter{from{opacity:.3;clip-path:inset(7% 0 0 5%)}to{opacity:1;clip-path:inset(0)}}
 @keyframes atmosphere-turn{to{transform:rotate(360deg)}}
+@keyframes hero-stamp-spin{to{transform:rotate(360deg)}}
 @keyframes atmosphere-turn-reverse{to{transform:rotate(-360deg)}}
 @keyframes ticker-run{to{transform:translateX(-50%)}}
 @keyframes reveal-up{from{opacity:.35;transform:translateY(38px)}to{opacity:1;transform:translateY(0)}}
-@keyframes image-reveal{from{transform:scale(1.1);clip-path:inset(8% 0 0 0)}to{transform:scale(1);clip-path:inset(0)}}
+@keyframes image-reveal{from{clip-path:inset(8% 0 0 0)}to{clip-path:inset(0)}}
 @keyframes hero-parallax{from{transform:translateY(0) scale(1.1)}to{transform:translateY(7%) scale(1.1)}}
 
 /* Native CSS timelines keep scroll-linked effects off the JavaScript main-thread loop.
@@ -159,9 +160,23 @@ h1,h2,h3,.wordmark{font-family:var(--font-display)}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .site-atmosphere,.site-atmosphere *,.hero-copy>*,.hero-image-wrap,.editorial-caption-track,.reference-image,.shop-item .reference-image,.site-scroll-progress span{animation:none!important;transition:none!important;transform:none!important;clip-path:none!important;opacity:1}
+   .site-atmosphere,.site-atmosphere *,.hero-copy>*,.hero-image-wrap,.hero-orbit-mark svg,.editorial-caption-track,.reference-image,.shop-item .reference-image,.site-scroll-progress span,.reveal-section,.section-heading,.reference-item,.shop-item,.product-page-image,.product-page-copy,.text-page section,.bag-item{animation:none!important;transition:none!important;transform:none!important;clip-path:none!important;opacity:1}
   .site-atmosphere{opacity:.16}
   .site-scroll-progress{display:none}
   .editorial-caption-track{width:100%;min-width:0;flex-wrap:wrap}
   .editorial-caption-group--duplicate{display:none}
 }
+
+/* The hero's orbit seal is original CSS/SVG artwork, not a stock badge. */
+.hero-orbit-mark{position:absolute;z-index:3;top:50%;right:clamp(1.1rem,5vw,4.7rem);width:clamp(138px,18vw,224px);aspect-ratio:1;display:grid;place-items:center;transform:translateY(-50%);color:var(--signal);pointer-events:none}
+.hero-orbit-mark svg{display:block;width:100%;height:100%;overflow:visible}
+.hero-orbit-mark circle{stroke:currentColor;stroke-width:.8}
+.hero-orbit-mark .hero-orbit-outer{stroke-dasharray:1 4;stroke-width:1.1}
+.hero-orbit-mark .hero-orbit-dash{stroke:var(--ember);stroke-dasharray:2 6;stroke-width:.85}
+.hero-orbit-mark .hero-orbit-spoke{stroke:currentColor;stroke-width:1}
+.hero-orbit-mark .hero-orbit-text{fill:currentColor;stroke:none;font:8px var(--font-mono),monospace;letter-spacing:2px}
+.hero-orbit-mark .hero-orbit-dot{fill:var(--signal);stroke:none}
+.hero-orbit-mark .hero-orbit-dot--ember{fill:var(--ember)}
+.hero-orbit-center{position:absolute;display:flex;align-items:flex-start;gap:3px;color:var(--paper);font:800 27px/.9 var(--font-display);letter-spacing:-.1em}
+.hero-orbit-center span{padding-top:1px;color:var(--signal);font:9px/1.2 var(--font-mono),monospace;letter-spacing:0}
+@media(prefers-reduced-motion:no-preference){.hero-orbit-mark svg{animation:hero-stamp-spin 48s linear infinite}}
