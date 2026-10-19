@@ -99,6 +99,10 @@ test("kinetic system uses the new typography and remains responsive", async ({ p
   expect(visuals.background).toBe("#f2eedf");
   expect(visuals.bodyFont).toContain("manrope");
   expect(visuals.headingFont).toContain("bodoni moda");
+  await expect(page.locator(".study-marker")).toHaveCount(3);
+  await expect(page.locator(".study-marker strong")).toHaveCount(3);
+  const leaderLine = await page.locator(".study-marker--one").evaluate((node) => getComputedStyle(node, "::after").content);
+  expect(leaderLine).toBe("\"\"");
   expect(visuals.atmospherePosition).toBe("fixed");
   expect(visuals.pointerEvents).toBe("none");
   expect(visuals.ringCount).toBe(2);
