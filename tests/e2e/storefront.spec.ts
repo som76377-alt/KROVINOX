@@ -48,20 +48,35 @@ test("product detail uses its catalog item and original source link", async ({ p
   await expect(page.getByRole("button", { name: /add to demo bag/i })).toBeVisible();
 });
 
-test("catalog photos use source descriptions and avoid known low-resolution placeholders", async ({ page }) => {
+test("catalog photos load and use premium-sized source descriptions", async ({ page }, testInfo) => {
+  test.setTimeout(60_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/shop");
-  const images = await page.locator(".catalog-item").evaluateAll((items) => items.map((item) => {
-    const image = item.querySelector("img");
-    return {
-      src: image?.getAttribute("src") ?? "",
-      alt: image?.getAttribute("alt") ?? "",
-      title: item.querySelector("h2")?.textContent?.trim() ?? "",
-    };
-  }));
+  const images = await page.locator(".catalog-item").evaluateAll(async (items) => {
+    const imageNodes = items.map((item) => item.querySelector("img")).filter((image): image is HTMLImageElement => image instanceof HTMLImageElement);
+    return await Promise.all(imageNodes.map(async (image) => {
+      image.loading = "eager";
+      try {
+        await image.decode();
+      } catch {
+        // A decode rejection is recorded as a failed image below.
+      }
+      return {
+        src: image.currentSrc || image.src,
+        alt: image.alt,
+        title: image.closest(".catalog-item")?.querySelector("h2")?.textContent?.trim() ?? "",
+        loaded: image.complete && image.naturalWidth > 0 && image.naturalHeight > 0,
+        width: image.naturalWidth,
+      };
+    }));
+  });
   expect(images).toHaveLength(50);
   expect(images.every((image) => image.alt.length >= 25 && image.title.length > 0)).toBe(true);
   expect(images.some((image) => /w=375(?:&|$)|w=%7bwidth%7d/i.test(image.src))).toBe(false);
   expect(images.every((image) => image.src.startsWith("https://"))).toBe(true);
+  const failedImages = images.filter((image) => !image.loaded).map(({ title, src }) => ({ title, src }));
+  expect(failedImages, JSON.stringify(failedImages, null, 2)).toEqual([]);
+  await page.screenshot({ path: testInfo.outputPath("catalog-all-images-desktop.png"), fullPage: true });
 });
 
 test("checkout does not pretend to work when test credentials are missing", async ({ page }) => {
