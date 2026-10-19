@@ -29,7 +29,7 @@ test("catalog filters men, women, and garment categories", async ({ page }) => {
   await page.goto("/shop");
   await expect(page.getByRole("heading", { name: "Study the garment." })).toBeVisible();
   await expect(page.getByText(/portfolio concept, not an inventory/i)).toBeVisible();
-  await expect(page.locator(".catalog-item")).toHaveCount(28);
+  await expect(page.locator(".catalog-item")).toHaveCount(50);
   await page.getByRole("button", { name: "Women", exact: true }).click();
   await expect(page.locator(".catalog-item")).toHaveCount(13);
   await page.getByRole("button", { name: "Men", exact: true }).click();
@@ -58,7 +58,7 @@ test("catalog photos use source descriptions and avoid known low-resolution plac
       title: item.querySelector("h2")?.textContent?.trim() ?? "",
     };
   }));
-  expect(images).toHaveLength(28);
+  expect(images).toHaveLength(50);
   expect(images.every((image) => image.alt.length >= 25 && image.title.length > 0)).toBe(true);
   expect(images.some((image) => /w=375(?:&|$)|w=%7bwidth%7d/i.test(image.src))).toBe(false);
   expect(images.every((image) => image.src.startsWith("https://"))).toBe(true);
