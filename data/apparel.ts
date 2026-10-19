@@ -1,5 +1,8 @@
-export const apparelReferences = [
-  { slug: "oversized-tee", number: "01", category: "Everyday base", name: "The oversized tee", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=85", alt: "Cotton T-shirt photographed as a clothing reference", description: "A considered everyday base layer. Final fabric weight, fit, construction, measurements, and price will be published after samples are approved." },
-  { slug: "utility-layer", number: "02", category: "Outer layer", name: "The utility layer", image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=85", alt: "Structured jacket photographed as a clothing reference", description: "An outer layer direction focused on practical construction and clean proportions. This image is a reference, not the final garment." },
-  { slug: "wide-leg-trouser", number: "03", category: "Daily uniform", name: "The wide-leg trouser", image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1000&q=85", alt: "Denim trousers photographed as a clothing reference", description: "A relaxed trouser direction intended for everyday wear. The final silhouette, fabric, measurements, and price are not yet confirmed." }
-] as const;
+import { catalogProducts } from "@/data/catalog";
+
+// Compatibility adapter for existing pages/components while the catalog migration is in progress.
+export const apparelReferences = catalogProducts.map((item, index) => ({
+  ...item,
+  number: String(index + 1).padStart(2, "0"),
+  description: `${item.designNote} Composition note: ${item.composition}`,
+}));
