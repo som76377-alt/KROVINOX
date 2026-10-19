@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { catalogProducts, productBySlug, featuredProducts, demoPriceLabel } from "@/data/catalog";
+import { catalogProducts, productBySlug, featuredProducts } from "@/data/catalog";
 
 const hero = productBySlug("mens-beige-100-linen-shirt")!;
-const study = productBySlug("mens-indigo-linen-cotton-blazer")!;
 const sampleNotes = [
   { title: "Surface and hand-feel", text: "The linked source identifies linen for this shirt. The visible irregular texture is consistent with linen, but a photograph cannot establish fibre composition by itself." },
   { title: "Proportion and line", text: "Compare where the shoulder seam sits, how much room the body has, and where the hem lands. Those are fit decisions, not evidence that one product is universally better." },
