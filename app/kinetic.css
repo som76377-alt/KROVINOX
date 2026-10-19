@@ -191,3 +191,8 @@ h1,h2,h3,.wordmark{font-family:var(--font-display)}
   .footer-top{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .footer-top>*{min-width:0}
 }
+
+@media(max-width:640px){
+  /* Avoid transformed image pixels extending the document's scrollable width on small screens. */
+  .hero-image{transform:none!important;animation:none!important}
+}
