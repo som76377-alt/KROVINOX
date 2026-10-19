@@ -28,8 +28,17 @@ test("empty preview bag points back to apparel", async ({ page }) => {
 test("bag reflows at narrow mobile and wide desktop widths", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 320, height: 780 });
   await page.goto("/bag");
-  let overflow = await page.evaluate(() => ({ hasOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth, viewport: document.documentElement.clientWidth, document: document.documentElement.scrollWidth, offenders: Array.from(document.querySelectorAll("body *")).map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left), width: Math.round(el.getBoundingClientRect().width) })).filter((el) => el.right > window.innerWidth + 1 || el.left < -1).slice(0, 50) }));
-  expect(overflow.hasOverflow, JSON.stringify(overflow)).toBe(false);
+  let overflow = await page.evaluate(() => {
+    window.scrollTo({ left: 1000, top: 0 });
+    const canScrollHorizontally = window.scrollX > 0;
+    window.scrollTo({ left: 0, top: 0 });
+    const overflowingContent = Array.from(document.querySelectorAll("main *"))
+      .map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left) }))
+      .filter((el) => el.right > window.innerWidth + 1 || el.left < -1);
+    return { canScrollHorizontally, overflowingContent };
+  });
+  expect(overflow.canScrollHorizontally, JSON.stringify(overflow)).toBe(false);
+  expect(overflow.overflowingContent, JSON.stringify(overflow)).toEqual([]);
   await page.screenshot({ path: testInfo.outputPath("bag-mobile-320.png"), fullPage: true });
 
   await page.setViewportSize({ width: 1440, height: 900 });
