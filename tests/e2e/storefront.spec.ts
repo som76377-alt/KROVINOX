@@ -4,7 +4,7 @@ test("homepage explains the portfolio and links to the source-attributed garment
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   await expect(page.getByRole("heading", { name: /look closer.*design with evidence/i })).toBeVisible();
-  await expect(page.getByText(/source-attributed garment references/i)).toBeVisible();
+  await expect(page.getByText(/fashion portfolio built around real garments/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /explore the reference catalog/i })).toHaveAttribute("href", "/shop");
   await expect(page.getByRole("heading", { name: /one garment.*a closer read/i })).toBeVisible();
   await expect(page.getByText(/not a true 3D scan/i)).toBeVisible();
