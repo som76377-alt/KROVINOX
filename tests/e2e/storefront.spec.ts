@@ -83,9 +83,13 @@ test("kinetic visual system stays decorative, unique, and responsive", async ({ 
   await page.setViewportSize({ width: 320, height: 780 });
   await page.goto("/");
   const overflowReport = await page.evaluate(() => {
-    window.scrollTo({ left: 1000, top: 0 });
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(1000, 0);
     const canScrollHorizontally = window.scrollX > 0;
-    window.scrollTo({ left: 0, top: 0 });
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = previousScrollBehavior;
     const overflowingContent = Array.from(document.querySelectorAll("main *"))
       .filter((el) => !el.closest(".editorial-caption"))
       .map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left) }))
