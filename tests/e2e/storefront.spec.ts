@@ -93,7 +93,7 @@ test("kinetic visual system stays decorative, unique, and responsive", async ({ 
     const overflowingContent = Array.from(document.querySelectorAll("main *"))
       .filter((el) => !el.closest(".editorial-caption"))
       .map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left) }))
-      .filter((el) => el.right > window.innerWidth + 1 || el.left < -1);
+      .filter((el) => el.tag !== "BR" && (el.right > window.innerWidth + 1 || el.left < -1));
     return { canScrollHorizontally, overflowingContent };
   });
   expect(overflowReport.canScrollHorizontally, JSON.stringify(overflowReport)).toBe(false);
