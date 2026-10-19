@@ -1,82 +1,101 @@
 import Image from "next/image";
 import Link from "next/link";
-import { apparelReferences } from "@/data/apparel";
+import { catalogProducts, productBySlug, featuredProducts, demoPriceLabel } from "@/data/catalog";
+
+const hero = productBySlug("mens-beige-100-linen-shirt")!;
+const study = productBySlug("mens-indigo-linen-cotton-blazer")!;
+const sampleNotes = [
+  { title: "Surface and hand-feel", text: "The linked source identifies linen for this shirt. The visible irregular texture is consistent with linen, but a photograph cannot establish fibre composition by itself." },
+  { title: "Proportion and line", text: "Compare where the shoulder seam sits, how much room the body has, and where the hem lands. Those are fit decisions, not evidence that one product is universally better." },
+  { title: "Construction details", text: "Buttons, pocket placement, cuffs, collars and visible seams give a garment its use and character. We describe only details that can be seen or verified in the linked reference." },
+];
 
 export default function HomePage() {
-  return <main id="main-content">
-    <section className="hero" aria-labelledby="hero-title">
+  const selected = featuredProducts.slice(0, 4);
+  return <main id="main-content" className="home-editorial">
+    <section className="hero hero--catalog" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="eyebrow">Independent clothing / First release in development</p>
-        <h1 id="hero-title">Utility,<br />cut with intent.</h1>
-        <p className="hero-description">KROVINOX is an independent clothing label developing oversized essentials, hard-wearing layers, and considered details for people who want function without looking uniform.</p>
+        <p className="eyebrow">KROVINOX / Apparel research and design direction</p>
+        <h1 id="hero-title">Look closer.<br />Design with evidence.</h1>
+        <p className="hero-description">A fashion portfolio built around real garments, specific reference photography and the construction choices behind the silhouette. The first step is learning what works, then developing original KROVINOX pieces from a clear brief.</p>
         <div className="hero-actions">
-          <Link className="button button-primary" href="#apparel">Explore the apparel direction <span className="arrow-mark" aria-hidden="true" /></Link>
-          <Link className="text-link" href="/about">How we approach clothing</Link>
+          <Link className="button button-primary" href="/shop">Explore the reference catalog <span className="arrow-mark" aria-hidden="true" /></Link>
+          <Link className="text-link" href="#construction-study">See the scroll study</Link>
         </div>
-        <p className="hero-note">Photography on this preview is reference material, not KROVINOX product photography.</p>
+        <p className="hero-note">Reference garments and retailer photography are credited to their source. KROVINOX has not claimed these as manufactured products.</p>
       </div>
-      <div className="hero-image-wrap">
-        <Image src="https://images.unsplash.com/photo-1773848091915-e703753f43ba?auto=format&fit=crop&w=1600&q=90" alt="A young man in a hoodie and trousers photographed outdoors, used as an editorial reference" fill priority unoptimized sizes="(max-width: 640px) 100vw, 52vw" className="hero-image" />
-        <div className="hero-orbit-mark" aria-hidden="true">
-          <svg viewBox="0 0 220 220" role="presentation">
-            <defs><path id="hero-orbit-copy" d="M110,110 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0" /></defs>
-            <circle className="hero-orbit-outer" cx="110" cy="110" r="104" fill="none" />
-            <circle className="hero-orbit-dash" cx="110" cy="110" r="91" fill="none" />
-            <circle cx="110" cy="110" r="70" fill="none" />
-            <path className="hero-orbit-spoke" d="M110 8v18M110 194v18M8 110h18M194 110h18" fill="none" />
-            <text className="hero-orbit-text"><textPath href="#hero-orbit-copy" startOffset="0%">FORM IN MOTION • KROVINOX FIELD NOTES • FORM IN MOTION •</textPath></text>
-            <circle className="hero-orbit-dot" cx="110" cy="19" r="4" />
-            <circle className="hero-orbit-dot hero-orbit-dot--ember" cx="201" cy="110" r="3" />
-          </svg>
-          <span className="hero-orbit-center">KX<span>/01</span></span>
-        </div>
-        <div className="image-index"><span>Campaign reference</span><span>Not for sale</span></div>
+      <div className="hero-image-wrap hero-image-wrap--catalog">
+        <Image src={hero.image} alt={hero.alt} fill priority unoptimized sizes="(max-width: 640px) 100vw, 54vw" className="hero-image" />
+        <div className="hero-image-spec" aria-hidden="true"><span>Ref / M-SH-01</span><span>100% linen stated by source</span></div>
+        <div className="image-index"><span>Source: {hero.retailer}</span><a href={hero.sourceUrl} target="_blank" rel="noreferrer">View original listing ↗</a></div>
       </div>
     </section>
 
-    <div className="editorial-caption" aria-label="KROVINOX design principles">
+    <div className="editorial-caption" aria-label="Catalog notes">
       <div className="editorial-caption-track">
-        <div className="editorial-caption-group">
-          <span>01 / Apparel only</span><span>02 / Form in motion</span><span>03 / Concepts in development</span><span>04 / Product truth first</span>
-        </div>
-        <div className="editorial-caption-group editorial-caption-group--duplicate" aria-hidden="true">
-          <span>01 / Apparel only</span><span>02 / Form in motion</span><span>03 / Concepts in development</span><span>04 / Product truth first</span>
-        </div>
+        <div className="editorial-caption-group"><span>01 / Exact image-to-item mapping</span><span>02 / Source-linked material notes</span><span>03 / Proposed design improvements</span><span>04 / Demo checkout only</span></div>
+        <div className="editorial-caption-group editorial-caption-group--duplicate" aria-hidden="true"><span>01 / Exact image-to-item mapping</span><span>02 / Source-linked material notes</span><span>03 / Proposed design improvements</span><span>04 / Demo checkout only</span></div>
       </div>
     </div>
 
-    <section className="collection section-wrap reveal-section" id="apparel" aria-labelledby="collection-title">
-      <div className="section-heading">
-        <div><p className="eyebrow">Apparel / Direction 01</p><h2 id="collection-title">A wardrobe with purpose.</h2></div>
-        <p className="section-intro">Three starting points for the first clothing release. Final garments, materials, fit, and prices will be shown only after samples are confirmed.</p>
+    <section id="construction-study" className="construction-study" aria-labelledby="study-title">
+      <div className="study-intro">
+        <p className="eyebrow">Scroll-controlled image study / 01</p>
+        <h2 id="study-title">One garment.<br />A closer read.</h2>
+        <p>The photograph below stays tied to one reference item while the crop layers separate and return as you scroll. This is a reversible 2D editorial effect, not a true 3D scan or a claim about hidden internal construction.</p>
+        <Link className="text-link" href={`/shop/${hero.slug}`}>Open the exact referenced garment <span className="arrow-mark" aria-hidden="true" /></Link>
       </div>
-      <div className="reference-grid">{apparelReferences.map((item) => <article className="reference-item" key={item.number}>
-        <Link href={`/shop/${item.slug}`} className="reference-image-link" aria-label={`Read about the ${item.name} direction`}>
-          <div className="reference-image-frame"><Image src={item.image} alt={item.alt} fill unoptimized sizes="(max-width: 640px) 90vw, (max-width: 980px) 45vw, 30vw" className="reference-image" /><span className="image-number">{item.number}</span></div>
-        </Link>
-        <div className="reference-meta"><span>{item.category}</span><span>Reference only</span></div>
-        <h3>{item.name}</h3>
-      </article>)}</div>
-      <div className="collection-footer"><span>These are design directions, not finished products.</span><Link className="text-link" href="/shop">View all directions <span className="arrow-mark" aria-hidden="true" /></Link></div>
+      <div className="study-scroll-track">
+        <div className="study-sticky">
+          <div className="study-photo-stack">
+            <Image src={hero.image} alt={hero.alt} fill unoptimized sizes="(max-width: 760px) 90vw, 52vw" className="study-photo study-photo--base" />
+            <Image src={hero.image} alt="" aria-hidden="true" fill unoptimized sizes="(max-width: 760px) 90vw, 52vw" className="study-photo study-photo--collar" />
+            <Image src={hero.image} alt="" aria-hidden="true" fill unoptimized sizes="(max-width: 760px) 90vw, 52vw" className="study-photo study-photo--body" />
+            <Image src={hero.image} alt="" aria-hidden="true" fill unoptimized sizes="(max-width: 760px) 90vw, 52vw" className="study-photo study-photo--edge" />
+            <span className="study-marker study-marker--one">A / Collar and neck line</span>
+            <span className="study-marker study-marker--two">B / Body drape</span>
+            <span className="study-marker study-marker--three">C / Sleeve and seam line</span>
+            <span className="study-stamp">Same source frame / no invented close-ups</span>
+          </div>
+          <div className="study-caption"><span>Source image remains constant</span><span>Scroll down to separate / scroll up to return</span></div>
+        </div>
+      </div>
     </section>
 
-    <section className="brand-principles reveal-section" aria-labelledby="principles-title">
-      <div><p className="eyebrow">The point of view</p><h2 id="principles-title">Less noise.<br />More intention.</h2></div>
-      <ol className="principle-list">
-        <li><span className="principle-number">01</span><div><h3>Proportion before graphics</h3><p>Silhouette and the way a piece sits come before surface decoration.</p></div></li>
-        <li><span className="principle-number">02</span><div><h3>Details with a reason</h3><p>Construction choices should make sense for the garment, not exist to look technical.</p></div></li>
-        <li><span className="principle-number">03</span><div><h3>Facts before promises</h3><p>Materials, measurements, price, and availability belong here only when they are verified.</p></div></li>
-      </ol>
+    <section className="design-reasons section-wrap" aria-labelledby="reasons-title">
+      <div className="section-heading"><div><p className="eyebrow">How product research becomes design</p><h2 id="reasons-title">Details should earn their place.</h2></div><p className="section-intro">The portfolio explains the design problem each feature could solve. It does not call an unmade garment better or claim performance that has not been tested.</p></div>
+      <div className="reason-grid">
+        {sampleNotes.map((note, index) => <article className="reason-item" key={note.title}><span className="reason-number">0{index + 1}</span><h3>{note.title}</h3><p>{note.text}</p></article>)}
+      </div>
     </section>
 
-    <section className="design-note reveal-section" aria-labelledby="design-note-title">
-      <div className="design-note-image"><Image src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1400&q=85" alt="Clothing displayed in a fashion retail setting as visual reference" fill unoptimized sizes="(max-width: 760px) 100vw, 48vw" className="design-note-photo" /></div>
-      <div className="design-note-copy"><p className="eyebrow">Design approach</p><h2 id="design-note-title">Start with the garment. Keep the noise out.</h2><p>We are developing the first pieces around silhouette, wearability, fabric hand-feel, and useful construction. Branding should support the garment, not compete with it.</p><Link className="button button-outline" href="/about">Read the approach <span className="arrow-mark" aria-hidden="true" /></Link></div>
+    <section className="featured-edit section-wrap" aria-labelledby="featured-title">
+      <div className="section-heading"><div><p className="eyebrow">Selected references</p><h2 id="featured-title">Different problems.<br />Different silhouettes.</h2></div><p className="section-intro">Selected model-worn items across casual, tailored and outerwear categories. Each image stays with its own catalog entry and source link.</p></div>
+      <div className="featured-grid">
+        {selected.map((product, index) => <article className={index === 1 ? "featured-item featured-item--offset" : "featured-item"} key={product.sku}>
+          <Link href={`/shop/${product.slug}`} className="featured-image-link"><div className="featured-image-frame"><Image src={product.image} alt={product.alt} fill unoptimized sizes="(max-width: 640px) 88vw, 24vw" className="featured-image" /><span>{product.sku}</span></div></Link>
+          <div className="featured-meta"><span>{product.audience} / {product.category}</span><span>{product.color}</span></div>
+          <h3><Link href={`/shop/${product.slug}`}>{product.name}</Link></h3>
+          <p>{product.designNote}</p>
+          <Link className="text-link" href={`/shop/${product.slug}`}>Study this garment <span className="arrow-mark" aria-hidden="true" /></Link>
+        </article>)}
+      </div>
+      <div className="collection-footer"><span>{catalogProducts.length} source-attributed reference entries in this build</span><Link className="text-link" href="/shop">Browse all references <span className="arrow-mark" aria-hidden="true" /></Link></div>
     </section>
 
-    <section className="release-band reveal-section" aria-labelledby="release-title">
-      <div><p className="eyebrow">Before the first release</p><h2 id="release-title">Real samples first.<br />Then the details.</h2></div>
-      <p>Measurements, material information, pricing, and purchase options will be published when verified. No placeholder product is offered for sale.</p>
+    <section className="materials-editorial" aria-labelledby="materials-title">
+      <div className="materials-copy"><p className="eyebrow">Materials / source notes</p><h2 id="materials-title">Know what the label says.<br />Know what we can verify.</h2><p>Linen, cotton, lyocell and wool are not interchangeable marketing words. Their feel, drape, care needs and performance differ, but a photo alone cannot tell us exact fibre percentages. The linked product detail is the authority for each source garment; unverified details stay marked as unverified.</p><Link className="button button-outline" href="/shop">See materials and construction notes <span className="arrow-mark" aria-hidden="true" /></Link></div>
+      <div className="materials-list">
+        <article><span>01</span><div><h3>Linen shirt reference</h3><p>Source title identifies 100% linen. Natural surface variation is visible; composition still comes from the source listing, not visual guesswork.</p></div></article>
+        <article><span>02</span><div><h3>Cotton and lyocell jacket reference</h3><p>Source listing describes a cotton/lyocell blend. Exact percentages need to be checked on the live product page.</p></div></article>
+        <article><span>03</span><div><h3>Cotton poplin shirt reference</h3><p>Source describes a spun-cotton main fabric and a concealed placket. Any KROVINOX version would need its own final spec and sample checks.</p></div></article>
+      </div>
+    </section>
+
+    <section className="release-band release-band--catalog" aria-labelledby="release-title">
+      <div><p className="eyebrow">Next in the process</p><h2 id="release-title">Research the reference.<br />Then make it ours.</h2></div>
+      <p>Original KROVINOX products need approved samples, verified fabric specifications, fit measurements, source photography and real fulfilment details before they can be sold. The current cart and payment flow are portfolio demo only.</p>
+      <Link className="button button-primary" href="/shop">Enter the catalog <span className="arrow-mark" aria-hidden="true" /></Link>
     </section>
   </main>;
 }
