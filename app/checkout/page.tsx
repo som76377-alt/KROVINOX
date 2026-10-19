@@ -19,7 +19,7 @@ export default function CheckoutPage() {
     <header className="checkout-heading">
       <p className="eyebrow">KROVINOX / Test environment</p>
       <h1>Sandbox checkout.</h1>
-      <p className="text-lead">A real hosted checkout interface connected to a payment provider's test environment, when test credentials are configured. It cannot make a live charge and does not place an order with any retailer.</p>
+      <p className="text-lead">A real hosted checkout interface connected to a payment provider&apos;s test environment, when test credentials are configured. It cannot make a live charge and does not place an order with any retailer.</p>
     </header>
     <div className="checkout-safety-note"><strong>Portfolio demonstration only.</strong><p>The basket contains sourced fashion references and illustrative prices. No garment is being sold by KROVINOX, no shipping is arranged, and no real order is created. Never enter a real payment card in a test demo.</p></div>
     <CheckoutExperience keyId={ready ? process.env.RAZORPAY_KEY_ID! : null} />
