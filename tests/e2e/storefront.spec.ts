@@ -80,12 +80,13 @@ test("no em dash, fake social proof, or CSS gradients", async ({ page }) => {
 test("kinetic system uses the new typography and remains responsive", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
-  await expect(page.locator(".hero-orbit-mark")).toBeVisible();
+  await expect(page.locator(".site-atmosphere")).toBeAttached();
+  await expect(page.locator(".atmosphere-orbit")).toHaveCount(2);
   await expect(page.locator(".editorial-caption-track")).toBeVisible();
   const visuals = await page.evaluate(() => {
     const body = getComputedStyle(document.body);
     const atmosphere = document.querySelector(".site-atmosphere");
-    const heading = document.querySelector(".hero h1");
+    const heading = document.querySelector("#hero-title");
     return {
       background: getComputedStyle(document.documentElement).getPropertyValue("--paper").trim().toLowerCase(),
       bodyFont: body.fontFamily.toLowerCase(),
@@ -108,17 +109,15 @@ test("kinetic system uses the new typography and remains responsive", async ({ p
   await page.screenshot({ path: testInfo.outputPath("catalog-home-mobile-320.png"), fullPage: true });
 });
 
-test("reduced motion removes the continuous decorative motion", async ({ page }) => {
+test("reduced motion removes continuous decorative motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   const result = await page.evaluate(() => ({
-    ring: getComputedStyle(document.querySelector(".atmosphere-orbit")!).animationName,
-    stamp: getComputedStyle(document.querySelector(".hero-orbit-mark svg")!).animationName,
+    orbit: getComputedStyle(document.querySelector(".atmosphere-orbit")!).animationName,
     ticker: getComputedStyle(document.querySelector(".editorial-caption-track")!).animationName,
     progress: getComputedStyle(document.querySelector(".site-scroll-progress")!).display,
   }));
-  expect(result.ring).toBe("none");
-  expect(result.stamp).toBe("none");
+  expect(result.orbit).toBe("none");
   expect(result.ticker).toBe("none");
   expect(result.progress).toBe("none");
 });
