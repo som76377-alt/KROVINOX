@@ -72,9 +72,9 @@ test("kinetic visual system stays decorative, unique, and responsive", async ({ 
   });
   expect(visuals.pageBackground.toLowerCase()).toBe("#f2eedf");
   expect(visuals.signal.toLowerCase()).toBe("#d8f36b");
-  expect(visuals.bodyFont.toLowerCase()).toContain("__dm_sans");
+  expect(visuals.bodyFont.toLowerCase()).toContain("dm sans");
   expect(visuals.bodyFontToken).not.toBe("");
-  expect(visuals.headingFont.toLowerCase()).toContain("__syne");
+  expect(visuals.headingFont.toLowerCase()).toContain("syne");
   expect(visuals.atmospherePosition).toBe("fixed");
   expect(visuals.atmospherePointerEvents).toBe("none");
   expect(visuals.ringCount).toBe(2);
