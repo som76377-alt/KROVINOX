@@ -1,67 +1,44 @@
-# KROVINOX visual system
+# KROVINOX visual and interaction system
 
-Status: approved for the storefront preview. This is a design-system record, not a claim that the clothing designs are final.
+Status: portfolio build in progress. The site is a fashion research and design-development portfolio, not an operating retailer.
 
 ## Art direction
 
-KROVINOX uses a kinetic editorial direction: mineral paper, deep pine, signal chartreuse, and a small amount of oxidation red. The identity feels like a fashion field notebook crossed with industrial instrument graphics, not a generic black-and-white luxury template.
+KROVINOX uses mineral paper, deep pine, signal chartreuse and a restrained oxidation-red accent. The type system pairs Bodoni Moda's editorial contrast with Manrope's readable geometry and IBM Plex Mono for technical metadata. Rectangular controls, purposeful negative space and real product-specific photography are preferred over a generic luxury template.
 
-Reference existing creative work for principles, not for copying brand assets:
-- [ACRNM digital lookbook concept, Behance](https://www.behance.net/gallery/188505207/ACRNM-E-commerce-website): editorial product structure and technical-utility art direction.
-- [Holt Renfrew Summer in Motion, Behance](https://www.behance.net/gallery/166236927/Holt-Renfrew-Summer-2022-Campaign): vivid campaign colour and dimensional typography.
-- [Auralee SS26 campaign concept, Dribbble](https://dribbble.com/shots/26263541-Auralee-Bold-Fashion-Campaign-Ads-Marketing-Website-Design): oversized kinetic type, image contrast, and a deliberate accent colour. This is a third-party design concept, not a statement about Auralee's official website.
-- [Iriedaily Webshop Redesign, Menschlabor](https://menschlabor.info/project/iriedaily-webshop-redesign/): collection, editorial storytelling, and shop work together without competing for attention.
-
-KROVINOX borrows abstract principles only. It does not copy other brands' logos, graphics, layouts pixel-for-pixel, photography, or product artwork.
-
-## Tokens
-
-| Role | Token | Value | Use |
-| --- | --- | --- | --- |
-| Primary surface | `--paper` | `#F2EEDF` | Warm mineral-paper background |
-| Secondary surface | `--paper-deep` | `#DCE1D0` | Muted moss / editorial panels |
-| Primary text | `--ink` | `#14251F` | Deep pine headlines, body and controls |
-| Secondary text | `--muted` | `#526159` | Supporting copy |
-| Borders | `--line` | `#BAC5B8` | Dividers and control boundaries |
-| Signal | `--signal` | `#D8F36B` | Acid-chartreuse motion marks and primary actions |
-| Oxidation | `--ember` | `#B9472F` | Sparse secondary details only |
-
-- Display family: Syne, using high-weight compressed editorial headlines and tight tracking.
-- Body family: DM Sans, with normal tracking and readable measure.
-- Utility/metadata family: IBM Plex Mono.
-- Rectangular buttons, purposeful negative space, no decorative gradients, no fake social proof, no random micro-labels, no pill-shaped controls, and no cursor effects.
-- Page gutter: responsive `clamp(1.1rem, 4.3vw, 4.8rem)`; maximum content width: 1440px.
-
-## Motion language
-
-- A fixed, transparent orbital line system runs behind the browsing experience. Its circles rotate slowly and remain outside the main reading focus as much as possible.
-- The hero carries a custom SVG orbit seal; it rotates slowly as a graphic detail, with a fixed KX/01 core.
-- A continuous horizontal editorial ticker introduces the collection's real scope and values.
-- Hero entrance timing is brief. Scroll effects reveal content and crop images as they enter view; the hero image moves slightly with scroll, and a top progress line follows page progress.
-- CSS Scroll-Driven Animations are a progressive enhancement: pages remain fully visible and usable when `animation-timeline` is unsupported. Scroll-driven work is in CSS rather than a JavaScript scroll handler to avoid main-thread tracking.
-- The fixed line artwork uses `pointer-events: none` and is decorative, not interactive.
-- Every moving element must stop with `prefers-reduced-motion: reduce`; reduced-motion mode also disables the progress animation and keeps content in its resting state.
-
-Implementation references:
+Abstract research references:
+- [ACRNM digital lookbook concept, Behance](https://www.behance.net/gallery/188505207/ACRNM-E-commerce-website)
+- [Holt Renfrew Summer in Motion, Behance](https://www.behance.net/gallery/166236927/Holt-Renfrew-Summer-2022-Campaign)
+- [Iriedaily Webshop Redesign, Menschlabor](https://menschlabor.info/project/iriedaily-webshop-redesign/)
 - [MDN: CSS scroll-driven animations](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Scroll-driven_animations)
-- [MDN: Scroll-driven animation timelines](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Scroll-driven_animations/Timelines)
-- [W3C WAI: `prefers-reduced-motion`](https://www.w3.org/WAI/WCAG22/Techniques/css/C39.html)
-- [Chrome: Motion design and performance guidance](https://github.com/GoogleChrome/modern-web-guidance-src/blob/main/guides/ui-behaviors/motion/guide.md)
+- [W3C WAI: reduced motion](https://www.w3.org/WAI/WCAG22/Techniques/css/C39.html)
 
-## Product truth
+## Product truth and image continuity
 
-- Apparel only in this release.
-- Editorial photography is explicitly labelled as reference material, not KROVINOX product photography.
-- No invented prices, stock, reviews, delivery promises, certifications, or scarcity.
-- The preview bag stores concept selections only. It cannot initiate checkout, orders, or payments.
-- Keep the site no-index until a reviewed launch decision is made.
+- Each catalog entry owns one image URL, an image-specific alt description, a source URL and a note about source confidence.
+- The catalog image, detail-page image and home feature image use the same product record rather than looking up images independently.
+- Category pages are explicitly labelled as broad references when the exact product cannot be verified. Composition claims are marked unconfirmed unless the linked source supports them.
+- The prices in this portfolio are illustrative concept estimates, not retailer prices, not prices charged by KROVINOX and not offers to sell.
+- Reference photography is attributed to its origin. Before a commercial launch, usage rights must be reviewed and imagery replaced or cleared as appropriate.
+- No fake social proof, stock scarcity, delivery promises or unverified performance claims.
+- The demo bag is not a retailer cart. Any payment is a Razorpay test-mode demonstration and cannot create a real sale or fulfilment.
+- Payment endpoints reject requests without KROVINOX_PAYMENT_MODE=test, a Razorpay test key ID beginning rzp_test_, and a server-side test secret. Live keys are not supported in this portfolio flow.
+- Keep site metadata noindex until product, legal, source-asset and business information has been reviewed for launch.
 
-## Review checklist
+## Motion system
 
-- [ ] Inspect 1440px, 390px, and 320px layouts after meaningful visual changes.
-- [ ] Check contrast, image crops, keyboard focus, and mobile navigation.
-- [ ] Verify fixed layers never obstruct pointer input.
-- [ ] Respect `prefers-reduced-motion` across every motion source.
-- [ ] Ensure unsupported scroll timelines leave static content visible.
-- [ ] Inspect fresh browser screenshots; source code or a successful build alone is not visual approval.
-- [ ] Replace editorial references only with approved original product photography and verified product information.
+- The home garment study uses one exact source photograph for every crop layer. It is a 2D editorial disassembly effect, not a 3D scan or representation of hidden garment construction.
+- Where supported, CSS scroll-linked timelines scrub the crop movement in both directions. Fallbacks retain readable static content.
+- All decorative and scroll-linked motion must respect prefers-reduced-motion.
+- The decorative atmosphere has pointer-events disabled and cannot block controls.
+- Avoid one-shot animation where the intended interaction is scroll position.
+
+## Validation checklist
+
+- [ ] Run lint, TypeScript, production build and Playwright.
+- [ ] Inspect 1440px, 390px and 320px layouts with screenshot evidence.
+- [ ] Verify all 50 target combinations: 5 garment categories x 5 items x 2 audiences.
+- [ ] Click through product cards and confirm each detail view keeps the exact item image and source attached.
+- [ ] Test missing credential behaviour; checkout must stay disabled rather than simulate success.
+- [ ] Confirm test order creation and payment signature validation with Razorpay test credentials only.
+- [ ] Confirm no live key can enable the demo checkout.
