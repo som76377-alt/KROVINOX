@@ -31,9 +31,9 @@ test("catalog filters men, women, and garment categories", async ({ page }) => {
   await expect(page.getByText(/portfolio concept, not an inventory/i)).toBeVisible();
   await expect(page.locator(".catalog-item")).toHaveCount(50);
   await page.getByRole("button", { name: "Women", exact: true }).click();
-  await expect(page.locator(".catalog-item")).toHaveCount(13);
+  await expect(page.locator(".catalog-item")).toHaveCount(25);
   await page.getByRole("button", { name: "Men", exact: true }).click();
-  await expect(page.locator(".catalog-item")).toHaveCount(15);
+  await expect(page.locator(".catalog-item")).toHaveCount(25);
   await page.getByRole("button", { name: "T-shirts", exact: true }).click();
   await expect(page.locator(".catalog-item")).toHaveCount(5);
   await expect(page.getByText("REF-M-TS-01", { exact: true })).toHaveCount(0);
