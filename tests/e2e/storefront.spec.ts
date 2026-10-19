@@ -82,7 +82,13 @@ test("kinetic visual system stays decorative, unique, and responsive", async ({ 
 
   await page.setViewportSize({ width: 320, height: 780 });
   await page.goto("/");
-  const overflowReport = await page.evaluate(() => ({\n    hasOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,\n    viewport: document.documentElement.clientWidth,\n    document: document.documentElement.scrollWidth,\n    offenders: Array.from(document.querySelectorAll("body *")).map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left), width: Math.round(el.getBoundingClientRect().width) })).filter((el) => el.right > window.innerWidth + 1 || el.left < -1).slice(0, 12),\n  }));\n  expect(overflowReport.hasOverflow, JSON.stringify(overflowReport)).toBe(false);
+  const overflowReport = await page.evaluate(() => ({
+    hasOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    viewport: document.documentElement.clientWidth,
+    document: document.documentElement.scrollWidth,
+    offenders: Array.from(document.querySelectorAll("body *")).map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left), width: Math.round(el.getBoundingClientRect().width) })).filter((el) => el.right > window.innerWidth + 1 || el.left < -1).slice(0, 12),
+  }));
+  expect(overflowReport.hasOverflow, JSON.stringify(overflowReport)).toBe(false);
   await page.screenshot({ path: testInfo.outputPath("kinetic-home-mobile-320.png"), fullPage: true });
 });
 
