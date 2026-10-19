@@ -26,5 +26,25 @@ export async function POST(request: Request) {
   if (received.length !== expected.length || !timingSafeEqual(received, expected)) {
     return NextResponse.json({ error: "Test payment signature verification failed." }, { status: 400 });
   }
-  return NextResponse.json({ verified: true, environment: "test", fulfilment: "none", message: "Test signature verified; no live charge or order fulfilment." });
+
+  // The signature must be valid and the provider must confirm the test payment belongs to this order.
+  // We deliberately do not create an order with the source retailer or trigger any fulfilment.
+  try {
+    const providerResponse = await fetch(`https://api.razorpay.com/v1/payments/${encodeURIComponent(item.razorpay_payment_id)}`, {
+      method: "GET",
+      headers: { "Authorization": `Basic ${Buffer.from(`${keyId}:${secret}`).toString("base64")}` },
+      cache: "no-store",
+    });
+    if (!providerResponse.ok) {
+      return NextResponse.json({ error: "The payment provider could not confirm this sandbox payment." }, { status: 502 });
+    }
+    const payment = await providerResponse.json() as { id?: string; order_id?: string; status?: string; currency?: string };
+    if (payment.id !== item.razorpay_payment_id || payment.order_id !== item.razorpay_order_id ||
+        !["authorized", "captured"].includes(payment.status ?? "") || payment.currency !== "INR") {
+      return NextResponse.json({ error: "Provider payment details do not match the sandbox order." }, { status: 400 });
+    }
+    return NextResponse.json({ verified: true, environment: "test", fulfilment: "none", message: "Test payment confirmed; no live charge, retailer order, or goods fulfilment." });
+  } catch {
+    return NextResponse.json({ error: "The sandbox provider could not confirm the payment. No order was created." }, { status: 502 });
+  }
 }
