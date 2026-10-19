@@ -86,7 +86,7 @@ test("kinetic visual system stays decorative, unique, and responsive", async ({ 
     hasOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
     viewport: document.documentElement.clientWidth,
     document: document.documentElement.scrollWidth,
-    offenders: Array.from(document.querySelectorAll("body *")).map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left), width: Math.round(el.getBoundingClientRect().width) })).filter((el) => el.right > window.innerWidth + 1 || el.left < -1).slice(0, 12),
+    offenders: Array.from(document.querySelectorAll("body *")).map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left), width: Math.round(el.getBoundingClientRect().width) })).filter((el) => el.right > window.innerWidth + 1 || el.left < -1).slice(0, 50),
   }));
   expect(overflowReport.hasOverflow, JSON.stringify(overflowReport)).toBe(false);
   await page.screenshot({ path: testInfo.outputPath("kinetic-home-mobile-320.png"), fullPage: true });
