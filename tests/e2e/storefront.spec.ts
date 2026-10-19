@@ -47,3 +47,57 @@ test("no em dash, fake social proof, or CSS gradients", async ({ page }) => {
   );
   expect(gradients).toBe(0);
 });
+
+test("kinetic visual system stays decorative, unique, and responsive", async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await expect(page.locator(".hero-orbit-mark")).toBeVisible();
+  await expect(page.locator(".editorial-caption-track")).toBeVisible();
+
+  const visuals = await page.evaluate(() => {
+    const body = getComputedStyle(document.body);
+    const atmosphere = document.querySelector(".site-atmosphere");
+    const heading = document.querySelector(".hero h1");
+    const ringCount = document.querySelectorAll(".atmosphere-orbit").length;
+    return {
+      pageBackground: getComputedStyle(document.documentElement).getPropertyValue("--paper").trim(),
+      signal: getComputedStyle(document.documentElement).getPropertyValue("--signal").trim(),
+      bodyFont: body.fontFamily,
+      headingFont: heading ? getComputedStyle(heading).fontFamily : "",
+      atmospherePosition: atmosphere ? getComputedStyle(atmosphere).position : "",
+      atmospherePointerEvents: atmosphere ? getComputedStyle(atmosphere).pointerEvents : "",
+      ringCount,
+    };
+  });
+  expect(visuals.pageBackground).toBe("#F2EEDF");
+  expect(visuals.signal).toBe("#D8F36B");
+  expect(visuals.bodyFont.toLowerCase()).toContain("dm sans");
+  expect(visuals.headingFont.toLowerCase()).toContain("syne");
+  expect(visuals.atmospherePosition).toBe("fixed");
+  expect(visuals.atmospherePointerEvents).toBe("none");
+  expect(visuals.ringCount).toBe(2);
+  await page.screenshot({ path: testInfo.outputPath("kinetic-home-desktop.png"), fullPage: true });
+
+  await page.setViewportSize({ width: 320, height: 780 });
+  await page.goto("/");
+  const hasOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  expect(hasOverflow).toBe(false);
+  await page.screenshot({ path: testInfo.outputPath("kinetic-home-mobile-320.png"), fullPage: true });
+});
+
+test("all decorative and scroll-linked motion is disabled with reduced motion enabled", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const result = await page.evaluate(() => ({
+    ringAnimation: getComputedStyle(document.querySelector(".atmosphere-orbit")!).animationName,
+    stampAnimation: getComputedStyle(document.querySelector(".hero-orbit-mark svg")!).animationName,
+    tickerAnimation: getComputedStyle(document.querySelector(".editorial-caption-track")!).animationName,
+    progressDisplay: getComputedStyle(document.querySelector(".site-scroll-progress")!).display,
+    revealAnimation: getComputedStyle(document.querySelector(".brand-principles")!).animationName,
+  }));
+  expect(result.ringAnimation).toBe("none");
+  expect(result.stampAnimation).toBe("none");
+  expect(result.tickerAnimation).toBe("none");
+  expect(result.progressDisplay).toBe("none");
+  expect(result.revealAnimation).toBe("none");
+});
