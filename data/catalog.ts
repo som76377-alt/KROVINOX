@@ -193,7 +193,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mens-navy-mohair-trousers", sku: "REF-M-TR-02", audience: "Men", category: "Trousers", name: "Navy Kid-Mohair Trousers", color: "Navy",
-    priceInr: 14990, image: "https://www.prada.com/content/dam/pradabkg_products/P/P27/P273I/12I1F0008/P273I_12I1_F0008_S_OOO_MDF.jpg/_jcr_content/renditions/cq5dam.web.hebebed.1200.1200.jpg",
+    priceInr: 14990, image: "https://www.prada.com/content/dam/pradabkg_products/P/P27/P273I/12I1F0008/P273I_12I1_F0008_S_OOO_MDF.jpg",
     alt: "Product image of navy tailored trousers with a clean, straight line and subtle fabric texture.",
     retailer: "Prada", sourceUrl: "https://www.prada.com/us/en/p/kid-mohair-pants/P273I_12I1_F0008_S_OOO", sourceType: "product",
     composition: "The exact composition was not captured in the retrieved product data; follow the source page for full fibre details.",
