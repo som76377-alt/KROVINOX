@@ -22,7 +22,7 @@ export type CatalogProduct = {
 export const catalogProducts: CatalogProduct[] = [
   {
     slug: "mens-faded-pink-heavyweight-tee", sku: "REF-M-TS-01", audience: "Men", category: "T-shirts", name: "Faded Pink Heavyweight Tee", color: "Faded pink",
-    priceInr: 1890, image: "https://static.zara.net/assets/public/d8f0/7eb4/e0564f2fb3c6/ca1e7db7a326/00761840633-p/00761840633-p.jpg?ts=1777993183374&w=375",
+    priceInr: 1890, image: "https://static.zara.net/assets/public/d8f0/7eb4/e0564f2fb3c6/ca1e7db7a326/00761840633-p/00761840633-p.jpg?ts=1777993183374&w=900",
     alt: "Model wearing a faded pink short-sleeve T-shirt with a relaxed silhouette and dark trousers.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/basic-heavyweight-t-shirt--03-p01887410.html", sourceType: "product",
     composition: "Retailer product reference: compact cotton is specified for the heavyweight tee style. Re-check the linked page for this colour's current composition.",
@@ -31,7 +31,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mens-white-slim-stretch-tee", sku: "REF-M-TS-02", audience: "Men", category: "T-shirts", name: "White Slim Stretch Tee", color: "White",
-    priceInr: 1290, image: "https://static.zara.net/assets/public/2692/a590/ec404fda858c/1406bf4fa2b0/05584401250-p/05584401250-p.jpg?ts=1765295541239&w=375",
+    priceInr: 1290, image: "https://static.zara.net/assets/public/2692/a590/ec404fda858c/1406bf4fa2b0/05584401250-p/05584401250-p.jpg?ts=1765295541239&w=900",
     alt: "Model wearing a white slim-fit short-sleeve T-shirt with dark trousers.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/basic-slim-fit-t-shirt--01-p05584401.html", sourceType: "product",
     composition: "The linked product describes a stretch-cotton T-shirt; see its current composition and care section for exact percentages.",
@@ -76,7 +76,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "womens-brown-stripe-wide-sleeve-tee", sku: "REF-W-TS-02", audience: "Women", category: "T-shirts", name: "Brown Stripe Wide-Sleeve Tee", color: "Brown / ecru",
-    priceInr: 1790, image: "https://static.zara.net/assets/public/d643/2e57/918d49c2b95b/eb7ac91a4429/04424629178-p/04424629178-p.jpg?ts=1783419434211&w=375",
+    priceInr: 1790, image: "https://static.zara.net/assets/public/d643/2e57/918d49c2b95b/eb7ac91a4429/04424629178-p/04424629178-p.jpg?ts=1783419434211&w=900",
     alt: "Model wearing a brown-and-light striped short-sleeve T-shirt with wider sleeves.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/striped-wide-sleeve-t-shirt-p04424629.html", sourceType: "product",
     composition: "Not confirmed in the retrieved product details; consult the live product page for fibre composition.",
@@ -94,7 +94,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mens-navy-stripe-boxy-shirt", sku: "REF-M-SH-02", audience: "Men", category: "Shirts", name: "Navy Stripe Boxy Shirt", color: "Navy / white",
-    priceInr: 2790, image: "https://static.zara.net/assets/public/f07d/4a6a/8a8c427b9ad4/32a01f96fe08/01000818422-p/01000818422-p.jpg?f=auto&ts=1777454619599&w=792",
+    priceInr: 2790, image: "https://static.zara.net/assets/public/f07d/4a6a/8a8c427b9ad4/32a01f96fe08/01000818422-p/01000818422-p.jpg?f=auto&ts=1777454619599&w=900",
     alt: "Model wearing a navy and white striped boxy short-sleeve shirt with a camp collar.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/boxy-fit-striped-shirt-p01000818.html", sourceType: "product",
     composition: "Exact fibre composition should be confirmed on the linked listing.",
@@ -103,7 +103,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "womens-white-poplin-shirt", sku: "REF-W-SH-01", audience: "Women", category: "Shirts", name: "White Cotton Poplin Shirt", color: "White",
-    priceInr: 2790, image: "https://static.zara.net/assets/public/c5f3/7f29/e89144ce8108/9f76ddbf6f1b/06100600250-p/06100600250-p.jpg?ts=1778063339697&w=560",
+    priceInr: 2790, image: "https://static.zara.net/assets/public/c5f3/7f29/e89144ce8108/9f76ddbf6f1b/06100600250-p/06100600250-p.jpg?ts=1778063339697&w=900",
     alt: "Model wearing a white cotton poplin button-up shirt with a curved hem and blue jeans.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/zw-collection-poplin-shirt-p06100600.html", sourceType: "product",
     composition: "The source listing describes the main fabric as spun cotton. Check its care tab for precise composition.",
@@ -130,7 +130,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mens-indigo-linen-cotton-blazer", sku: "REF-M-BL-01", audience: "Men", category: "Blazers", name: "Indigo Double-Breasted Blazer", color: "Indigo",
-    priceInr: 8990, image: "https://static.zara.net/assets/public/d85a/58ae/57d54fe586ac/1dfaf608ceef/04552594405-p/04552594405-p.jpg?f=auto&ts=1777967984545&w=792",
+    priceInr: 8990, image: "https://static.zara.net/assets/public/d85a/58ae/57d54fe586ac/1dfaf608ceef/04552594405-p/04552594405-p.jpg?f=auto&ts=1777967984545&w=900",
     alt: "Model wearing an indigo double-breasted blazer with notched lapels and matching tailored trousers.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/double-breasted-linen-cotton-suit-blazer-p04552594.html", sourceType: "product",
     composition: "The product title identifies a linen/cotton blend. See the retailer page for exact proportions.",
@@ -139,7 +139,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mens-beige-linen-suit-blazer", sku: "REF-M-BL-02", audience: "Men", category: "Blazers", name: "Light Beige 100% Linen Blazer", color: "Light beige",
-    priceInr: 8990, image: "https://static.zara.net/assets/public/9376/bbdf/53da486dbd82/c3cee0a31362/04283333052-a3/04283333052-a3.jpg?ts=1770281735806&w=%7Bwidth%7D",
+    priceInr: 8990, image: "https://static.zara.net/assets/public/9376/bbdf/53da486dbd82/c3cee0a31362/04283333052-a3/04283333052-a3.jpg?ts=1770281735806&w=900",
     alt: "Model wearing a light beige single-breasted linen blazer with matching trousers.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/100-linen-suit-blazer-p04283333.html", sourceType: "product",
     composition: "Product title identifies 100% linen. Verify the linked item's current composition and lining details.",
@@ -148,7 +148,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mens-brown-check-blazer", sku: "REF-M-BL-03", audience: "Men", category: "Blazers", name: "Brown Check Suit Blazer", color: "Brown check",
-    priceInr: 9990, image: "https://static.zara.net/assets/public/4ff7/4505/e65449ffa768/0cf4a9c0b88f/05746439719-p/05746439719-p.jpg?f=auto&ts=1755171666603&w=792",
+    priceInr: 9990, image: "https://static.zara.net/assets/public/4ff7/4505/e65449ffa768/0cf4a9c0b88f/05746439719-p/05746439719-p.jpg?f=auto&ts=1755171666603&w=900",
     alt: "Model wearing a brown check tailored blazer with a beige V-neck knit and matching trousers.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/check-suit-blazer-p05746439.html", sourceType: "product",
     composition: "The product listing describes a wool-blend style; confirm current percentages on the live page.",
@@ -157,7 +157,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "womens-white-linen-blazer", sku: "REF-W-BL-01", audience: "Women", category: "Blazers", name: "White Linen Blazer", color: "White",
-    priceInr: 8990, image: "https://static.zara.net/assets/public/197c/0171/fd5644388b69/4f1c4b05f6cb/02909681250-a4/02909681250-a4.jpg?ts=1779377049996&w=560",
+    priceInr: 8990, image: "https://static.zara.net/assets/public/197c/0171/fd5644388b69/4f1c4b05f6cb/02909681250-a4/02909681250-a4.jpg?ts=1779377049996&w=900",
     alt: "Model wearing a white linen blazer with wide-leg trousers in a minimalist studio.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/us/en/zw-collection-100-linen-blazer-p02909681.html", sourceType: "product",
     composition: "Product title identifies 100% linen. This source is a US regional listing; price and availability may differ by region.",
@@ -166,7 +166,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "womens-black-shoulder-pad-blazer", sku: "REF-W-BL-02", audience: "Women", category: "Blazers", name: "Black Tailored Blazer with Shoulder Pads", color: "Black",
-    priceInr: 7990, image: "https://static.zara.net/assets/public/3929/5422/e95240d29e4d/971fd9060354/07973668800-p/07973668800-p.jpg?ts=1788274132821&w=560",
+    priceInr: 7990, image: "https://static.zara.net/assets/public/3929/5422/e95240d29e4d/971fd9060354/07973668800-p/07973668800-p.jpg?ts=1788274132821&w=900",
     alt: "Model wearing a black tailored blazer with structured shoulders and notched lapels.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/sg/en/tailored-blazer-with-shoulder-pads-p07973668.html", sourceType: "product",
     composition: "The exact fibre composition is not recorded. The linked regional page should be checked before stating one.",
@@ -175,7 +175,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "womens-sand-tailored-blazer", sku: "REF-W-BL-03", audience: "Women", category: "Blazers", name: "Sand Tailored Blazer", color: "Sand",
-    priceInr: 8990, image: "https://static.zara.net/assets/public/e340/d9c0/df7b480bb804/926abe7e5866/03004369711-a11/03004369711-a11.jpg?ts=1776337766723&w=%7Bwidth%7D",
+    priceInr: 8990, image: "https://static.zara.net/assets/public/e340/d9c0/df7b480bb804/926abe7e5866/03004369711-a11/03004369711-a11.jpg?ts=1776337766723&w=900",
     alt: "Model wearing a sand-coloured tailored blazer with a white top and coordinating trousers.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/us/en/zw-collection-limited-edition-fitted-blazer-p03004369.html", sourceType: "product",
     composition: "Not recorded from the retrieved source. Verify the product page before publishing fibre content.",
@@ -184,7 +184,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mens-black-wide-leg-trousers", sku: "REF-M-TR-01", audience: "Men", category: "Trousers", name: "Black Wide-Leg Pleated Trousers", color: "Black",
-    priceInr: 3990, image: "https://static.zara.net/assets/public/6b16/152d/db584e04b54f/37686741deb5/05070401800-p/05070401800-p.jpg?ts=1753860146244&w=%7Bwidth%7D",
+    priceInr: 3990, image: "https://static.zara.net/assets/public/6b16/152d/db584e04b54f/37686741deb5/05070401800-p/05070401800-p.jpg?ts=1753860146244&w=900",
     alt: "Model wearing black wide-leg pleated trousers with a grey crew-neck T-shirt.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/in/en/man-trousers-black-l2524.html", sourceType: "category",
     composition: "Category-level visual reference only. The exact product and fibre composition have not been identified from this image.",
@@ -229,7 +229,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mens-brown-technical-hooded-jacket", sku: "REF-M-JK-02", audience: "Men", category: "Jackets", name: "Brown Technical Hooded Jacket", color: "Brown",
-    priceInr: 6990, image: "https://static.zara.net/assets/public/b11a/ffc4/763842b3a60b/9368df412ee8/00155792700-p/00155792700-p.jpg?ts=1788191281768&w=560",
+    priceInr: 6990, image: "https://static.zara.net/assets/public/b11a/ffc4/763842b3a60b/9368df412ee8/00155792700-p/00155792700-p.jpg?ts=1788191281768&w=900",
     alt: "Model wearing a brown cropped technical jacket with a high neck and hood.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/uk/en/cropped-fit-technical-hooded-jacket-p00155792.html", sourceType: "product",
     composition: "Exact fibre content not captured; the source is a UK regional listing, so availability and price may differ.",
@@ -247,7 +247,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "womens-black-faux-leather-bomber", sku: "REF-W-JK-01", audience: "Women", category: "Jackets", name: "Black High-Neck Faux-Leather Bomber", color: "Black",
-    priceInr: 6990, image: "https://static.zara.net/assets/public/0d62/4c5b/dfdd4139b6d9/a88e8ac75613/06318250800-a5/06318250800-a5.jpg?ts=1756916774453&w=%7Bwidth%7D",
+    priceInr: 6990, image: "https://static.zara.net/assets/public/0d62/4c5b/dfdd4139b6d9/a88e8ac75613/06318250800-a5/06318250800-a5.jpg?ts=1756916774453&w=900",
     alt: "Model wearing a black high-neck faux-leather bomber jacket over a denim shirt.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/th/en/high-neck-faux-leather-bomber-jacket-p06318250.html", sourceType: "product",
     composition: "Faux-leather describes the surface category, not the backing composition. See the retailer's composition section for exact materials.",
@@ -256,7 +256,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "womens-black-belted-leather-effect-jacket", sku: "REF-W-JK-02", audience: "Women", category: "Jackets", name: "Black Belted Leather-Effect Jacket", color: "Black",
-    priceInr: 7990, image: "https://static.zara.net/assets/public/c46b/abf3/4dd34f12aca3/89d476d3c486/04341823800-a1/04341823800-a1.jpg?ts=1769163864060&w=%7Bwidth%7D",
+    priceInr: 7990, image: "https://static.zara.net/assets/public/c46b/abf3/4dd34f12aca3/89d476d3c486/04341823800-a1/04341823800-a1.jpg?ts=1769163864060&w=900",
     alt: "Model wearing a black belted leather-effect jacket with a wide lapel collar.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/uk/en/leather-effect-jacket-with-belt-p04341823.html", sourceType: "product",
     composition: "Leather-effect is not real leather. Check the product page for shell and lining fibre details.",
