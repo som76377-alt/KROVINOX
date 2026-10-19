@@ -17,12 +17,32 @@ export default function HomePage() {
       </div>
       <div className="hero-image-wrap">
         <Image src="https://images.unsplash.com/photo-1773848091915-e703753f43ba?auto=format&fit=crop&w=1600&q=90" alt="A young man in a hoodie and trousers photographed outdoors, used as an editorial reference" fill priority unoptimized sizes="(max-width: 640px) 100vw, 52vw" className="hero-image" />
+        <div className="hero-orbit-mark" aria-hidden="true">
+          <svg viewBox="0 0 220 220" role="presentation">
+            <defs><path id="hero-orbit-copy" d="M110,110 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0" /></defs>
+            <circle className="hero-orbit-outer" cx="110" cy="110" r="104" fill="none" />
+            <circle className="hero-orbit-dash" cx="110" cy="110" r="91" fill="none" />
+            <circle cx="110" cy="110" r="70" fill="none" />
+            <path className="hero-orbit-spoke" d="M110 8v18M110 194v18M8 110h18M194 110h18" fill="none" />
+            <text className="hero-orbit-text"><textPath href="#hero-orbit-copy" startOffset="0%">FORM IN MOTION • KROVINOX FIELD NOTES • FORM IN MOTION •</textPath></text>
+            <circle className="hero-orbit-dot" cx="110" cy="19" r="4" />
+            <circle className="hero-orbit-dot hero-orbit-dot--ember" cx="201" cy="110" r="3" />
+          </svg>
+          <span className="hero-orbit-center">KX<span>/01</span></span>
+        </div>
         <div className="image-index"><span>Campaign reference</span><span>Not for sale</span></div>
       </div>
     </section>
 
-    <div className="editorial-caption" aria-label="Current scope">
-      <span>01 / Apparel only</span><span>02 / Concepts in development</span><span>03 / No orders accepted</span>
+    <div className="editorial-caption" aria-label="KROVINOX design principles">
+      <div className="editorial-caption-track">
+        <div className="editorial-caption-group">
+          <span>01 / Apparel only</span><span>02 / Form in motion</span><span>03 / Concepts in development</span><span>04 / Product truth first</span>
+        </div>
+        <div className="editorial-caption-group editorial-caption-group--duplicate" aria-hidden="true">
+          <span>01 / Apparel only</span><span>02 / Form in motion</span><span>03 / Concepts in development</span><span>04 / Product truth first</span>
+        </div>
+      </div>
     </div>
 
     <section className="collection section-wrap reveal-section" id="apparel" aria-labelledby="collection-title">

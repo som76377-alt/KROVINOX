@@ -28,14 +28,40 @@ test("empty preview bag points back to apparel", async ({ page }) => {
 test("bag reflows at narrow mobile and wide desktop widths", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 320, height: 780 });
   await page.goto("/bag");
-  let overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
-  expect(overflow).toBe(false);
+  let overflow = await page.evaluate(() => {
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(1000, 0);
+    const canScrollHorizontally = window.scrollX > 0;
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = previousScrollBehavior;
+    const overflowingContent = Array.from(document.querySelectorAll("main *"))
+      .map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left) }))
+      .filter((el) => el.right > window.innerWidth + 1 || el.left < -1);
+    return { canScrollHorizontally, overflowingContent };
+  });
+  expect(overflow.canScrollHorizontally, JSON.stringify(overflow)).toBe(false);
+  expect(overflow.overflowingContent, JSON.stringify(overflow)).toEqual([]);
   await page.screenshot({ path: testInfo.outputPath("bag-mobile-320.png"), fullPage: true });
 
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/bag");
-  overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
-  expect(overflow).toBe(false);
+  overflow = await page.evaluate(() => {
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(1000, 0);
+    const canScrollHorizontally = window.scrollX > 0;
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = previousScrollBehavior;
+    const overflowingContent = Array.from(document.querySelectorAll("main *"))
+      .map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left) }))
+      .filter((el) => el.right > window.innerWidth + 1 || el.left < -1);
+    return { canScrollHorizontally, overflowingContent };
+  });
+  expect(overflow.canScrollHorizontally, JSON.stringify(overflow)).toBe(false);
+  expect(overflow.overflowingContent, JSON.stringify(overflow)).toEqual([]);
   await page.screenshot({ path: testInfo.outputPath("bag-desktop.png"), fullPage: true });
 });
 

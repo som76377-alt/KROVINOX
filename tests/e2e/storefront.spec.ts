@@ -47,3 +47,73 @@ test("no em dash, fake social proof, or CSS gradients", async ({ page }) => {
   );
   expect(gradients).toBe(0);
 });
+
+test("kinetic visual system stays decorative, unique, and responsive", async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await expect(page.locator(".hero-orbit-mark")).toBeVisible();
+  await expect(page.locator(".editorial-caption-track")).toBeVisible();
+
+  const visuals = await page.evaluate(() => {
+    const body = getComputedStyle(document.body);
+    const atmosphere = document.querySelector(".site-atmosphere");
+    const heading = document.querySelector(".hero h1");
+    const ringCount = document.querySelectorAll(".atmosphere-orbit").length;
+    return {
+      pageBackground: getComputedStyle(document.documentElement).getPropertyValue("--paper").trim(),
+      signal: getComputedStyle(document.documentElement).getPropertyValue("--signal").trim(),
+      bodyFont: body.fontFamily,
+      bodyFontToken: body.getPropertyValue("--font-dm-sans").trim(),
+      headingFont: heading ? getComputedStyle(heading).fontFamily : "",
+      atmospherePosition: atmosphere ? getComputedStyle(atmosphere).position : "",
+      atmospherePointerEvents: atmosphere ? getComputedStyle(atmosphere).pointerEvents : "",
+      ringCount,
+    };
+  });
+  expect(visuals.pageBackground.toLowerCase()).toBe("#f2eedf");
+  expect(visuals.signal.toLowerCase()).toBe("#d8f36b");
+  expect(visuals.bodyFont.toLowerCase()).toContain("dm sans");
+  expect(visuals.bodyFontToken).not.toBe("");
+  expect(visuals.headingFont.toLowerCase()).toContain("syne");
+  expect(visuals.atmospherePosition).toBe("fixed");
+  expect(visuals.atmospherePointerEvents).toBe("none");
+  expect(visuals.ringCount).toBe(2);
+  await page.screenshot({ path: testInfo.outputPath("kinetic-home-desktop.png"), fullPage: true });
+
+  await page.setViewportSize({ width: 320, height: 780 });
+  await page.goto("/");
+  const overflowReport = await page.evaluate(() => {
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(1000, 0);
+    const canScrollHorizontally = window.scrollX > 0;
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = previousScrollBehavior;
+    const overflowingContent = Array.from(document.querySelectorAll("main *"))
+      .filter((el) => !el.closest(".editorial-caption"))
+      .map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left) }))
+      .filter((el) => el.tag !== "BR" && (el.right > window.innerWidth + 1 || el.left < -1));
+    return { canScrollHorizontally, overflowingContent };
+  });
+  expect(overflowReport.canScrollHorizontally, JSON.stringify(overflowReport)).toBe(false);
+  expect(overflowReport.overflowingContent, JSON.stringify(overflowReport)).toEqual([]);
+  await page.screenshot({ path: testInfo.outputPath("kinetic-home-mobile-320.png"), fullPage: true });
+});
+
+test("all decorative and scroll-linked motion is disabled with reduced motion enabled", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const result = await page.evaluate(() => ({
+    ringAnimation: getComputedStyle(document.querySelector(".atmosphere-orbit")!).animationName,
+    stampAnimation: getComputedStyle(document.querySelector(".hero-orbit-mark svg")!).animationName,
+    tickerAnimation: getComputedStyle(document.querySelector(".editorial-caption-track")!).animationName,
+    progressDisplay: getComputedStyle(document.querySelector(".site-scroll-progress")!).display,
+    revealAnimation: getComputedStyle(document.querySelector(".brand-principles")!).animationName,
+  }));
+  expect(result.ringAnimation).toBe("none");
+  expect(result.stampAnimation).toBe("none");
+  expect(result.tickerAnimation).toBe("none");
+  expect(result.progressDisplay).toBe("none");
+  expect(result.revealAnimation).toBe("none");
+});
