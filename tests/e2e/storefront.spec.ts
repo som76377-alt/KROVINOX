@@ -62,7 +62,8 @@ test("kinetic visual system stays decorative, unique, and responsive", async ({ 
     return {
       pageBackground: getComputedStyle(document.documentElement).getPropertyValue("--paper").trim(),
       signal: getComputedStyle(document.documentElement).getPropertyValue("--signal").trim(),
-      bodyFont: body.fontFamily,\n      bodyFontToken: body.getPropertyValue("--font-dm-sans").trim(),
+      bodyFont: body.fontFamily,
+      bodyFontToken: body.getPropertyValue("--font-dm-sans").trim(),
       headingFont: heading ? getComputedStyle(heading).fontFamily : "",
       atmospherePosition: atmosphere ? getComputedStyle(atmosphere).position : "",
       atmospherePointerEvents: atmosphere ? getComputedStyle(atmosphere).pointerEvents : "",
@@ -71,7 +72,8 @@ test("kinetic visual system stays decorative, unique, and responsive", async ({ 
   });
   expect(visuals.pageBackground.toLowerCase()).toBe("#f2eedf");
   expect(visuals.signal.toLowerCase()).toBe("#d8f36b");
-  expect(visuals.bodyFont.toLowerCase()).toContain("__dm_sans");\n  expect(visuals.bodyFontToken).not.toBe("");
+  expect(visuals.bodyFont.toLowerCase()).toContain("__dm_sans");
+  expect(visuals.bodyFontToken).not.toBe("");
   expect(visuals.headingFont.toLowerCase()).toContain("__syne");
   expect(visuals.atmospherePosition).toBe("fixed");
   expect(visuals.atmospherePointerEvents).toBe("none");
