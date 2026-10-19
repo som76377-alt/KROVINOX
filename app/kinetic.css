@@ -1,0 +1,167 @@
+/* KROVINOX / Kinetic editorial system
+   Direction: mineral bone + deep pine + signal chartreuse + oxidation red.
+   Motion is progressive enhancement, decorative, and disabled for reduced-motion users. */
+:root{
+  --paper:#F2EEDF;
+  --paper-deep:#DCE1D0;
+  --ink:#14251F;
+  --muted:#526159;
+  --line:#BAC5B8;
+  --signal:#D8F36B;
+  --dark:#14251F;
+  --ember:#B9472F;
+  --font-display:var(--font-syne),Arial,sans-serif;
+  --font-body:var(--font-dm-sans),Arial,sans-serif;
+}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{font-family:var(--font-body);background:var(--paper);color:var(--ink)}
+::selection{background:var(--signal);color:var(--ink)}
+:focus-visible{outline:2px solid var(--ember);outline-offset:4px}
+h1,h2,h3,.wordmark{font-family:var(--font-display)}
+.wordmark{font-weight:800;letter-spacing:-.075em}
+.wordmark-dot{color:var(--ember)}
+.site-header{position:relative;z-index:15;background:var(--paper);border-bottom-color:var(--line)}
+.topline{background:var(--dark);color:var(--paper);font-size:9px;letter-spacing:.085em}
+.desktop-nav{font:10px/1.4 var(--font-mono),monospace;text-transform:uppercase;letter-spacing:.04em}
+.header-action{font-family:var(--font-mono),monospace;font-size:10px;text-transform:uppercase;letter-spacing:.02em}
+.menu-toggle{font-family:var(--font-mono),monospace;text-transform:uppercase;letter-spacing:.03em}
+.hero{background:var(--dark);color:var(--paper)}
+.hero .eyebrow{color:#CED8C9}
+.hero h1{font-family:var(--font-display);font-size:clamp(3.7rem,7.15vw,7.45rem);font-weight:800;line-height:.84;letter-spacing:-.105em;text-transform:uppercase}
+.hero-description{max-width:460px;color:#D7DED4;font-size:clamp(15px,1.18vw,18px)}
+.hero-note{color:#BAC7BB}
+.hero-image-wrap{isolation:isolate}
+.hero-image{filter:saturate(.66) contrast(1.045);transform:scale(1.035);will-change:transform}
+.hero-image-wrap::after{content:"";position:absolute;inset:18px;border:1px solid rgb(216 243 107 / 28%);pointer-events:none;z-index:1}
+.image-index{z-index:2;align-items:center;background:var(--signal);color:var(--ink);font-size:9px;letter-spacing:.075em}
+.button{font-family:var(--font-mono),monospace;font-size:10px;text-transform:uppercase;letter-spacing:.015em;font-weight:500}
+.button-primary{background:var(--signal);color:var(--ink)}
+.button-primary:hover{background:var(--ember);color:#fff}
+.button-outline{border-color:var(--ink)}
+.text-link{text-underline-offset:6px}
+.eyebrow{font-size:9px;letter-spacing:.105em}
+.section-heading h2,.design-note h2,.release-band h2{font-family:var(--font-display);font-weight:700;letter-spacing:-.075em}
+.section-heading h2{font-size:clamp(2.6rem,5.2vw,5.25rem);line-height:.92}
+.section-intro{color:#4D5B52}
+.reference-image-frame{background:var(--paper-deep)}
+.reference-image{filter:saturate(.78);will-change:transform}
+.image-number{background:var(--signal);color:var(--ink);font-family:var(--font-mono),monospace}
+.reference-meta{font-size:9px;letter-spacing:.07em}
+.reference-item h3,.shop-item h2{font-family:var(--font-display);font-weight:700;letter-spacing:-.055em}
+.editorial-caption{position:relative;display:block;overflow:hidden;padding:0;border:0;background:var(--dark);color:var(--signal);font:10px/1.4 var(--font-mono),monospace;letter-spacing:.085em;text-transform:uppercase}
+.editorial-caption-track{display:flex;width:max-content;min-width:100%;animation:ticker-run 32s linear infinite;will-change:transform}
+.editorial-caption-group{display:flex;flex:0 0 auto;align-items:center;gap:clamp(24px,4vw,64px);padding:15px clamp(18px,3vw,42px)}
+.editorial-caption-group span{display:inline-flex;align-items:center;gap:clamp(24px,4vw,64px);white-space:nowrap}
+.editorial-caption-group span::after{content:"";width:6px;height:6px;display:inline-block;background:var(--ember);transform:rotate(45deg)}
+.brand-principles{background:var(--signal);color:var(--ink)}
+.brand-principles .eyebrow{color:#37452C}
+.brand-principles h2{font-family:var(--font-display);font-size:clamp(3.2rem,7.8vw,8rem);font-weight:800;letter-spacing:-.095em;line-height:.83}
+.principle-list{border-color:rgb(20 37 31 / 38%)}
+.principle-list li{border-color:rgb(20 37 31 / 38%)}
+.principle-number{color:var(--ember)}
+.principle-list h3{font-family:var(--font-display);font-size:17px;font-weight:700}
+.principle-list p{color:#344238}
+.design-note{background:var(--paper-deep)}
+.design-note h2{font-size:clamp(3rem,5.8vw,6.1rem);line-height:.88}
+.design-note-copy>p:not(.eyebrow){color:#425247}
+.release-band{position:relative;overflow:hidden;background:var(--dark);color:var(--paper);border-bottom:0}
+.release-band .eyebrow{color:#C5D0C2}
+.release-band h2{color:var(--signal);font-size:clamp(3rem,6vw,6.8rem);line-height:.88}
+.release-band>p{color:#D0D9CE}
+.text-page h1,.shop-heading h1,.product-page-copy h1,.bag-heading h1{font-family:var(--font-display);font-weight:800;letter-spacing:-.09em}
+.text-page section h2{font-family:var(--font-display);font-weight:700}
+.shop-item-status,.product-status{font-family:var(--font-mono),monospace;text-transform:uppercase;letter-spacing:.05em}
+.product-status{color:var(--ember)}
+.product-image-note{z-index:2;background:var(--signal);color:var(--ink);font-size:9px;letter-spacing:.06em}
+.product-page-copy h2{font-family:var(--font-display);font-size:18px;font-weight:700}
+.bag-summary{background:var(--paper-deep)}
+.bag-summary h2,.bag-empty h2,.bag-item-copy h2{font-family:var(--font-display);font-weight:700}
+.bag-count-line{font-family:var(--font-mono),monospace}
+.bag-summary .button-outline:hover{background:var(--dark);color:var(--paper)}
+.site-footer{position:relative;z-index:10;background:var(--dark);color:var(--paper)}
+.footer-wordmark{font-family:var(--font-display)}
+.footer-bottom,.footer-cta{font-family:var(--font-mono),monospace;letter-spacing:.035em}
+.footer-cta:hover{color:var(--signal)}
+.reference-image-link:hover .reference-image{transform:scale(1.035)}
+.shop-item .reference-image-link:hover .reference-image{transform:scale(1.035)}
+
+/* Persistent, low-contrast technical orbital artwork. It lives in the viewport, not in document flow. */
+.site-atmosphere{position:fixed;inset:0;z-index:40;overflow:hidden;pointer-events:none;contain:strict;opacity:.55}
+.atmosphere-orbit{position:absolute;display:block;aspect-ratio:1;border-radius:50%;will-change:transform}
+.atmosphere-orbit--north{width:clamp(22rem,42vw,48rem);top:clamp(-27rem,-20vw,-12rem);right:clamp(-24rem,-18vw,-8rem);border:1px solid rgb(216 243 107 / 70%);animation:atmosphere-turn 56s linear infinite}
+.atmosphere-orbit--north::before{content:"";position:absolute;inset:9%;border:1px solid rgb(216 243 107 / 45%);border-radius:50%}
+.atmosphere-orbit--north::after{content:"";position:absolute;inset:24%;border:1px dashed rgb(203 80 56 / 60%);border-radius:50%;transform:rotate(22deg)}
+.atmosphere-orbit--south{width:clamp(19rem,35vw,40rem);bottom:clamp(-25rem,-18vw,-10rem);left:clamp(-22rem,-16vw,-8rem);border:1px dashed rgb(203 80 56 / 64%);animation:atmosphere-turn-reverse 72s linear infinite}
+.atmosphere-orbit--south::before{content:"";position:absolute;inset:12%;border:1px solid rgb(216 243 107 / 52%);border-radius:50%}
+.atmosphere-orbit--south::after{content:"";position:absolute;inset:32%;border:1px solid rgb(203 80 56 / 48%);border-radius:50%}
+.atmosphere-orbit-node{position:absolute;top:10%;left:50%;width:9px;height:9px;background:var(--signal);border:1px solid var(--dark);border-radius:50%;transform:translate(-50%,-50%)}
+.atmosphere-orbit-tick{position:absolute;top:50%;right:-4px;width:9px;height:1px;background:var(--ember);box-shadow:0 0 0 2px var(--paper)}
+.atmosphere-orbit-core{position:absolute;top:50%;left:50%;width:5px;height:5px;background:var(--ember);transform:translate(-50%,-50%)}
+.atmosphere-coordinate{position:absolute;color:var(--signal);font:8px/1.4 var(--font-mono),monospace;letter-spacing:.08em;opacity:.55}
+.atmosphere-coordinate--one{top:18%;right:2.2rem;writing-mode:vertical-rl}
+.atmosphere-coordinate--two{bottom:18%;left:1.3rem;writing-mode:vertical-rl;transform:rotate(180deg)}
+.site-scroll-progress{position:fixed;z-index:80;top:0;left:0;right:0;height:3px;pointer-events:none}
+.site-scroll-progress span{display:block;width:100%;height:100%;background:var(--signal);transform:scaleX(0);transform-origin:left center;box-shadow:0 0 9px rgb(216 243 107 / 35%)}
+
+/* First impression: short editorial entrance, followed by scroll-driven movement. */
+@media(prefers-reduced-motion:no-preference){
+  .hero-copy>.eyebrow,.hero h1,.hero-description,.hero-actions,.hero-note{opacity:0;animation:hero-copy-enter 720ms cubic-bezier(.2,.75,.2,1) both}
+  .hero-copy>.eyebrow{animation-delay:80ms}
+  .hero h1{animation-delay:150ms}
+  .hero-description{animation-delay:230ms}
+  .hero-actions{animation-delay:300ms}
+  .hero-note{animation-delay:380ms}
+  .hero-image-wrap{animation:hero-image-enter 1000ms cubic-bezier(.2,.72,.2,1) both}
+}
+@keyframes hero-copy-enter{from{opacity:0;transform:translateY(20px);clip-path:inset(0 0 8% 0)}to{opacity:1;transform:translateY(0);clip-path:inset(0)}}
+@keyframes hero-image-enter{from{opacity:.3;clip-path:inset(7% 0 0 5%)}to{opacity:1;clip-path:inset(0)}}
+@keyframes atmosphere-turn{to{transform:rotate(360deg)}}
+@keyframes atmosphere-turn-reverse{to{transform:rotate(-360deg)}}
+@keyframes ticker-run{to{transform:translateX(-50%)}}
+@keyframes reveal-up{from{opacity:.35;transform:translateY(38px)}to{opacity:1;transform:translateY(0)}}
+@keyframes image-reveal{from{transform:scale(1.1);clip-path:inset(8% 0 0 0)}to{transform:scale(1);clip-path:inset(0)}}
+@keyframes hero-parallax{from{transform:translateY(0) scale(1.1)}to{transform:translateY(7%) scale(1.1)}}
+
+/* Native CSS timelines keep scroll-linked effects off the JavaScript main-thread loop.
+   Browsers without timeline support retain fully visible, fully usable static content. */
+@supports (animation-timeline:view()){
+  .reveal-section,.section-heading,.reference-item,.shop-item,.product-page-image,.product-page-copy,.text-page section,.bag-item{
+    animation:reveal-up 1ms linear both;
+    animation-timeline:view();
+    animation-range:entry 0% entry 42%;
+  }
+  .reference-image,.shop-item .reference-image{
+    animation:image-reveal 1ms linear both;
+    animation-timeline:view();
+    animation-range:entry 0% exit 90%;
+  }
+}
+@supports (animation-timeline:scroll(root block)){
+  .site-scroll-progress{opacity:1}
+  .site-scroll-progress span{animation:progress-fill 1ms linear both;animation-timeline:scroll(root block)}
+  @keyframes progress-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .hero-image{animation:hero-parallax 1ms linear both;animation-timeline:scroll(root block);animation-range:0px 760px}
+}
+@media(max-width:900px){
+  .hero h1{font-size:clamp(3.5rem,8.4vw,6rem)}
+  .atmosphere-coordinate--one{right:1rem}
+}
+@media(max-width:640px){
+  .hero h1{font-size:clamp(3.4rem,14.8vw,5.6rem);letter-spacing:-.105em}
+  .hero-image-wrap::after{inset:10px}
+  .brand-principles h2{font-size:clamp(3.1rem,14.4vw,5.2rem)}
+  .editorial-caption-group{gap:23px;padding:13px 18px}
+  .editorial-caption-group span{gap:23px}
+  .atmosphere-orbit--north{width:64vw;min-width:15rem;top:-12rem;right:-11rem}
+  .atmosphere-orbit--south{width:58vw;min-width:14rem;bottom:-11rem;left:-10rem}
+  .atmosphere-coordinate{display:none}
+  .site-atmosphere{opacity:.38}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .site-atmosphere,.site-atmosphere *,.hero-copy>*,.hero-image-wrap,.editorial-caption-track,.reference-image,.shop-item .reference-image,.site-scroll-progress span{animation:none!important;transition:none!important;transform:none!important;clip-path:none!important;opacity:1}
+  .site-atmosphere{opacity:.16}
+  .site-scroll-progress{display:none}
+  .editorial-caption-track{width:100%;min-width:0;flex-wrap:wrap}
+  .editorial-caption-group--duplicate{display:none}
+}
