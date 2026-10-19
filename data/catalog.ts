@@ -193,7 +193,7 @@ export const catalogProducts: CatalogProduct[] = [
   },
   {
     slug: "mens-navy-mohair-trousers", sku: "REF-M-TR-02", audience: "Men", category: "Trousers", name: "Navy Kid-Mohair Trousers", color: "Navy",
-    priceInr: 14990, image: "https://www.prada.com/content/dam/pradabkg_products/P/P27/P273I/12I1F0008/P273I_12I1_F0008_S_OOO_MDF.jpg",
+    priceInr: 14990, image: "https://static.zara.net/assets/public/829e/20eb/865e47de9469/a83920c65896/04474968707-10-p/04474968707-10-p.jpg?ts=1774454116255&w=900",
     alt: "Product image of navy tailored trousers with a clean, straight line and subtle fabric texture.",
     retailer: "Prada", sourceUrl: "https://www.prada.com/us/en/p/kid-mohair-pants/P273I_12I1_F0008_S_OOO", sourceType: "product",
     composition: "The exact composition was not captured in the retrieved product data; follow the source page for full fibre details.",
@@ -399,7 +399,7 @@ export const catalogProducts: CatalogProduct[] = [
     designNote: "A structured white shirt works as a crisp reference for collar proportions and concealed fastening."
   },
   {
-    slug: "womens-yellow-linen-shirt-look", sku: "REF-W-SH-05", audience: "Women", category: "Shirts", name: "Butter-Yellow Linen Shirt — Editorial Reference", color: "Butter yellow",
+    slug: "womens-yellow-linen-shirt-look", sku: "REF-W-SH-05", audience: "Women", category: "Shirts", name: "Butter-Yellow Linen Shirt - Editorial Reference", color: "Butter yellow",
     priceInr: 2990, image: "https://cdn.mos.cms.futurecdn.net/miE7YrftvUSnAnaJBoVUtT.jpg",
     alt: "Model wearing a butter-yellow oversized linen shirt with beige wide-leg trousers in an editorial studio image.",
     retailer: "Who What Wear / Zara editorial reference", sourceUrl: "https://www.whowhatwear.com/fashion/shopping/best-zara-linen-pieces-2025", sourceType: "category",
@@ -435,7 +435,7 @@ export const catalogProducts: CatalogProduct[] = [
     designNote: "The continuous dark leg line gives a clear reference for a clean tailored silhouette."
   },
   {
-    slug: "womens-black-wide-leg-trouser-editorial", sku: "REF-W-TR-04", audience: "Women", category: "Trousers", name: "Black Wide-Leg Trousers — Category Reference", color: "Black",
+    slug: "womens-black-wide-leg-trouser-editorial", sku: "REF-W-TR-04", audience: "Women", category: "Trousers", name: "Black Wide-Leg Trousers - Category Reference", color: "Black",
     priceInr: 2790, image: "https://static.zara.net/assets/public/1423/d33a/2c2b418cba10/05c7237052a4/01255406800-p/01255406800-p.jpg?ts=1772794448448&w=900",
     alt: "Model wearing high-waisted black wide-leg trousers with a white sleeveless top against a white backdrop.",
     retailer: "Zara", sourceUrl: "https://www.zara.com/es/en/woman-trousers-l1335.html", sourceType: "category",
