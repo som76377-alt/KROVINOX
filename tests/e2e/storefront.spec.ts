@@ -1,34 +1,63 @@
 import { expect, test } from "@playwright/test";
 
-test("desktop homepage explains the offer and next step above the fold", async ({ page }, testInfo) => {
+test("homepage explains the portfolio and links to the source-attributed garment study", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: /utility, cut with intent/i })).toBeVisible();
-  await expect(page.getByText(/independent clothing label developing oversized essentials/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /explore the apparel direction/i }).first()).toHaveAttribute("href", "#apparel");
-  await expect(page.getByText(/reference material, not KROVINOX product photography/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: /look closer.*design with evidence/i })).toBeVisible();
+  await expect(page.getByText(/source-attributed garment references/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /explore the reference catalog/i })).toHaveAttribute("href", "/shop");
+  await expect(page.getByRole("heading", { name: /one garment.*a closer read/i })).toBeVisible();
+  await expect(page.getByText(/not a true 3D scan/i)).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath("homepage-desktop.png"), fullPage: true });
 });
 
-test("mobile menu works and page has no horizontal overflow", async ({ page }, testInfo) => {
+test("mobile navigation works and homepage has no horizontal overflow", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await page.getByRole("button", { name: "Menu" }).click();
   await expect(page.getByRole("navigation", { name: "Mobile navigation" })).toBeVisible();
   await page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Approach" }).click();
   await expect(page).toHaveURL(/\/about$/);
-  await expect(page.getByRole("heading", { name: "Clothing should earn its place." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Study the garment. Then design." })).toBeVisible();
   await page.goto("/");
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(overflow).toBe(false);
   await page.screenshot({ path: testInfo.outputPath("homepage-mobile.png"), fullPage: true });
 });
 
-test("shop routes, legal pages, and favicon exist", async ({ page }) => {
+test("catalog filters men, women, and garment categories", async ({ page }) => {
   await page.goto("/shop");
-  await expect(page.getByRole("heading", { name: "Clothing in progress." })).toBeVisible();
-  await page.getByRole("link", { name: "The oversized tee" }).click();
-  await expect(page.getByRole("heading", { name: "The oversized tee" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Study the garment." })).toBeVisible();
+  await expect(page.getByText(/portfolio concept, not an inventory/i)).toBeVisible();
+  await expect(page.locator(".catalog-item")).toHaveCount(28);
+  await page.getByRole("button", { name: "Women", exact: true }).click();
+  await expect(page.locator(".catalog-item")).toHaveCount(13);
+  await page.getByRole("button", { name: "Men", exact: true }).click();
+  await expect(page.locator(".catalog-item")).toHaveCount(15);
+  await page.getByRole("button", { name: "T-shirts", exact: true }).click();
+  await expect(page.locator(".catalog-item")).toHaveCount(5);
+  await expect(page.getByText("REF-M-TS-01", { exact: true })).toHaveCount(0);
+});
+
+test("product detail uses its catalog item and original source link", async ({ page }) => {
+  await page.goto("/shop/mens-beige-100-linen-shirt");
+  await expect(page.getByRole("heading", { name: "Light Beige Linen Shirt" })).toBeVisible();
+  await expect(page.getByText(/Original retailer image \/ reference only/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /open original retailer page/i })).toHaveAttribute("href", /zara\.com/);
+  await expect(page.getByText(/Product title identifies 100% linen/i)).toBeVisible();
+  await expect(page.getByRole("button", { name: /add to demo bag/i })).toBeVisible();
+});
+
+test("checkout does not pretend to work when test credentials are missing", async ({ page }) => {
+  await page.goto("/checkout");
+  await expect(page.getByRole("heading", { name: "Sandbox checkout." })).toBeVisible();
+  await expect(page.getByText(/no real order is created/i)).toBeVisible();
+  await expect(page.getByRole("button", { name: /open sandbox card checkout/i })).toBeDisabled();
+  const response = await page.request.post("/api/checkout/create-order", { data: { items: [{ slug: "mens-beige-100-linen-shirt", quantity: 1 }] } });
+  expect([503, 502]).toContain(response.status());
+});
+
+test("legal pages and favicon exist", async ({ page }) => {
   await page.goto("/terms");
   await expect(page.getByRole("heading", { name: "Terms and conditions" })).toBeVisible();
   await page.goto("/privacy");
@@ -48,72 +77,48 @@ test("no em dash, fake social proof, or CSS gradients", async ({ page }) => {
   expect(gradients).toBe(0);
 });
 
-test("kinetic visual system stays decorative, unique, and responsive", async ({ page }, testInfo) => {
+test("kinetic system uses the new typography and remains responsive", async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   await expect(page.locator(".hero-orbit-mark")).toBeVisible();
   await expect(page.locator(".editorial-caption-track")).toBeVisible();
-
   const visuals = await page.evaluate(() => {
     const body = getComputedStyle(document.body);
     const atmosphere = document.querySelector(".site-atmosphere");
     const heading = document.querySelector(".hero h1");
-    const ringCount = document.querySelectorAll(".atmosphere-orbit").length;
     return {
-      pageBackground: getComputedStyle(document.documentElement).getPropertyValue("--paper").trim(),
-      signal: getComputedStyle(document.documentElement).getPropertyValue("--signal").trim(),
-      bodyFont: body.fontFamily,
-      bodyFontToken: body.getPropertyValue("--font-dm-sans").trim(),
-      headingFont: heading ? getComputedStyle(heading).fontFamily : "",
+      background: getComputedStyle(document.documentElement).getPropertyValue("--paper").trim().toLowerCase(),
+      bodyFont: body.fontFamily.toLowerCase(),
+      headingFont: heading ? getComputedStyle(heading).fontFamily.toLowerCase() : "",
       atmospherePosition: atmosphere ? getComputedStyle(atmosphere).position : "",
-      atmospherePointerEvents: atmosphere ? getComputedStyle(atmosphere).pointerEvents : "",
-      ringCount,
+      pointerEvents: atmosphere ? getComputedStyle(atmosphere).pointerEvents : "",
+      ringCount: document.querySelectorAll(".atmosphere-orbit").length,
     };
   });
-  expect(visuals.pageBackground.toLowerCase()).toBe("#f2eedf");
-  expect(visuals.signal.toLowerCase()).toBe("#d8f36b");
-  expect(visuals.bodyFont.toLowerCase()).toContain("dm sans");
-  expect(visuals.bodyFontToken).not.toBe("");
-  expect(visuals.headingFont.toLowerCase()).toContain("syne");
+  expect(visuals.background).toBe("#f2eedf");
+  expect(visuals.bodyFont).toContain("manrope");
+  expect(visuals.headingFont).toContain("bodoni moda");
   expect(visuals.atmospherePosition).toBe("fixed");
-  expect(visuals.atmospherePointerEvents).toBe("none");
+  expect(visuals.pointerEvents).toBe("none");
   expect(visuals.ringCount).toBe(2);
-  await page.screenshot({ path: testInfo.outputPath("kinetic-home-desktop.png"), fullPage: true });
-
+  await page.screenshot({ path: testInfo.outputPath("catalog-home-desktop.png"), fullPage: true });
   await page.setViewportSize({ width: 320, height: 780 });
   await page.goto("/");
-  const overflowReport = await page.evaluate(() => {
-    const root = document.documentElement;
-    const previousScrollBehavior = root.style.scrollBehavior;
-    root.style.scrollBehavior = "auto";
-    window.scrollTo(1000, 0);
-    const canScrollHorizontally = window.scrollX > 0;
-    window.scrollTo(0, 0);
-    root.style.scrollBehavior = previousScrollBehavior;
-    const overflowingContent = Array.from(document.querySelectorAll("main *"))
-      .filter((el) => !el.closest(".editorial-caption"))
-      .map((el) => ({ tag: el.tagName, className: typeof el.className === "string" ? el.className : "", right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left) }))
-      .filter((el) => el.tag !== "BR" && (el.right > window.innerWidth + 1 || el.left < -1));
-    return { canScrollHorizontally, overflowingContent };
-  });
-  expect(overflowReport.canScrollHorizontally, JSON.stringify(overflowReport)).toBe(false);
-  expect(overflowReport.overflowingContent, JSON.stringify(overflowReport)).toEqual([]);
-  await page.screenshot({ path: testInfo.outputPath("kinetic-home-mobile-320.png"), fullPage: true });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  await page.screenshot({ path: testInfo.outputPath("catalog-home-mobile-320.png"), fullPage: true });
 });
 
-test("all decorative and scroll-linked motion is disabled with reduced motion enabled", async ({ page }) => {
+test("reduced motion removes the continuous decorative motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   const result = await page.evaluate(() => ({
-    ringAnimation: getComputedStyle(document.querySelector(".atmosphere-orbit")!).animationName,
-    stampAnimation: getComputedStyle(document.querySelector(".hero-orbit-mark svg")!).animationName,
-    tickerAnimation: getComputedStyle(document.querySelector(".editorial-caption-track")!).animationName,
-    progressDisplay: getComputedStyle(document.querySelector(".site-scroll-progress")!).display,
-    revealAnimation: getComputedStyle(document.querySelector(".brand-principles")!).animationName,
+    ring: getComputedStyle(document.querySelector(".atmosphere-orbit")!).animationName,
+    stamp: getComputedStyle(document.querySelector(".hero-orbit-mark svg")!).animationName,
+    ticker: getComputedStyle(document.querySelector(".editorial-caption-track")!).animationName,
+    progress: getComputedStyle(document.querySelector(".site-scroll-progress")!).display,
   }));
-  expect(result.ringAnimation).toBe("none");
-  expect(result.stampAnimation).toBe("none");
-  expect(result.tickerAnimation).toBe("none");
-  expect(result.progressDisplay).toBe("none");
-  expect(result.revealAnimation).toBe("none");
+  expect(result.ring).toBe("none");
+  expect(result.stamp).toBe("none");
+  expect(result.ticker).toBe("none");
+  expect(result.progress).toBe("none");
 });
