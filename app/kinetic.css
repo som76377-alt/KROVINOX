@@ -196,3 +196,9 @@ h1,h2,h3,.wordmark{font-family:var(--font-display)}
   /* Avoid transformed image pixels extending the document's scrollable width on small screens. */
   .hero-image{transform:none!important;animation:none!important}
 }
+
+@media(max-width:640px){
+  .brand-principles>*{width:100%;max-width:100%;min-width:0}
+  .brand-principles h2,.principle-list,.principle-list li{min-width:0;max-width:100%}
+  .brand-principles h2{overflow-wrap:anywhere}
+}
