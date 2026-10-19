@@ -192,13 +192,13 @@ export const catalogProducts: CatalogProduct[] = [
     designNote: "A wider leg changes the line of the outfit and allows fabric to fall away from the calf."
   },
   {
-    slug: "mens-navy-mohair-trousers", sku: "REF-M-TR-02", audience: "Men", category: "Trousers", name: "Navy Kid-Mohair Trousers", color: "Navy",
-    priceInr: 14990, image: "https://static.zara.net/assets/public/829e/20eb/865e47de9469/a83920c65896/04474968707-10-p/04474968707-10-p.jpg?ts=1774454116255&w=900",
-    alt: "Product image of navy tailored trousers with a clean, straight line and subtle fabric texture.",
-    retailer: "Prada", sourceUrl: "https://www.prada.com/us/en/p/kid-mohair-pants/P273I_12I1_F0008_S_OOO", sourceType: "product",
-    composition: "The exact composition was not captured in the retrieved product data; follow the source page for full fibre details.",
-    construction: ["Tailored trouser shape", "Navy colour", "Clean front presentation"],
-    designNote: "A dark monochrome trouser is a useful reference for studying drape and tailoring without a high-contrast print."
+    slug: "mens-sand-tailored-suit-trousers-reference", sku: "REF-M-TR-02", audience: "Men", category: "Trousers", name: "Sand Tailored Suit Trousers - Category Reference", color: "Sand",
+    priceInr: 5490, image: "https://static.zara.net/assets/public/829e/20eb/865e47de9469/a83920c65896/04474968707-10-p/04474968707-10-p.jpg?ts=1774454116255&w=900",
+    alt: "Model wearing a sand tailored suit with matching trousers and a brown shirt against a neutral studio background.",
+    retailer: "Zara", sourceUrl: "https://www.zara.com/uk/en/man-suits-tailored-l819.html", sourceType: "category",
+    composition: "Category-level outfit reference. The exact individual trouser listing and its fibre composition are not verified from the category page.",
+    construction: ["Matching tailored trousers visible with blazer", "Straight-to-relaxed leg appearance", "Clean front line", "Coordinated suit fabric appearance"],
+    designNote: "The coordinated suit makes the trouser line and jacket-to-waist relationship easy to study; this is a category reference, not a verified individual trouser listing."
   },
   {
     slug: "womens-ecru-pleated-wide-leg-trousers", sku: "REF-W-TR-01", audience: "Women", category: "Trousers", name: "Ecru Pleated Wide-Leg Trousers", color: "Ecru",
