@@ -51,9 +51,9 @@ export default function HomePage() {
             <Image src={hero.image} alt="" aria-hidden="true" fill unoptimized sizes="(max-width: 760px) 90vw, 52vw" className="study-photo study-photo--collar" />
             <Image src={hero.image} alt="" aria-hidden="true" fill unoptimized sizes="(max-width: 760px) 90vw, 52vw" className="study-photo study-photo--body" />
             <Image src={hero.image} alt="" aria-hidden="true" fill unoptimized sizes="(max-width: 760px) 90vw, 52vw" className="study-photo study-photo--edge" />
-            <span className="study-marker study-marker--one">A / Collar and neck line</span>
-            <span className="study-marker study-marker--two">B / Body drape</span>
-            <span className="study-marker study-marker--three">C / Sleeve and seam line</span>
+            <span className="study-marker study-marker--one"><strong>01</strong><span>Collar geometry</span></span>
+            <span className="study-marker study-marker--two"><strong>02</strong><span>Body drape</span></span>
+            <span className="study-marker study-marker--three"><strong>03</strong><span>Sleeve and seam line</span></span>
             <span className="study-stamp">Same source frame / no invented close-ups</span>
           </div>
           <div className="study-caption"><span>Source image remains constant</span><span>Scroll down to separate / scroll up to return</span></div>
