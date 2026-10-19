@@ -48,6 +48,22 @@ test("product detail uses its catalog item and original source link", async ({ p
   await expect(page.getByRole("button", { name: /add to demo bag/i })).toBeVisible();
 });
 
+test("catalog photos use source descriptions and avoid known low-resolution placeholders", async ({ page }) => {
+  await page.goto("/shop");
+  const images = await page.locator(".catalog-item").evaluateAll((items) => items.map((item) => {
+    const image = item.querySelector("img");
+    return {
+      src: image?.getAttribute("src") ?? "",
+      alt: image?.getAttribute("alt") ?? "",
+      title: item.querySelector("h2")?.textContent?.trim() ?? "",
+    };
+  }));
+  expect(images).toHaveLength(28);
+  expect(images.every((image) => image.alt.length >= 25 && image.title.length > 0)).toBe(true);
+  expect(images.some((image) => /w=375(?:&|$)|w=%7bwidth%7d/i.test(image.src))).toBe(false);
+  expect(images.every((image) => image.src.startsWith("https://"))).toBe(true);
+});
+
 test("checkout does not pretend to work when test credentials are missing", async ({ page }) => {
   await page.goto("/checkout");
   await expect(page.getByRole("heading", { name: "Sandbox checkout." })).toBeVisible();
