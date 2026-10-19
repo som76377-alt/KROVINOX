@@ -14,7 +14,7 @@
   --font-body:var(--font-dm-sans),Arial,sans-serif;
 }
 html{scroll-behavior:smooth;scroll-padding-top:24px;overflow-x:clip!important} body{overflow-x:clip!important}
-:root body{--font-display:var(--font-syne),Arial,sans-serif;--font-body:var(--font-dm-sans),Arial,sans-serif;font-family:var(--font-dm-sans),Arial,sans-serif;background:var(--paper);color:var(--ink)}
+:root body{font-family:var(--font-manrope),Arial,sans-serif;background:var(--paper);color:var(--ink)}
 ::selection{background:var(--signal);color:var(--ink)}
 :focus-visible{outline:2px solid var(--ember);outline-offset:4px}
 h1,h2,h3,.wordmark{font-family:var(--font-display)}
@@ -341,9 +341,9 @@ h1,h2,h3{font-family:var(--font-bodoni-moda),Georgia,serif}
   .study-scroll-track .study-photo--collar{animation:study-collar 1ms linear both;animation-timeline:--krovinox-study;animation-range:entry 0% exit 100%}
   .study-scroll-track .study-photo--body{animation:study-body 1ms linear both;animation-timeline:--krovinox-study;animation-range:entry 0% exit 100%}
   .study-scroll-track .study-photo--edge{animation:study-edge 1ms linear both;animation-timeline:--krovinox-study;animation-range:entry 0% exit 100%}
-  @keyframes study-collar{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(-7%,-5%) rotate(-3deg);opacity:.98}}
-  @keyframes study-body{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(4%,1%) scale(1.02);opacity:1}}
-  @keyframes study-edge{0%{transform:translate(0,0);opacity:1}100%{transform:translate(8%,4%);opacity:.98}}
+  @keyframes study-collar{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}100%{transform:translate(-15%,-8%) rotate(-5deg) scale(1.035);opacity:1}}
+  @keyframes study-body{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(3%,4%) scale(1.045);opacity:1}}
+  @keyframes study-edge{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}100%{transform:translate(15%,8%) rotate(2deg) scale(1.025);opacity:1}}
 }
 @media(max-width:1000px){
   .catalog-grid,.featured-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -387,4 +387,41 @@ h1,h2,h3{font-family:var(--font-bodoni-moda),Georgia,serif}
 @media(prefers-reduced-motion:reduce){
   .study-photo--collar,.study-photo--body,.study-photo--edge{animation:none!important;transform:none!important}
   .catalog-image,.featured-image{transition:none!important}
+}
+
+
+/* Final catalog art direction overrides: headings must use the actual display face.
+   The body-level variable used to shadow the root token on every descendant. */
+:root body{font-family:var(--font-manrope),Arial,sans-serif}
+.home-editorial .hero h1,
+.home-editorial .study-intro h2,
+.home-editorial .section-heading h2,
+.home-editorial .reason-item h3,
+.home-editorial .materials-editorial h2,
+.home-editorial .release-band h2{
+  font-family:var(--font-bodoni-moda),Georgia,serif;
+}
+.study-marker{display:inline-flex;align-items:center;gap:9px;border:1px solid rgb(20 37 31 / 38%);box-shadow:5px 5px 0 rgb(20 37 31 / 10%);will-change:transform,opacity}
+.study-marker strong{display:grid;place-items:center;align-self:stretch;min-width:23px;margin:-7px 0 -7px -9px;padding:0 4px;background:var(--signal);color:var(--ink);font:10px var(--font-mono),monospace}
+.study-marker::after{content:"";position:absolute;display:block;height:1px;background:var(--signal);box-shadow:0 0 0 1px rgb(20 37 31 / 6%);opacity:.9}
+.study-marker--one::after{right:100%;top:50%;width:clamp(40px,6vw,94px);transform:rotate(-10deg);transform-origin:right center}
+.study-marker--two::after{left:100%;top:50%;width:clamp(42px,7vw,110px);transform:rotate(7deg);transform-origin:left center}
+.study-marker--three::after{right:100%;top:50%;width:clamp(48px,7vw,108px);transform:rotate(4deg);transform-origin:right center}
+@supports (animation-timeline:view()){
+  .study-scroll-track .study-marker{
+    animation:study-label-arrive 1ms linear both;
+    animation-timeline:--krovinox-study;
+  }
+  .study-scroll-track .study-marker--one{animation-range:entry 12% exit 88%}
+  .study-scroll-track .study-marker--two{animation-range:entry 23% exit 77%}
+  .study-scroll-track .study-marker--three{animation-range:entry 34% exit 66%}
+  @keyframes study-label-arrive{
+    0%{opacity:.2;transform:translateY(10px)}
+    26%,76%{opacity:1;transform:translateY(0)}
+    100%{opacity:.2;transform:translateY(-7px)}
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .study-marker{animation:none!important;transform:none!important;opacity:1!important;box-shadow:none}
+  .study-marker::after{box-shadow:none}
 }
