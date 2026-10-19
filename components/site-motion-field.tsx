@@ -10,8 +10,6 @@ export default function SiteMotionField() {
         <span className="atmosphere-orbit-node" />
         <span className="atmosphere-orbit-tick" />
       </div>
-      <span className="atmosphere-coordinate atmosphere-coordinate--one">KX / 001</span>
-      <span className="atmosphere-coordinate atmosphere-coordinate--two">FORM FOLLOWS FEELING</span>
     </div>
     <div className="site-scroll-progress" aria-hidden="true"><span /></div>
   </>;
