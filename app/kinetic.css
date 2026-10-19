@@ -180,3 +180,14 @@ h1,h2,h3,.wordmark{font-family:var(--font-display)}
 .hero-orbit-center{position:absolute;display:flex;align-items:flex-start;gap:3px;color:var(--paper);font:800 27px/.9 var(--font-display);letter-spacing:-.1em}
 .hero-orbit-center span{padding-top:1px;color:var(--signal);font:9px/1.2 var(--font-mono),monospace;letter-spacing:0}
 @media(prefers-reduced-motion:no-preference){.hero-orbit-mark svg{animation:hero-stamp-spin 48s linear infinite}}
+
+/* Explicit min-width constraints stop intrinsic content and fixed artwork from widening 320px layouts. */
+.hero-copy,.hero-image-wrap{min-width:0}
+.hero-image{max-width:100%}
+.footer-top,.footer-top>*{min-width:0}
+@media(max-width:640px){
+  .hero-copy,.hero-image-wrap{width:100%;max-width:100%;min-width:0}
+  .hero-image{width:100%;max-width:100%}
+  .footer-top{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .footer-top>*{min-width:0}
+}
